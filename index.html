@@ -241,11 +241,12 @@
 
     <script>
         // ==========================================
-        //  پیکربندی سوپابیس
+        //  پیکربندی اتصال به دیتابیس سوپابیس
+        //  اسم متغیر از supabase به db تغییر کرد تا خطا ندهد
         // ==========================================
         const supabaseUrl = 'https://ssbyethkhdilosnydaxy.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzYnlldGhraGRpbG9zbnlkYXh5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ2MjkxNDksImV4cCI6MjEwMDIwNTE0OX0.-d22TnVxPnPuXF9wbWmLhLW2tAt1KL55ypS6EvM4u0c';
-        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+        const db = window.supabase.createClient(supabaseUrl, supabaseKey);
         
         let currentPlayer = "";
 
@@ -266,14 +267,16 @@
                 last_spin: parseInt(lastSpinTime)
             };
             
-            const { error } = await supabase.from('farm_players').upsert(data, { onConflict: 'username' });
+            // ذخیره داده‌ها با متغیر جدید (db)
+            const { error } = await db.from('farm_players').upsert(data, { onConflict: 'username' });
             if (error) console.error('خطا در ذخیره بازی:', error);
         }
 
         async function loadCloudData() {
             if(!currentPlayer) return;
             
-            const { data, error } = await supabase.from('farm_players').select('*').eq('username', currentPlayer).single();
+            // لود اطلاعات با متغیر جدید (db)
+            const { data, error } = await db.from('farm_players').select('*').eq('username', currentPlayer).single();
 
             if (data) {
                 cash = data.cash; 
@@ -301,7 +304,7 @@
             if ((user === 'حمیدرضا' && pass === 'CTF_22') || (user === 'الهه' && pass === 'CTF_11')) {
                 loading.style.display = 'block';
                 currentPlayer = user;
-                await loadCloudData(); // بارگزاری اطلاعات از سرور
+                await loadCloudData(); // دریافت اطلاعات از سرور
                 document.getElementById('loginScreen').style.display = 'none';
                 alert(`سلام ${user}! خوش آمدی به مزرعه.`);
             } else {
@@ -636,8 +639,8 @@
             const list = document.getElementById('leaderboard-list');
             list.innerHTML = '<p>در حال دریافت اطلاعات...</p>';
             
-            // گرفتن آنلاین بهترین کشاورزان از دیتابیس
-            const { data, error } = await supabase
+            // گرفتن آنلاین بهترین کشاورزان با متغیر جدید (db)
+            const { data, error } = await db
                 .from('farm_players')
                 .select('username, sun')
                 .order('sun', { ascending: false })
@@ -681,7 +684,7 @@
             } else { alert(`به ${cost} اسکناس نیاز داری.`); }
         }
 
-        // --- گردونه شانس (کارت جایزه) ---
+        // --- گردونه شانس ---
         const prizes = [
             { text: '۲۰ اسکناس 💵', type: 'cash', val: 20 },
             { text: '۵۰ خورشید ☀️', type: 'sun', val: 50 },
@@ -729,7 +732,7 @@
                     
                     updateHUD();
                     localStorage.setItem(`lastSpin_${currentPlayer}`, Date.now());
-                    saveCloudData(); // بروزرسانی سرور بعد از دریافت جایزه
+                    saveCloudData(); 
                     checkSpinCooldown();
                 }
             }, 100);
