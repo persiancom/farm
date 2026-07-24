@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>مزرعه پیکسلی آنلاین</title>
     
-    <!-- پیش‌بارگذاری سریع عکس‌ها -->
     <link rel="preload" as="image" href="https://raw.githubusercontent.com/persiancom/farm/main/file_00000000f91881f5a58514cf07c9b1dd.png">
     <link rel="preload" as="image" href="https://raw.githubusercontent.com/persiancom/farm/main/file_0000000033bc81f59148b646dd90601f.png">
     <link rel="preload" as="image" href="https://raw.githubusercontent.com/persiancom/farm/main/file_000000001840822f85970d29e8d4e02d.png">
@@ -24,62 +23,55 @@
         :root { --grid-size: 3; }
         * { box-sizing: border-box; user-select: none; font-family: 'Vazirmatn', sans-serif; -webkit-tap-highlight-color: transparent; }
 
-        body, html {
-            margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
-            background-color: #558b2f; /* فقط رنگ ثابت برای بادی */
-        }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #558b2f; }
 
-        /* فیلتر شبانه روز */
         #timeOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 40; transition: background 2s; }
         #timeOverlay.lamp-on { background: radial-gradient(circle at top center, rgba(255, 255, 180, 0.4) 0%, rgba(0, 10, 40, 0.7) 80%) !important; mix-blend-mode: hard-light; }
 
-        /* لامپ آویزون */
-        #hangingLamp {
-            position: fixed; top: -150px; left: 50%; transform: translateX(-50%); z-index: 55;
-            cursor: pointer; transition: top 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex; flex-direction: column; align-items: center;
-        }
-        #hangingLamp.active { top: 0; }
-        .lamp-wire { width: 4px; height: 90px; background: #fff; box-shadow: 0 0 10px #00f2fe, 0 0 20px #00f2fe; border-radius: 2px; position: relative; z-index: 1; }
-        /* تنظیم حاشیه منفی بیشتر برای اتصال کامل سرپیچ به سیم */
-        .lamp-bulb { font-size: 55px; transform: rotate(180deg); margin-top: -24px; filter: grayscale(100%) brightness(0.4); transition: 0.3s; position: relative; z-index: 2; }
-        #hangingLamp.on .lamp-bulb { filter: grayscale(0) drop-shadow(0 -30px 50px #ffeb3b); }
+        /* لامپ کاملاً متصل و ریسه LED */
+        #hangingLamp { position: fixed; top: -150px; left: 50%; transform: translateX(-50%); z-index: 55; cursor: pointer; transition: top 0.6s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; align-items: center; }
+        #hangingLamp.active { top: -10px; } /* آوردن بالاتر برای اتصال دقیق */
+        .lamp-wire { width: 5px; height: 100px; background: #fff; box-shadow: 0 0 10px #00f2fe, 0 0 20px #00f2fe; border-radius: 2px; position: relative; z-index: 1; }
+        .lamp-bulb { font-size: 55px; transform: rotate(180deg); margin-top: -30px; filter: grayscale(100%) brightness(0.4); transition: 0.3s; position: relative; z-index: 2; }
+        #hangingLamp.on .lamp-bulb { filter: grayscale(0) drop-shadow(0 -30px 60px #ffeb3b); }
 
         #loginScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://raw.githubusercontent.com/persiancom/farm/main/file_00000000f91881f5a58514cf07c9b1dd.png'); background-size: 150px; z-index: 99999; display: flex; justify-content: center; align-items: center; }
-        .login-box { background: linear-gradient(to bottom, #fff8e1, #ffecb3); border: 5px solid #ff8f00; border-radius: 20px; padding: 30px 20px; width: 85%; max-width: 320px; text-align: center; box-shadow: 0 15px 40px rgba(0,0,0,0.8); }
+        .login-box { background: linear-gradient(to bottom, #fff8e1, #ffecb3); border: 5px solid #ff8f00; border-radius: 20px; padding: 25px 20px; width: 85%; max-width: 320px; text-align: center; box-shadow: 0 15px 40px rgba(0,0,0,0.8); }
         .login-input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #ffb300; border-radius: 10px; font-size: 16px; text-align: center; font-weight: bold; outline: none; }
         .login-input:focus { border-color: #e65100; }
         #loadingMsg { display: none; margin-top: 15px; font-weight: bold; color: #2e7d32; }
 
-        .hud-top { position: fixed; top: 12px; left: 12px; right: 12px; display: flex; justify-content: space-between; z-index: 50; }
-        .level-panel { background: rgba(0, 0, 0, 0.85); border: 2px solid #ffb300; border-radius: 12px; padding: 4px 12px; color: white; font-weight: bold; font-size: 13px; display: flex; flex-direction: column; align-items: center; width: 90px; box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
-        .xp-bar-bg { width: 100%; height: 5px; background: #333; border-radius: 3px; margin-top: 4px; overflow: hidden; }
+        /* پنل پروفایل و اطلاعات */
+        .hud-top { position: fixed; top: 12px; left: 12px; right: 12px; display: flex; justify-content: space-between; align-items:flex-start; z-index: 50; pointer-events: none;}
+        
+        .profile-panel { background: rgba(0, 0, 0, 0.85); border: 2px solid #ffb300; border-radius: 12px; padding: 6px 12px; color: white; font-weight: bold; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.5); cursor: pointer; pointer-events: auto; }
+        .profile-panel:active { transform: scale(0.98); }
+        .profile-pic { width: 35px; height: 35px; background: #fff; border: 2px solid #ffb300; border-radius: 8px; display: flex; justify-content: center; align-items: center; font-size: 20px; }
+        .profile-info { display: flex; flex-direction: column; align-items: flex-start; }
+        .profile-name { font-size: 13px; color: #fff8e1; }
+        .profile-lvl { font-size: 11px; color: #00e676; margin-top: 2px; }
+        .xp-bar-bg { width: 70px; height: 4px; background: #333; border-radius: 2px; margin-top: 2px; overflow: hidden; }
         .xp-bar-fill { height: 100%; background: #00e676; width: 0%; transition: width 0.3s; }
-        .currency-panel { background: rgba(0, 0, 0, 0.85); border: 2px solid #aed581; border-radius: 12px; padding: 6px 12px; color: white; font-size: 13px; font-weight: bold; display: flex; gap: 12px; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
-        .btn-plus { background: #4caf50; border: none; color: white; border-radius: 50%; width: 20px; height: 20px; font-size: 14px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin-right: 5px; box-shadow: 0 2px 0 #2e7d32; }
+
+        .currency-panel { background: rgba(0, 0, 0, 0.85); border: 2px solid #aed581; border-radius: 12px; padding: 6px 12px; color: white; font-size: 13px; font-weight: bold; display: flex; gap: 12px; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.5); pointer-events: auto; flex-direction: column;}
+        .curr-row { display: flex; align-items: center; gap: 5px; width:100%; justify-content: space-between;}
+        .btn-plus { background: #4caf50; border: none; color: white; border-radius: 5px; padding:2px 6px; font-size: 14px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 0 #2e7d32; margin-right:5px;}
+        .btn-plus:active { transform: translateY(2px); box-shadow: none; }
 
         .alert-box { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); background: #d32f2f; color: white; padding: 6px 15px; border-radius: 12px; font-weight: bold; border: 2px solid #ff5252; display: none; z-index: 60; box-shadow: 0 4px 10px rgba(0,0,0,0.5); font-size: 13px; }
-        .seed-indicator { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); background: linear-gradient(to bottom, #ffb300, #ff8f00); color: white; padding: 6px 15px; border-radius: 15px; font-weight: bold; border: 2px solid #e65100; display: none; z-index: 50; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5); font-size: 13px; }
+        .seed-indicator { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); background: linear-gradient(to bottom, #ffb300, #ff8f00); color: white; padding: 6px 15px; border-radius: 15px; font-weight: bold; border: 2px solid #e65100; display: none; z-index: 50; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5); font-size: 13px; pointer-events:auto;}
 
-        .toolbar { position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 50; flex-wrap: nowrap; justify-content: center; }
+        .toolbar { position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 50; flex-wrap: nowrap; justify-content: center; pointer-events: auto;}
         .action-btn { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(to bottom, #fffde7, #ffc107); border: 2px solid #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.5); font-size: 18px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.1s; flex-shrink: 0; }
         .action-btn:active { transform: scale(0.9); box-shadow: 0 2px 4px rgba(0,0,0,0.4); }
-        
         #adminBtn { display: none; background: linear-gradient(to bottom, #f44336, #b71c1c); }
 
-        #moveUI { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); gap: 20px; z-index: 100; }
+        #moveUI { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); gap: 20px; z-index: 100; pointer-events: auto;}
         .btn-move { width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 26px; box-shadow: 0 5px 10px rgba(0,0,0,0.5); border: 3px solid white; cursor: pointer; }
 
-        /* --- دوربین آزاد و زمین رفع باگ شده --- */
+        /* --- دوربین آزاد و زمین (بدون معلق شدن کلبه ها) --- */
         #gameViewport { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; touch-action: none; z-index: 10; }
-        
-        /* لایه پس زمینه متصل به زمین اصلی (برای جلوگیری از حس معلق بودن) */
-        #groundBg {
-            position: absolute; top: -1500px; left: -1500px; width: 3000px; height: 3000px;
-            background-color: #558b2f; background-image: url('https://raw.githubusercontent.com/persiancom/farm/main/file_00000000f91881f5a58514cf07c9b1dd.png');
-            background-size: 150px; z-index: -10; pointer-events: none;
-        }
-
+        #groundBg { position: absolute; top: -1500px; left: -1500px; width: 3000px; height: 3000px; background-color: #558b2f; background-image: url('https://raw.githubusercontent.com/persiancom/farm/main/file_00000000f91881f5a58514cf07c9b1dd.png'); background-size: 150px; z-index: -10; pointer-events: none; }
         .game-wrapper { position: absolute; top: 50%; left: 50%; width: 0; height: 0; }
         
         .garden {
@@ -89,8 +81,7 @@
         }
 
         .plot {
-            width: 75px; height: 75px; 
-            background: #6d4c41; border: 3px solid #4e342e; border-radius: 10px;
+            width: 75px; height: 75px; background: #6d4c41; border: 3px solid #4e342e; border-radius: 10px;
             box-shadow: inset 0 0 15px rgba(0,0,0,0.4), -6px 6px 0px rgba(62, 39, 35, 0.95);
             position: relative; cursor: pointer; transform-style: preserve-3d; transition: background 0.2s;
         }
@@ -99,8 +90,7 @@
         .plot-content {
             position: absolute; bottom: 15px; left: 0; width: 100%; height: 100%;
             display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
-            transform: rotateZ(45deg) rotateX(-60deg) scale(1.3);
-            transform-origin: bottom center; pointer-events: none !important; 
+            transform: rotateZ(45deg) rotateX(-60deg) scale(1.3); transform-origin: bottom center; pointer-events: none !important; 
         }
         .plot-content img { max-height: 55px; object-fit: contain; filter: drop-shadow(0 4px 3px rgba(0,0,0,0.4)); pointer-events: none; }
 
@@ -108,20 +98,23 @@
         .progress-bar { width: 40px; height: 5px; background-color: #222; border: 1px solid #fff; border-radius: 4px; display: none; overflow: hidden; margin-bottom: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.5); }
         .progress-fill { height: 100%; background-color: #76ff03; width: 0%; transition: width 1s linear; }
 
-        /* کلبه‌های ایستاده و 3D (حذف کدهای مخرب چرخش) */
-        .building { position: absolute; cursor: pointer; z-index: 10; transition: filter 0.2s; }
+        /* کلبه‌های ایستاده روی زمین (حذف سایه معلق) */
+        .building { position: absolute; cursor: pointer; z-index: 10; transform: rotateZ(45deg) rotateX(-60deg) scale(1.1); transform-origin: bottom center; transition: filter 0.2s; }
         .building:hover { filter: brightness(1.15); } 
-        .building img { width: 120px; object-fit: contain; filter: drop-shadow(0 15px 10px rgba(0,0,0,0.6)); pointer-events: none; }
+        /* سایه معلق (0 15px 10px) به سایه روی زمین (-2px 5px 3px) تغییر کرد تا طبیعی شود */
+        .building img { width: 110px; object-fit: contain; filter: drop-shadow(-2px 5px 3px rgba(0,0,0,0.5)); pointer-events: none; }
         
-        /* انیمیشن شناور شدن هنگام جابجایی */
         .building.moving { filter: drop-shadow(0 0 15px #4caf50) brightness(1.2) !important; z-index: 99 !important; animation: floatMove 1s infinite alternate; touch-action: none; }
-        @keyframes floatMove { from { transform: translateY(-10px); } to { transform: translateY(-20px); } }
+        @keyframes floatMove { from { transform: rotateZ(45deg) rotateX(-60deg) scale(1.1) translateY(-10px); } to { transform: rotateZ(45deg) rotateX(-60deg) scale(1.1) translateY(-20px); } }
 
         .b-label { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.85); color: #fff; font-size: 10px; padding: 3px 8px; border-radius: 6px; font-weight: bold; white-space: nowrap; border: 1px solid #ffb300; pointer-events: none;}
         .b-label.locked { background: rgba(180,0,0,0.9); border-color: #d32f2f; }
+        
+        /* نشانگر نگهبان */
+        .guard-sprite { position: absolute; top: -5px; right: 10px; font-size: 22px; z-index: 15; pointer-events: none; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5)); }
 
-        #cloudOverlay { position: fixed; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%); z-index: 999999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: left 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
-        #cloudOverlay.active { left: 0; }
+        #cloudOverlay { position: fixed; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%); z-index: 999999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: left 0.7s cubic-bezier(0.4, 0, 0.2, 1); pointer-events:none;}
+        #cloudOverlay.active { left: 0; pointer-events:auto;}
         .cloud-icon { font-size: 80px; animation: float 2s infinite ease-in-out alternate; text-shadow: 0 10px 20px rgba(0,0,0,0.3); }
         @keyframes float { from { transform: translateY(-15px); } to { transform: translateY(15px); } }
         .cloud-text { color: white; font-size: 20px; font-weight: bold; margin-top: 20px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
@@ -132,8 +125,8 @@
         .tab-content { display: none; max-height: 55vh; overflow-y: auto; }
         .tab-content.active { display: block; }
 
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); z-index: 100; justify-content: center; align-items: center; }
-        .modal-content { background: linear-gradient(to bottom, #fff8e1, #ffecb3); border: 4px solid #ff8f00; border-radius: 15px; padding: 15px; width: 90%; max-width: 320px; text-align: center; max-height: 85vh; overflow-y: auto; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); z-index: 100; justify-content: center; align-items: center; pointer-events:auto;}
+        .modal-content { background: linear-gradient(to bottom, #fff8e1, #ffecb3); border: 4px solid #ff8f00; border-radius: 15px; padding: 15px; width: 90%; max-width: 340px; text-align: center; max-height: 85vh; overflow-y: auto; }
         .list-item { background: #fff; border: 2px solid #ffb300; padding: 8px; margin-bottom: 8px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; box-shadow: 0 3px 0 #ffe082; font-size: 13px; position: relative; }
         .list-item img { width: 40px; height: 40px; object-fit: contain; }
         .locked { opacity: 0.6; filter: grayscale(100%); pointer-events: none; }
@@ -149,6 +142,9 @@
         .price-up { color: #2e7d32; font-weight: bold; }
         .price-down { color: #d32f2f; font-weight: bold; }
         .exchange-input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 8px; border: 2px solid #ffb300; text-align: center; font-weight: bold; font-size: 16px; outline: none; }
+        
+        /* استایل‌های پروفایل */
+        .stat-row { display: flex; justify-content: space-between; font-size: 13px; font-weight: bold; color: #4e342e; margin: 5px 0; border-bottom: 1px dashed #ccc; padding-bottom: 3px;}
     </style>
 </head>
 <body>
@@ -162,9 +158,9 @@
 
     <div id="loginScreen">
         <div class="login-box">
-            <img src="https://raw.githubusercontent.com/persiancom/farm/main/file_0000000073dc81f5bc7991afd0bca56c.png" style="width: 220px; max-width: 100%; margin: 0 auto 5px auto; display: block; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));">
-            <h3 style="color:#d32f2f; margin-top:0; margin-bottom: 20px; font-weight:900; text-shadow: 1px 1px 0px #fff;">♥️ به مزرعه زیبای خودت خوش اومدی ♥️</h3>
-            
+            <!-- عکس درخواستی صفحه ورود -->
+            <img src="https://raw.githubusercontent.com/persiancom/farm/main/file_0000000073dc81f5bc7991afd0bca56c.png" style="width: 280px; max-width: 95%; margin: 0 auto 5px auto; display: block; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));">
+            <h4 style="margin: 0 0 20px 0; white-space: nowrap; font-size: 13px; color:#d32f2f; text-shadow:1px 1px 0px #fff; font-weight:900;">♥️ به مزرعه زیبای خودت خوش اومدی ♥️</h4>
             <input type="text" id="username" class="login-input" placeholder="نام کاربری">
             <input type="password" id="password" class="login-input" placeholder="رمز عبور">
             <button class="btn-action" style="background:#4caf50; box-shadow:0 4px 0 #2e7d32; font-size:18px; padding:12px;" onclick="attemptLogin()">ورود</button>
@@ -172,23 +168,30 @@
         </div>
     </div>
 
-    <div id="cloudOverlay"><div class="cloud-icon">☁️ ✈️ ☁️</div><div class="cloud-text">🔍 لطفاً صبر کنید...</div></div>
+    <div id="cloudOverlay"><div class="cloud-icon">☁️ ✈️ ☁️</div><div class="cloud-text" id="cloudText">🔍 لطفاً صبر کنید...</div></div>
 
     <div class="hud-top">
-        <div class="level-panel"><span id="levelText">لول: 1</span><div class="xp-bar-bg"><div class="xp-bar-fill" id="xpBar"></div></div></div>
+        <!-- پروفایل کاربری جدید به سبک کلش -->
+        <div class="profile-panel" onclick="openProfile()">
+            <div class="profile-pic">👤</div>
+            <div class="profile-info">
+                <span class="profile-name" id="hudName">کاربر</span>
+                <span class="profile-lvl">لول: <span id="hudLevel">1</span></span>
+                <div class="xp-bar-bg"><div class="xp-bar-fill" id="xpBar"></div></div>
+            </div>
+        </div>
         <div class="currency-panel">
-            <div>💵 <span id="cash">100</span></div>
-            <div>☀️ <span id="sun">0</span> <button class="btn-plus" onclick="openModal('exchangeModal')" title="تبدیل خورشید">+</button></div>
+            <div class="curr-row">💵 <span id="cash">100</span></div>
+            <div class="curr-row">☀️ <span id="sun">0</span> <button class="btn-plus" onclick="openModal('exchangeModal')" title="تبدیل">+</button></div>
         </div>
     </div>
 
     <div class="alert-box" id="alertBox">پیام!</div>
     <div class="seed-indicator" id="seedIndicator" onclick="cancelPlanting()">در حال کاشت: <span id="seedName"></span> (لغو ✖)</div>
 
-    <!-- محیط بازی (دارای قابلیت دراگ و زوم محدود شده) -->
+    <!-- محیط بازی و دوربین -->
     <div id="gameViewport">
         <div class="game-wrapper" id="gameWrapper">
-            <!-- لایه چمن ثابت با زمین بازی -->
             <div id="groundBg"></div>
             
             <div class="building" id="cabin-inv" onclick="onBuildingClick('inv')">
@@ -197,6 +200,7 @@
             </div>
             <div class="building" id="cabin-guard" onclick="onBuildingClick('guard')">
                 <div class="b-label" id="guardLabel">نگهبانی</div>
+                <div id="guardSpriteContainer"></div>
                 <img src="https://raw.githubusercontent.com/persiancom/farm/main/file_00000000318c81f488176e9d1c9220d5.png">
             </div>
             <div class="building" id="cabin-crow" onclick="onBuildingClick('crow')">
@@ -213,6 +217,7 @@
         <div class="btn-move" style="background:#f44336;" onclick="cancelMove()">❌</div>
     </div>
 
+    <!-- تولبار اصلاح شده و یک ردیفه -->
     <div class="toolbar" id="toolbar-normal">
         <button class="action-btn" onclick="openModal('shopModal')" title="فروشگاه">🛒</button>
         <button class="action-btn" onclick="openModal('marketModal')" title="بورس">📈</button>
@@ -222,9 +227,34 @@
     </div>
 
     <div class="toolbar" id="toolbar-visit" style="display:none;">
-        <button class="btn-action" style="background:#d32f2f; box-shadow:0 4px 0 #b71c1c; font-size:16px; padding:12px; width:auto; border-radius:12px;" onclick="returnHome()">🏡 بازگشت به مزرعه خودم</button>
+        <button class="btn-action" style="background:#d32f2f; box-shadow:0 4px 0 #b71c1c; font-size:16px; padding:12px; width:auto; border-radius:12px; margin:0;" onclick="returnHome()">🏡 بازگشت به مزرعه خودم</button>
     </div>
 
+    <!-- مودال پروفایل اختصاصی -->
+    <div class="modal" id="profileModal">
+        <div class="modal-content" style="text-align:right;">
+            <div style="display:flex; gap:15px; align-items:center;">
+                <div style="width:65px; height:65px; border:2px solid #ffb300; border-radius:10px; background:#fff; display:flex; justify-content:center; align-items:center; font-size:35px;">👤</div>
+                <div>
+                    <h3 style="margin:0; color:#3e2723;" id="profName">نام</h3>
+                    <span style="color:#888; font-size:12px;" id="profUid">UID: ---</span>
+                </div>
+            </div>
+            <hr style="border:1px solid #ffb300; margin:15px 0;">
+            <div class="stat-row"><span>⭐ سطح اصلی:</span> <span id="profLvl">1</span></div>
+            <div class="stat-row"><span>🦅 سطح آشیانه کلاغ‌ها:</span> <span id="profCrow">0</span></div>
+            <div class="stat-row"><span>🛡️ سطح کلبه نگهبانان:</span> <span id="profGuard">0</span></div>
+            <hr style="border:1px dashed #ffb300; margin:15px 0;">
+            <div class="stat-row"><span>🌾 برداشت گیاهان:</span> <span id="profHarvest">0</span></div>
+            <div class="stat-row"><span>⚔️ حمله‌های ارسالی:</span> <span id="profAtk">0</span></div>
+            <div class="stat-row"><span>🛡️ دفاع‌های موفق:</span> <span id="profDef">0</span></div>
+            <div class="stat-row"><span>☀️ بیشترین خورشید:</span> <span id="profSun">0</span></div>
+            <div class="stat-row"><span>⏱️ تایم فعالیت:</span> <span id="profTime">0</span></div>
+            <button class="btn-close" onclick="closeModal('profileModal')">بستن</button>
+        </div>
+    </div>
+
+    <!-- مودال‌ها -->
     <div class="modal" id="exchangeModal">
         <div class="modal-content">
             <h3 style="margin-top:0;">💱 صرافی مزرعه</h3>
@@ -270,7 +300,7 @@
     <div class="modal" id="marketModal"><div class="modal-content"><h3 style="margin-top:0;">📈 بورس جهانی</h3><p style="font-size:12px;">نوسان قیمت‌ها هر ۶۰ ثانیه</p><div id="market-list"></div><button class="btn-close" onclick="closeModal('marketModal')">بستن</button></div></div>
     <div class="modal" id="leaderboardModal"><div class="modal-content"><h3 style="margin-top:0;">🏆 رقبا</h3><p style="font-size:11px; color:#666;">برای بازدید روی نام ضربه بزنید</p><div id="leaderboard-list"></div><button class="btn-close" onclick="closeModal('leaderboardModal')">بستن</button></div></div>
     
-    <div class="modal" id="adminModal"><div class="modal-content"><h3 style="margin-top:0; color:#b71c1c;">⚙️ پنل مدیریت</h3><div id="admin-user-list"></div><button class="btn-close" onclick="closeModal('adminModal')">بستن</button></div></div>
+    <div class="modal" id="adminModal"><div class="modal-content"><h3 style="margin-top:0; color:#b71c1c;">⚙️ پنل مدیریت (ادمین)</h3><div id="admin-user-list"></div><button class="btn-close" onclick="closeModal('adminModal')">بستن</button></div></div>
 
     <div class="modal" id="luckyModal">
         <div class="modal-content">
@@ -300,7 +330,8 @@
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzYnlldGhraGRpbG9zbnlkYXh5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ2MjkxNDksImV4cCI6MjEwMDIwNTE0OX0.-d22TnVxPnPuXF9wbWmLhLW2tAt1KL55ypS6EvM4u0c';
         const db = window.supabase.createClient(supabaseUrl, supabaseKey);
         
-        let currentPlayer = ""; let isVisiting = false; let isMovingMode = false;
+        let currentPlayer = ""; let isVisiting = false; let visitingData = null;
+        let isMovingMode = false;
         let cash = 100, sun = 0, level = 1, xp = 0, gridSize = 3; let selectedSeed = null;
 
         const imgs = {
@@ -323,6 +354,7 @@
 
         let currentPrices = {};
         let state = {
+            uid: null, stats: { hrv: 0, atk: 0, def: 0, maxS: 0, pTime: 0, lt: 0 },
             items: { redFlower: [], pinkFlower: [], wheat: [], appleTree: [], pineTree: [] },
             guard: { level: 0, kills: 0, sleeping: false },
             crow: { level: 0, lastSent: 0 },
@@ -330,18 +362,22 @@
             incomingAttack: false
         };
 
-        // --- دوربین آزاد (Pan & Zoom) ---
+        // --- دوربین آزاد و زوم ---
         let panX = 0, panY = 0, zoom = 1;
-        let isDraggingMap = false, isClick = true;
+        let isDraggingMap = false, dragThreshold = false;
         let dragStartX = 0, dragStartY = 0;
         const viewport = document.getElementById('gameViewport');
         const wrapper = document.getElementById('gameWrapper');
+        const bg = document.getElementById('groundBg');
 
-        function updateTransform() { wrapper.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`; }
+        function updateTransform() { 
+            wrapper.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`; 
+            bg.style.transform = `translate(${-panX/zoom}px, ${-panY/zoom}px)`; // برای رفع معلق بودن
+        }
 
         viewport.addEventListener('pointerdown', e => {
             if (e.target.closest('.modal') || e.target.closest('.hud-top') || e.target.closest('.toolbar') || isMovingMode) return;
-            isDraggingMap = true; isClick = true;
+            isDraggingMap = true; dragThreshold = false;
             dragStartX = e.clientX - (panX * zoom); dragStartY = e.clientY - (panY * zoom);
             viewport.setPointerCapture(e.pointerId);
         });
@@ -349,39 +385,35 @@
             if (!isDraggingMap) return;
             let dx = (e.clientX - dragStartX) / zoom; let dy = (e.clientY - dragStartY) / zoom;
             
-            // محدودیت برای جابجایی منطقی (جلوگیری از رفتن به سیاهچاله)
-            const LIMIT = 500;
-            dx = Math.max(-LIMIT, Math.min(LIMIT, dx));
-            dy = Math.max(-LIMIT, Math.min(LIMIT, dy));
+            // محدودیت کشیدن صفحه (جلوگیری از گم شدن)
+            const LIMIT = 300; dx = Math.max(-LIMIT, Math.min(LIMIT, dx)); dy = Math.max(-LIMIT, Math.min(LIMIT, dy));
             
-            if (Math.abs(dx - panX) > 2 || Math.abs(dy - panY) > 2) isClick = false;
+            if (Math.abs(dx - panX) > 3 || Math.abs(dy - panY) > 3) dragThreshold = true;
             panX = dx; panY = dy; updateTransform();
         });
         viewport.addEventListener('pointerup', e => { isDraggingMap = false; viewport.releasePointerCapture(e.pointerId); });
         
         viewport.addEventListener('wheel', e => {
-            if(e.target.closest('.modal')) return;
-            e.preventDefault(); zoom += e.deltaY * -0.001; zoom = Math.min(Math.max(0.5, zoom), 2.5); updateTransform();
+            if(e.target.closest('.modal') || e.target.closest('.hud-top')) return;
+            e.preventDefault(); zoom += e.deltaY * -0.001; zoom = Math.min(Math.max(0.6, zoom), 2.0); updateTransform();
         }, {passive: false});
 
         function resizeGame() {
             panX = 0; panY = 0; zoom = Math.min(window.innerWidth / 400, window.innerHeight / 650);
-            if (zoom > 1.2) zoom = 1.2; updateTransform();
+            if (zoom > 1.1) zoom = 1.1; updateTransform();
         }
         window.addEventListener('resize', resizeGame); resizeGame();
 
         // --- لامپ و زمان ---
         let isLampOn = false;
         function toggleLamp() {
-            isLampOn = !isLampOn;
-            const lamp = document.getElementById('hangingLamp'); const overlay = document.getElementById('timeOverlay');
+            isLampOn = !isLampOn; const lamp = document.getElementById('hangingLamp'); const overlay = document.getElementById('timeOverlay');
             if (isLampOn) { lamp.classList.add('on'); overlay.classList.add('lamp-on'); } 
             else { lamp.classList.remove('on'); overlay.classList.remove('lamp-on'); }
         }
 
         function updateTimeOfDay() {
-            const h = new Date().getHours();
-            const overlay = document.getElementById('timeOverlay'); const lamp = document.getElementById('hangingLamp');
+            const h = new Date().getHours(); const overlay = document.getElementById('timeOverlay'); const lamp = document.getElementById('hangingLamp');
             if (h >= 17 && h < 19) { 
                 if(!isLampOn) { overlay.style.background = 'rgba(255, 100, 0, 0.2)'; overlay.style.mixBlendMode = 'color-burn'; }
                 lamp.classList.remove('active'); isLampOn = false; lamp.classList.remove('on'); overlay.classList.remove('lamp-on');
@@ -395,8 +427,17 @@
         }
         setInterval(updateTimeOfDay, 60000); updateTimeOfDay();
 
+        // محاسبه تایم پلی
+        setInterval(() => {
+            if(!currentPlayer || isVisiting) return;
+            let now = Date.now(); let diff = Math.floor((now - state.stats.lt) / 1000);
+            if (diff > 0 && diff < 300) state.stats.pTime += diff; // فقط اگه وقفه کم بود
+            state.stats.lt = now;
+        }, 5000);
+
         async function saveCloudData() {
             if(!currentPlayer || isVisiting || isMovingMode) return;
+            if(sun > state.stats.maxS) state.stats.maxS = sun;
             const lastSpinTime = localStorage.getItem(`lastSpin_${currentPlayer}`) || 0;
             const data = { username: currentPlayer, cash: cash, sun: sun, level: level, xp: xp, grid_size: gridSize, inventory: state, last_spin: parseInt(lastSpinTime) };
             await db.from('farm_players').upsert(data, { onConflict: 'username' });
@@ -410,42 +451,55 @@
                 if(data.inventory && data.inventory.items) { 
                     state = data.inventory; 
                     if(!state.positions) state.positions = { inv: { t: -100, l: -30 }, guard: { t: 220, l: -30 }, crow: { t: -50, l: 220 } };
+                    if(!state.stats) state.stats = { hrv: 0, atk: 0, def: 0, maxS: sun, pTime: 0, lt: Date.now() };
+                    if(!state.uid) state.uid = 'UID-' + Math.random().toString(36).substr(2, 6).toUpperCase();
                 }
                 if(data.last_spin) localStorage.setItem(`lastSpin_${currentPlayer}`, data.last_spin);
-            } else { await saveCloudData(); }
+            } else {
+                state.uid = 'UID-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+                state.stats.lt = Date.now();
+                await saveCloudData(); 
+            }
             
             cleanSpoiledItems(); applyBuildingPositions(); updateLabels();
             updateHUD(); renderGarden(); checkSpinCooldown();
-            
             if(currentPlayer === 'حمیدرضا') document.getElementById('adminBtn').style.display = 'flex';
         }
 
+        // سینک آنلاین تغییرات ادمین
+        setInterval(async () => {
+            if(!currentPlayer || isVisiting) return;
+            const { data } = await db.from('farm_players').select('cash, sun, level, xp').eq('username', currentPlayer).single();
+            if (data && (data.cash !== cash || data.level !== level)) {
+                cash = data.cash; level = data.level; sun = data.sun; xp = data.xp; updateHUD();
+            }
+        }, 15000);
+
         async function attemptLogin() {
-            const user = document.getElementById('username').value.trim();
-            const pass = document.getElementById('password').value.trim();
+            const user = document.getElementById('username').value.trim(); const pass = document.getElementById('password').value.trim();
             document.getElementById('loadingMsg').style.display = 'block';
             if ((user === 'حمیدرضا' && pass === 'CTF_22') || (user === 'الهه' && pass === 'CTF_11')) {
-                currentPlayer = user; await loadCloudData(); document.getElementById('loginScreen').style.display = 'none'; showAlert(`سلام ${user}! خوش آمدی.`);
+                currentPlayer = user; await loadCloudData(); document.getElementById('loginScreen').style.display = 'none';
             } else { alert('رمز اشتباه است!'); document.getElementById('loadingMsg').style.display = 'none'; }
         }
 
         function getRequiredXp(lvl) { return lvl * lvl * 50; }
         function addXp(amount) {
-            xp += amount;
-            while (xp >= getRequiredXp(level)) { xp -= getRequiredXp(level); level++; showAlert(`🎉 لول آپ! لول ${level}`); updateLabels(); }
+            xp += amount; while (xp >= getRequiredXp(level)) { xp -= getRequiredXp(level); level++; showAlert(`🎉 لول آپ! لول ${level}`); updateLabels(); }
             updateHUD(); saveCloudData();
         }
         function updateHUD() {
             document.getElementById('cash').innerText = cash; document.getElementById('sun').innerText = sun;
-            document.getElementById('levelText').innerText = `لول: ${level}`; document.getElementById('xpBar').style.width = `${(xp / getRequiredXp(level)) * 100}%`;
+            document.getElementById('hudName').innerText = isVisiting ? visitingData.username : currentPlayer;
+            document.getElementById('hudLevel').innerText = isVisiting ? visitingData.level : level;
+            document.getElementById('xpBar').style.width = `${(xp / getRequiredXp(level)) * 100}%`;
+            if(sun > state.stats.maxS) state.stats.maxS = sun;
         }
 
         function initMarket() {
             for (let k in itemsData) if (itemsData[k].type === 'crop') currentPrices[k] = itemsData[k].basePrice;
             setInterval(() => {
-                for (let k in currentPrices) {
-                    let f = 1 + (Math.random() * 0.4 - 0.2); currentPrices[k] = Math.max(1, Math.round(itemsData[k].basePrice * f));
-                }
+                for (let k in currentPrices) { let f = 1 + (Math.random() * 0.4 - 0.2); currentPrices[k] = Math.max(1, Math.round(itemsData[k].basePrice * f)); }
                 if(document.getElementById('marketModal').style.display === 'flex') renderMarket();
                 if(document.getElementById('inventoryModal').style.display === 'flex') renderInventory();
             }, 60000); 
@@ -455,43 +509,77 @@
         function cleanSpoiledItems() {
             const now = Date.now(); const ONE_DAY = 24 * 60 * 60 * 1000; let spoiled = false;
             for(let k in state.items) {
-                let initialLength = state.items[k].length;
-                state.items[k] = state.items[k].filter(ts => (now - ts) < ONE_DAY);
-                if(state.items[k].length < initialLength) spoiled = true;
+                let initial = state.items[k].length; state.items[k] = state.items[k].filter(ts => (now - ts) < ONE_DAY);
+                if(state.items[k].length < initial) spoiled = true;
             }
-            if(spoiled) { showAlert('برخی محصولات فاسد شدند!'); saveCloudData(); }
-            updateLabels();
+            if(spoiled) { showAlert('برخی محصولات فاسد شدند!'); saveCloudData(); } updateLabels();
+        }
+
+        function formatTime(s) {
+            let h = Math.floor(s / 3600); let m = Math.floor((s % 3600) / 60);
+            return `${h}ساعت و ${m}دقیقه`;
+        }
+
+        function openProfile() {
+            let dataToShow = isVisiting ? visitingData.inventory : state;
+            let n = isVisiting ? visitingData.username : currentPlayer;
+            let l = isVisiting ? visitingData.level : level;
+            
+            document.getElementById('profName').innerText = n;
+            document.getElementById('profUid').innerText = 'UID: ' + (dataToShow.uid || '---');
+            document.getElementById('profLvl').innerText = l;
+            document.getElementById('profCrow').innerText = dataToShow.crow.level;
+            document.getElementById('profGuard').innerText = dataToShow.guard.level;
+            
+            let st = dataToShow.stats || { hrv: 0, atk: 0, def: 0, maxS: 0, pTime: 0 };
+            document.getElementById('profHarvest').innerText = st.hrv;
+            document.getElementById('profAtk').innerText = st.atk;
+            document.getElementById('profDef').innerText = st.def;
+            document.getElementById('profSun').innerText = st.maxS;
+            document.getElementById('profTime').innerText = formatTime(st.pTime);
+            
+            openModal('profileModal');
         }
 
         function updateLabels() {
-            document.getElementById('invLabel').innerText = `انبار (${getInvCount()}/200)`;
+            let dataToUse = isVisiting ? visitingData.inventory : state;
+            let lToUse = isVisiting ? visitingData.level : level;
+            let nToUse = isVisiting ? `(${visitingData.username})` : `(${getInvCount()}/200)`;
+            
+            document.getElementById('invLabel').innerText = `انبار ${nToUse}`;
+            
             const gl = document.getElementById('guardLabel');
-            if(level < 10) { gl.innerText = "قفل (لول 10)"; gl.classList.add('locked'); }
-            else { gl.classList.remove('locked'); gl.innerText = state.guard.level === 0 ? "خرید نگهبان" : `نگهبان ${state.guard.sleeping?'(خواب)':'👁️'}`; }
+            if(lToUse < 10) { gl.innerText = "قفل"; gl.classList.add('locked'); document.getElementById('guardSpriteContainer').innerHTML=''; }
+            else { 
+                gl.classList.remove('locked'); gl.innerText = dataToUse.guard.level === 0 ? "خرید نگهبان" : `نگهبان ${dataToUse.guard.sleeping?'(خواب)':'👁️'}`; 
+                // رسم آدمک
+                if (dataToUse.guard.level > 0) {
+                    let c = dataToUse.guard.level >= 4 ? 2 : 1;
+                    document.getElementById('guardSpriteContainer').innerHTML = `<div class="guard-sprite">${dataToUse.guard.sleeping ? '💤' : '🏹'.repeat(c)}</div>`;
+                } else { document.getElementById('guardSpriteContainer').innerHTML = ''; }
+            }
+            
             const cl = document.getElementById('crowLabel');
-            if(level < 10) { cl.innerText = "قفل (لول 10)"; cl.classList.add('locked'); }
-            else { cl.classList.remove('locked'); cl.innerText = state.crow.level === 0 ? "خرید آشیانه" : `آشیانه Lvl.${state.crow.level}`; }
+            if(lToUse < 10) { cl.innerText = "قفل"; cl.classList.add('locked'); }
+            else { cl.classList.remove('locked'); cl.innerText = dataToUse.crow.level === 0 ? "خرید آشیانه" : `آشیانه Lvl.${dataToUse.crow.level}`; }
         }
 
         function applyBuildingPositions() {
-            document.getElementById('cabin-inv').style.top = state.positions.inv.t + 'px'; document.getElementById('cabin-inv').style.left = state.positions.inv.l + 'px';
-            document.getElementById('cabin-guard').style.top = state.positions.guard.t + 'px'; document.getElementById('cabin-guard').style.left = state.positions.guard.l + 'px';
-            document.getElementById('cabin-crow').style.top = state.positions.crow.t + 'px'; document.getElementById('cabin-crow').style.left = state.positions.crow.l + 'px';
+            let p = isVisiting ? visitingData.inventory.positions : state.positions;
+            document.getElementById('cabin-inv').style.top = p.inv.t + 'px'; document.getElementById('cabin-inv').style.left = p.inv.l + 'px';
+            document.getElementById('cabin-guard').style.top = p.guard.t + 'px'; document.getElementById('cabin-guard').style.left = p.guard.l + 'px';
+            document.getElementById('cabin-crow').style.top = p.crow.t + 'px'; document.getElementById('cabin-crow').style.left = p.crow.l + 'px';
         }
 
-        // --- جابجایی کلبه‌ها (Drag & Drop) ---
-        let activeB = null, isDraggingB = false, bStartT, bStartL, pStartX, pStartY;
+        // --- جابجایی کلبه‌ها ---
         function onBuildingClick(id) {
-            if(!isClick || isMovingMode || isVisiting) return;
-            if(id === 'inv') openModal('inventoryModal');
-            if(id === 'guard') openGuardModal();
-            if(id === 'crow') openCrowModal();
+            if(dragThreshold || isMovingMode || isVisiting) return;
+            if(id === 'inv') openModal('inventoryModal'); if(id === 'guard') openGuardModal(); if(id === 'crow') openCrowModal();
         }
 
         function startMoveMode(id) {
             closeModal('inventoryModal'); closeModal('guardModal'); closeModal('crowModal');
-            isMovingMode = true; activeB = document.getElementById(`cabin-${id}`);
-            activeB.classList.add('moving');
+            isMovingMode = true; activeB = document.getElementById(`cabin-${id}`); activeB.classList.add('moving');
             bStartT = activeB.offsetTop; bStartL = activeB.offsetLeft;
             document.getElementById('moveUI').style.display = 'flex'; document.getElementById('toolbar-normal').style.display = 'none';
             activeB.addEventListener('pointerdown', dragStart); window.addEventListener('pointermove', dragMove); window.addEventListener('pointerup', dragEnd);
@@ -503,19 +591,9 @@
             let dx = (e.clientX - pStartX) / zoom; let dy = (e.clientY - pStartY) / zoom;
             activeB.style.left = (bStartL + dx) + 'px'; activeB.style.top = (bStartT + dy) + 'px';
         }
-        function dragEnd(e) {
-            if(!isDraggingB) return; isDraggingB = false;
-            bStartL = activeB.offsetLeft; bStartT = activeB.offsetTop; activeB.releasePointerCapture(e.pointerId);
-        }
-
-        function confirmMove() {
-            let key = activeB.id.replace('cabin-', ''); state.positions[key] = { t: activeB.offsetTop, l: activeB.offsetLeft };
-            saveCloudData(); exitMoveMode();
-        }
-        function cancelMove() {
-            let key = activeB.id.replace('cabin-', ''); let orig = state.positions[key];
-            activeB.style.top = orig.t + 'px'; activeB.style.left = orig.l + 'px'; exitMoveMode();
-        }
+        function dragEnd(e) { if(!isDraggingB) return; isDraggingB = false; bStartL = activeB.offsetLeft; bStartT = activeB.offsetTop; activeB.releasePointerCapture(e.pointerId); }
+        function confirmMove() { let key = activeB.id.replace('cabin-', ''); state.positions[key] = { t: activeB.offsetTop, l: activeB.offsetLeft }; saveCloudData(); exitMoveMode(); }
+        function cancelMove() { let key = activeB.id.replace('cabin-', ''); let orig = state.positions[key]; activeB.style.top = orig.t + 'px'; activeB.style.left = orig.l + 'px'; exitMoveMode(); }
         function exitMoveMode() {
             isMovingMode = false; activeB.classList.remove('moving');
             activeB.removeEventListener('pointerdown', dragStart); window.removeEventListener('pointermove', dragMove); window.removeEventListener('pointerup', dragEnd);
@@ -530,8 +608,7 @@
             garden.innerHTML = '';
             
             for (let i = 0; i < gSize * gSize; i++) {
-                const plot = document.createElement('div');
-                plot.className = 'plot'; plot.dataset.state = 'empty';
+                const plot = document.createElement('div'); plot.className = 'plot'; plot.dataset.state = 'empty';
                 const content = document.createElement('div'); content.className = 'plot-content';
                 const tb = document.createElement('div'); tb.className = 'timer-badge';
                 const svg = document.createElement('div'); svg.className = 'svg-container';
@@ -551,29 +628,27 @@
                             svg.innerHTML = svgSeed; pb.style.display = 'block'; tb.style.display = 'block'; tb.innerText = 'در حال رشد'; pf.style.width = '50%';
                         }
                     }
-                } else if (!isVisiting) {
-                    plot.onclick = () => handlePlotClick(plot, svg, pb, pf, tb);
-                }
-                
+                } else if (!isVisiting) { plot.onclick = () => handlePlotClick(plot, svg, pb, pf, tb); }
                 garden.appendChild(plot);
             }
         }
 
         function handlePlotClick(plot, svg, pb, pf, tb) {
-            if(!isClick || isMovingMode) return;
+            if(dragThreshold || isMovingMode) return;
             if (plot.dataset.state === 'empty' && selectedSeed && itemsData[selectedSeed].type === 'crop') {
                 const item = itemsData[selectedSeed];
                 if (cash >= item.cost) {
                     if (getInvCount() >= 200) { alert('انبار پر است!'); return; }
-                    cash -= item.cost; updateHUD(); saveCloudData();
+                    cash -= item.cost; updateHUD(); 
                     plot.dataset.state = 'growing'; plot.dataset.plant = selectedSeed; plot.dataset.startTime = Date.now();
                     svg.innerHTML = svgSeed; pb.style.display = 'block'; tb.style.display = 'block';
-                    startGrowthTimer(plot, svg, pb, pf, tb, item, item.time);
+                    startGrowthTimer(plot, svg, pb, pf, tb, item, item.time); saveCloudData();
                 } else { alert('اسکناس کافی نیست!'); }
             } else if (plot.dataset.state === 'ready') {
                 const pid = plot.dataset.plant;
                 if (getInvCount() >= 200) { alert('انبار پر است!'); return; }
                 state.items[pid].push(Date.now()); addXp(itemsData[pid].xp);
+                state.stats.hrv++; // آپدیت آمار
                 plot.dataset.state = 'empty'; plot.dataset.plant = '';
                 svg.innerHTML = ''; pb.style.display = 'none'; pf.style.width = '0%'; tb.style.display = 'none';
                 updateLabels(); saveCloudData();
@@ -581,85 +656,67 @@
         }
 
         function startGrowthTimer(plot, svg, pb, pf, tb, plant, timeLeft) {
-            let total = plant.time;
-            tb.innerText = timeLeft + 's'; pf.style.width = (((total - timeLeft) / total) * 100) + '%';
+            let total = plant.time; tb.innerText = timeLeft + 's'; pf.style.width = (((total - timeLeft) / total) * 100) + '%';
             let inv = setInterval(() => {
                 if (plot.dataset.state !== 'growing') { clearInterval(inv); return; } 
-                timeLeft--; tb.innerText = timeLeft + 's';
-                pf.style.width = (((total - timeLeft) / total) * 100) + '%';
-                if (timeLeft <= 0) {
-                    clearInterval(inv); plot.dataset.state = 'ready';
-                    svg.innerHTML = `<img src="${plant.img}">`; 
-                    tb.innerText = 'برداشت 🖐'; pb.style.display = 'none';
-                }
+                timeLeft--; tb.innerText = timeLeft + 's'; pf.style.width = (((total - timeLeft) / total) * 100) + '%';
+                if (timeLeft <= 0) { clearInterval(inv); plot.dataset.state = 'ready'; svg.innerHTML = `<img src="${plant.img}">`; tb.innerText = 'برداشت 🖐'; pb.style.display = 'none'; }
             }, 1000);
         }
 
         // --- بازدید ---
         async function visitFarm(username) {
             closeModal('leaderboardModal');
-            const overlay = document.getElementById('cloudOverlay'); overlay.classList.add('active');
+            const overlay = document.getElementById('cloudOverlay'); document.getElementById('cloudText').innerText = `🔍 در حال سفر به مزرعه ${username}...`;
+            overlay.classList.add('active');
             setTimeout(async () => {
                 const { data } = await db.from('farm_players').select('*').eq('username', username).single();
                 if(data) {
-                    isVisiting = true;
+                    isVisiting = true; visitingData = data;
                     document.getElementById('toolbar-normal').style.display = 'none'; document.getElementById('toolbar-visit').style.display = 'flex';
-                    document.getElementById('invLabel').innerText = `انبار ${username}`; document.getElementById('guardLabel').innerText = `نگهبان ${username}`; document.getElementById('crowLabel').innerText = `آشیانه ${username}`;
                     
-                    let p = data.inventory.positions || { inv: { t: -100, l: -30 }, guard: { t: 220, l: -30 }, crow: { t: -50, l: 220 } };
-                    document.getElementById('cabin-inv').style.top = p.inv.t + 'px'; document.getElementById('cabin-inv').style.left = p.inv.l + 'px';
-                    document.getElementById('cabin-guard').style.top = p.guard.t + 'px'; document.getElementById('cabin-guard').style.left = p.guard.l + 'px';
-                    document.getElementById('cabin-crow').style.top = p.crow.t + 'px'; document.getElementById('cabin-crow').style.left = p.crow.l + 'px';
-
+                    applyBuildingPositions(); updateLabels(); updateHUD();
                     let dummyLayout = { size: data.grid_size, plots: [] };
                     for(let i=0; i<data.grid_size*data.grid_size; i++) dummyLayout.plots.push({state:'empty'});
-                    renderGarden(dummyLayout);
-                    overlay.classList.remove('active');
+                    renderGarden(dummyLayout); overlay.classList.remove('active');
                 } else { alert('خطا در بارگذاری مزرعه!'); overlay.classList.remove('active'); }
             }, 1000);
         }
 
         function returnHome() {
-            const overlay = document.getElementById('cloudOverlay'); overlay.classList.add('active');
+            const overlay = document.getElementById('cloudOverlay'); document.getElementById('cloudText').innerText = '🏡 بازگشت به خانه...';
+            overlay.classList.add('active');
             setTimeout(() => {
-                isVisiting = false; document.getElementById('toolbar-normal').style.display = 'flex'; document.getElementById('toolbar-visit').style.display = 'none';
-                applyBuildingPositions(); updateLabels(); renderGarden(); overlay.classList.remove('active');
+                isVisiting = false; visitingData = null;
+                document.getElementById('toolbar-normal').style.display = 'flex'; document.getElementById('toolbar-visit').style.display = 'none';
+                applyBuildingPositions(); updateLabels(); updateHUD(); renderGarden(); overlay.classList.remove('active');
             }, 1000);
         }
 
         // --- مودال‌ها ---
         function switchShopTab(tab) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.getElementById(`tab-btn-${tab}`).classList.add('active'); document.getElementById(`tab-${tab}`).classList.add('active');
         }
 
         function openModal(id) {
-            if(isMovingMode || !isClick) return;
             cleanSpoiledItems(); document.getElementById(id).style.display = 'flex';
             if(id === 'shopModal') { document.getElementById('landCostLabel').innerText = `💵 ${gridSize * 150}`; renderShop(); }
             if(id === 'inventoryModal') renderInventory();
             if(id === 'marketModal') renderMarket();
             if(id === 'leaderboardModal') renderLeaderboard();
-            if(id === 'adminModal') openAdminPanel();
         }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-        function updateExchangeCalc() {
-            let val = parseInt(document.getElementById('sunInput').value) || 0;
-            document.getElementById('cashOutput').innerText = val * 3; 
-        }
-
+        function updateExchangeCalc() { let val = parseInt(document.getElementById('sunInput').value) || 0; document.getElementById('cashOutput').innerText = val * 3; }
         function exchangeSunBulk() {
             let val = parseInt(document.getElementById('sunInput').value) || 0;
             if(val <= 0) { alert('مقدار نامعتبر!'); return; }
-            if (sun >= val) { sun -= val; cash += (val * 3); updateHUD(); saveCloudData(); closeModal('exchangeModal'); } 
-            else { alert('خورشید کافی نداری!'); }
+            if (sun >= val) { sun -= val; cash += (val * 3); updateHUD(); saveCloudData(); closeModal('exchangeModal'); } else { alert('خورشید کافی نداری!'); }
         }
 
         function renderShop() {
-            const seedsList = document.getElementById('tab-seeds'); seedsList.innerHTML = '';
-            const equipList = document.getElementById('tab-equip-other'); equipList.innerHTML = '';
+            const seedsList = document.getElementById('tab-seeds'); seedsList.innerHTML = ''; const equipList = document.getElementById('tab-equip-other'); equipList.innerHTML = '';
             for (let key in itemsData) {
                 const p = itemsData[key]; let isLocked = level < p.reqLvl;
                 if(p.type === 'food' && state.guard.level === 0) continue; 
@@ -674,10 +731,7 @@
                                 if(state.guard.sleeping) { cash -= p.cost; state.guard.sleeping = false; state.guard.kills = 0; updateHUD(); saveCloudData(); showAlert('نگهبان بیدار شد!'); updateLabels(); closeModal('shopModal'); }
                                 else { alert('نگهبان بیدار است!'); }
                             } else alert('پول کافی نیست!');
-                        } else {
-                            selectedSeed = key; document.getElementById('seedName').innerText = p.name;
-                            document.getElementById('seedIndicator').style.display = 'block'; closeModal('shopModal');
-                        }
+                        } else { selectedSeed = key; document.getElementById('seedName').innerText = p.name; document.getElementById('seedIndicator').style.display = 'block'; closeModal('shopModal'); }
                     };
                 }
                 if(p.type === 'crop') seedsList.appendChild(item); else equipList.appendChild(item);
@@ -687,13 +741,11 @@
         function expandLand() {
             if (gridSize >= 5) { alert('زمین به حداکثر رسیده!'); return; }
             let cost = gridSize * 150; 
-            if (cash >= cost) { if(confirm(`گسترش زمین با ${cost} اسکناس؟`)) { cash -= cost; gridSize++; renderGarden(); updateHUD(); saveCloudData(); closeModal('shopModal'); } } 
-            else alert(`به ${cost} اسکناس نیاز داری.`);
+            if (cash >= cost) { if(confirm(`گسترش زمین با ${cost} اسکناس؟`)) { cash -= cost; gridSize++; renderGarden(); updateHUD(); saveCloudData(); closeModal('shopModal'); } } else alert(`به ${cost} اسکناس نیاز داری.`);
         }
 
         function renderInventory() {
-            const list = document.getElementById('inventory-list'); list.innerHTML = ''; document.getElementById('invCount').innerText = getInvCount();
-            let isEmpty = true;
+            const list = document.getElementById('inventory-list'); list.innerHTML = ''; document.getElementById('invCount').innerText = getInvCount(); let isEmpty = true;
             for (let key in state.items) {
                 if (state.items[key].length > 0) {
                     isEmpty = false; const p = itemsData[key]; const price = currentPrices[key];
@@ -705,9 +757,7 @@
             if (isEmpty) list.innerHTML = '<p>انبار خالی است.</p>';
         }
 
-        function sellItem(key) {
-            if (state.items[key].length > 0) { state.items[key].pop(); sun += currentPrices[key]; updateHUD(); saveCloudData(); renderInventory(); updateLabels(); }
-        }
+        function sellItem(key) { if (state.items[key].length > 0) { state.items[key].pop(); sun += currentPrices[key]; updateHUD(); saveCloudData(); renderInventory(); updateLabels(); } }
 
         function renderMarket() {
             const list = document.getElementById('market-list'); list.innerHTML = '';
@@ -723,63 +773,48 @@
         function showAlert(msg) { const box = document.getElementById('alertBox'); box.innerText = msg; box.style.display = 'block'; setTimeout(() => { box.style.display = 'none'; }, 4000); }
         function cancelPlanting() { selectedSeed = null; document.getElementById('seedIndicator').style.display = 'none'; }
 
-        // --- پنل ادمین با قابلیت واریز اسکناس ---
+        // --- پنل ادمین واریز آنی ---
         async function openAdminPanel() {
             if (currentPlayer !== 'حمیدرضا') return;
             document.getElementById('adminModal').style.display = 'flex';
             const list = document.getElementById('admin-user-list'); list.innerHTML = '<p>در حال بارگذاری لیست...</p>';
             
-            const { data, error } = await db.from('farm_players').select('username, level, cash, sun').order('sun', { ascending: false });
+            const { data } = await db.from('farm_players').select('username, level, cash, sun').order('sun', { ascending: false });
             if (data) {
                 list.innerHTML = '';
                 data.forEach(u => {
                     list.innerHTML += `<div class="list-item" style="flex-direction:column; align-items:start; gap:5px; margin-bottom: 12px; border: 2px solid #5d4037;">
-                        <div style="width:100%; display:flex; justify-content:space-between; align-items:center;">
-                            <span style="font-weight:bold;">👤 ${u.username}</span>
-                            <button style="background:#d32f2f; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;" onclick="resetPlayer('${u.username}')">🔄 ریست کامل</button>
-                        </div>
+                        <div style="width:100%; display:flex; justify-content:space-between; align-items:center;"><span style="font-weight:bold;">👤 ${u.username}</span><button style="background:#d32f2f; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;" onclick="resetPlayer('${u.username}')">🔄 ریست کامل</button></div>
                         <div style="width:100%; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #ccc; padding-bottom:5px;">
                             <div style="font-size:12px; color:#666;">💵 ${u.cash} | ☀️ ${u.sun}</div>
-                            <div style="display:flex; gap:8px; align-items:center;">
-                                <button style="background:#ff9800; color:white; border:none; padding:4px 8px; border-radius:5px; cursor:pointer;" onclick="changeLvl('${u.username}', ${u.level}, -1)">-</button>
-                                <span style="font-weight:bold; width:45px; text-align:center;">لول ${u.level}</span>
-                                <button style="background:#4caf50; color:white; border:none; padding:4px 8px; border-radius:5px; cursor:pointer;" onclick="changeLvl('${u.username}', ${u.level}, 1)">+</button>
-                            </div>
+                            <div style="display:flex; gap:8px; align-items:center;"><button style="background:#ff9800; color:white; border:none; padding:4px 8px; border-radius:5px; cursor:pointer;" onclick="changeLvl('${u.username}', ${u.level}, -1)">-</button><span style="font-weight:bold; width:45px; text-align:center;">لول ${u.level}</span><button style="background:#4caf50; color:white; border:none; padding:4px 8px; border-radius:5px; cursor:pointer;" onclick="changeLvl('${u.username}', ${u.level}, 1)">+</button></div>
                         </div>
                         <div style="width:100%; display:flex; gap:10px; margin-top:5px;">
                             <input type="number" id="addCash_${u.username}" placeholder="تعداد اسکناس" style="width:100px; padding:5px; border-radius:5px; border:1px solid #ffb300; text-align:center;">
                             <button style="background:#4caf50; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer; font-weight:bold;" onclick="addCashToUser('${u.username}')">واریز 💵</button>
-                        </div>
-                    </div>`;
+                        </div></div>`;
                 });
             }
         }
 
         async function addCashToUser(targetUser) {
-            const input = document.getElementById(`addCash_${targetUser}`);
-            const amount = parseInt(input.value);
+            const input = document.getElementById(`addCash_${targetUser}`); const amount = parseInt(input.value);
             if (!amount || amount <= 0) { alert('مقدار معتبر وارد کن!'); return; }
-            
             const { data } = await db.from('farm_players').select('cash').eq('username', targetUser).single();
             if (data) {
-                const newCash = data.cash + amount;
-                await db.from('farm_players').update({ cash: newCash }).eq('username', targetUser);
-                alert(`${amount} اسکناس به حساب ${targetUser} واریز شد!`);
-                openAdminPanel();
+                await db.from('farm_players').update({ cash: data.cash + amount }).eq('username', targetUser);
+                alert(`${amount} اسکناس واریز شد!`); openAdminPanel();
             }
         }
-
         async function changeLvl(targetUser, currentLevel, amount) {
             let newLvl = currentLevel + amount; if (newLvl < 1) newLvl = 1;
-            await db.from('farm_players').update({ level: newLvl }).eq('username', targetUser);
-            openAdminPanel(); 
+            await db.from('farm_players').update({ level: newLvl }).eq('username', targetUser); openAdminPanel(); 
         }
-
         async function resetPlayer(targetUser) {
-            if(!confirm(`آیا مطمئن هستید که می‌خواهید کل پیشرفت "${targetUser}" را صفر کنید؟ این کار قابل بازگشت نیست!`)) return;
-            const defaultState = { items: { redFlower: [], pinkFlower: [], wheat: [], appleTree: [], pineTree: [] }, guard: { level: 0, kills: 0, sleeping: false }, crow: { level: 0, lastSent: 0 }, positions: { inv: { t: -100, l: -30 }, guard: { t: 220, l: -30 }, crow: { t: -50, l: 220 } }, incomingAttack: false };
+            if(!confirm(`آیا مطمئن هستید؟`)) return;
+            const defaultState = { uid: 'UID-'+Math.random().toString(36).substr(2, 6).toUpperCase(), stats:{hrv:0,atk:0,def:0,maxS:0,pTime:0,lt:Date.now()}, items: { redFlower: [], pinkFlower: [], wheat: [], appleTree: [], pineTree: [] }, guard: { level: 0, kills: 0, sleeping: false }, crow: { level: 0, lastSent: 0 }, positions: { inv: { t: -100, l: -30 }, guard: { t: 220, l: -30 }, crow: { t: -50, l: 220 } }, incomingAttack: false };
             const { error } = await db.from('farm_players').update({ cash: 100, sun: 0, level: 1, xp: 0, grid_size: 3, inventory: defaultState }).eq('username', targetUser);
-            if(!error) { alert(`اکانت ${targetUser} ریست شد.`); openAdminPanel(); } else { alert('خطا در ریست کردن!'); }
+            if(!error) { alert(`ریست شد.`); openAdminPanel(); }
         }
 
         // --- کلبه نگهبانی و کلاغ ---
@@ -827,7 +862,7 @@
             if(data) {
                 let oppInv = data.inventory || {}; oppInv.incomingAttack = true;
                 await db.from('farm_players').update({ inventory: oppInv }).eq('username', opp);
-                state.crow.lastSent = Date.now(); saveCloudData(); openCrowModal(); showAlert('🦅 کلاغ فرستاده شد!');
+                state.crow.lastSent = Date.now(); state.stats.atk++; saveCloudData(); openCrowModal(); showAlert('🦅 کلاغ فرستاده شد!');
             } else alert('حریف هنوز نیست.');
         }
 
@@ -843,7 +878,7 @@
                     if (state.guard.level > 0 && !state.guard.sleeping) {
                         let chance = [30, 50, 75, 100][state.guard.level-1];
                         if (Math.random() * 100 <= chance) {
-                            defended = true; state.guard.kills++;
+                            defended = true; state.guard.kills++; state.stats.def++;
                             if(state.guard.kills >= 2) { state.guard.sleeping = true; updateLabels(); }
                             showAlert('🏹 نگهبان، کلاغ حریف را شکار کرد!'); saveCloudData();
                         }
