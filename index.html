@@ -16,6 +16,7 @@
     <link rel="preload" as="image" href="https://raw.githubusercontent.com/persiancom/farm/main/file_00000000318c81f488176e9d1c9220d5.png">
     <link rel="preload" as="image" href="https://raw.githubusercontent.com/persiancom/farm/main/file_00000000c9ec81f4b0f7578df0859c1a.png">
     <link rel="preload" as="image" href="https://raw.githubusercontent.com/persiancom/farm/main/file_0000000073dc81f5bc7991afd0bca56c.png">
+    <link rel="preload" as="image" href="https://raw.githubusercontent.com/persiancom/farm/main/BackgroundEraser_%DB%B2%DB%B0%DB%B2%DB%B6%DB%B0%DB%B7%DB%B2%DB%B4_%DB%B1%DB%B9%DB%B0%DB%B7%DB%B1%DB%B5%DB%B3%DB%B9%DB%B7.png">
 
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -38,11 +39,8 @@
         .login-box { background: linear-gradient(to bottom, #fff8e1, #ffecb3); border: 4px solid #ff8f00; border-radius: 15px; padding: 25px 20px; width: 85%; max-width: 320px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.7); }
         .login-input { width: 100%; padding: 10px; margin: 8px 0; border: 2px solid #ffb300; border-radius: 8px; font-size: 14px; text-align: center; font-weight: bold; outline: none; }
         .login-input:focus { border-color: #e65100; }
-        #loadingMsg { margin-top: 15px; font-weight: bold; color: #2e7d32; font-size: 13px; }
 
-        /* پنل‌های ظریف */
         .hud-top { position: fixed; top: 12px; left: 12px; right: 12px; display: flex; justify-content: space-between; align-items:flex-start; z-index: 50; pointer-events: none;}
-        
         .profile-panel { background: rgba(0, 0, 0, 0.85); border: 2px solid #ffb300; border-radius: 10px; padding: 5px 10px; color: white; font-weight: bold; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.5); cursor: pointer; pointer-events: auto; transition: 0.1s;}
         .profile-panel:active { transform: scale(0.95); }
         .profile-pic { width: 28px; height: 28px; background: #fff; border: 2px solid #ffb300; border-radius: 6px; display: flex; justify-content: center; align-items: center; font-size: 16px; }
@@ -57,25 +55,24 @@
         .btn-plus { background: #4caf50; border: none; color: white; border-radius: 4px; padding:2px 5px; font-size: 12px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 0 #2e7d32; margin-right:5px;}
         .btn-plus:active { transform: translateY(2px); box-shadow: none; }
 
-        .alert-box { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); background: #d32f2f; color: white; padding: 6px 12px; border-radius: 10px; font-weight: bold; border: 2px solid #ff5252; display: none; z-index: 60; box-shadow: 0 4px 8px rgba(0,0,0,0.5); font-size: 12px; text-align:center;}
+        .alert-box { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); background: #d32f2f; color: white; padding: 6px 12px; border-radius: 10px; font-weight: bold; border: 2px solid #ff5252; display: none; z-index: 3000; box-shadow: 0 4px 8px rgba(0,0,0,0.5); font-size: 12px; text-align:center;}
         .seed-indicator { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); background: linear-gradient(to bottom, #ffb300, #ff8f00); color: white; padding: 6px 15px; border-radius: 12px; font-weight: bold; border: 2px solid #e65100; display: none; z-index: 50; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.5); font-size: 12px; pointer-events:auto;}
 
-        /* تولبار مینیمال و دقیق */
+        /* تولبار */
         .toolbar { position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 50; flex-wrap: nowrap; justify-content: center; pointer-events: auto;}
-        .action-btn { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(to bottom, #fffde7, #ffc107); border: 2px solid #fff; box-shadow: 0 3px 6px rgba(0,0,0,0.5); font-size: 16px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.1s; flex-shrink: 0; }
+        .action-btn { position: relative; width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(to bottom, #fffde7, #ffc107); border: 2px solid #fff; box-shadow: 0 3px 6px rgba(0,0,0,0.5); font-size: 16px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.1s; flex-shrink: 0; }
         .action-btn:active { transform: scale(0.9); box-shadow: 0 1px 2px rgba(0,0,0,0.4); }
-        #adminBtn { display: none; background: linear-gradient(to bottom, #f44336, #b71c1c); }
+        .msg-badge { position: absolute; top: -2px; right: -2px; width: 12px; height: 12px; background: #e53935; border: 2px solid #fff; border-radius: 50%; display: none; }
+        
+        #adminBtn { display: none; background: linear-gradient(to bottom, #f44336, #b71c1c); color:white;}
 
         #moveUI { display: none; position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); gap: 15px; z-index: 100; pointer-events: auto;}
         .btn-move { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 22px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); border: 2px solid white; cursor: pointer; }
 
-        /* --- سیستم جدید دوربین و زمین --- */
+        /* دوربین آزاد */
         #gameViewport { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; touch-action: none; z-index: 10; }
-        
         #cameraContainer { position: absolute; top: 50%; left: 50%; width: 0; height: 0; }
-        
         #groundBg { position: absolute; top: -1500px; left: -1500px; width: 3000px; height: 3000px; background-color: #558b2f; background-image: url('https://raw.githubusercontent.com/persiancom/farm/main/file_00000000f91881f5a58514cf07c9b1dd.png'); background-size: 150px; z-index: -10; pointer-events: none; }
-        
         #isoWorld { position: absolute; top: 0; left: 0; transform: rotateX(60deg) rotateZ(-45deg); transform-style: preserve-3d; }
 
         .garden { display: grid; grid-template-columns: repeat(var(--grid-size), 50px); grid-template-rows: repeat(var(--grid-size), 50px); gap: 3px; transform-style: preserve-3d; transition: all 0.5s ease; }
@@ -102,14 +99,15 @@
         .b-label.locked { background: rgba(180,0,0,0.9); border-color: #d32f2f; }
         
         .guard-sprite { position: absolute; top: 15px; right: -5px; font-size: 16px; z-index: 15; pointer-events: none; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5)); }
+        
+        .bank-cash-icon { position: absolute; top: -35px; left: 50%; transform: translateX(-50%); font-size: 22px; z-index: 15; pointer-events: none; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5)); display: none; animation: floatIcon 1.5s infinite alternate;}
+        @keyframes floatIcon { from { transform: translateX(-50%) translateY(0); } to { transform: translateX(-50%) translateY(-5px); } }
 
         #cloudOverlay { position: fixed; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%); z-index: 999999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1); pointer-events:none;}
         #cloudOverlay.active { left: 0; pointer-events:auto;}
         .cloud-icon { font-size: 60px; animation: float 2s infinite ease-in-out alternate; text-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-        @keyframes float { from { transform: translateY(-10px); } to { transform: translateY(10px); } }
         .cloud-text { color: white; font-size: 16px; font-weight: bold; margin-top: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
 
-        /* انیمیشن‌های حمله کلاغ */
         #battleCrow { position: absolute; font-size: 35px; z-index: 100; transition: all 1s ease; transform: rotateZ(45deg) rotateX(-60deg) !important; transform-origin: bottom center; pointer-events: none; filter: drop-shadow(0 10px 5px rgba(0,0,0,0.5)); opacity: 0; }
         #battleArrow { position: absolute; font-size: 25px; z-index: 101; transition: all 0.5s linear; transform: rotateZ(45deg) rotateX(-60deg) !important; pointer-events: none; opacity: 0;}
 
@@ -133,12 +131,16 @@
         .wheel-pointer { position: absolute; top: -8px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-top: 20px solid #212121; z-index: 10; }
         .btn-spin { background: #4caf50; border: none; color: white; padding: 8px; width: 100%; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 0 #2e7d32; margin-top:8px; }
         
-        .price-up { color: #2e7d32; font-weight: bold; }
-        .price-down { color: #d32f2f; font-weight: bold; }
         .exchange-input { width: 100%; padding: 8px; margin: 8px 0; border-radius: 6px; border: 2px solid #ffb300; text-align: center; font-weight: bold; font-size: 14px; outline: none; }
-        
         .stat-row { display: flex; justify-content: space-between; font-size: 12px; font-weight: bold; color: #4e342e; margin: 4px 0; border-bottom: 1px dashed #ccc; padding-bottom: 2px;}
         .attack-box { background: #fff; border: 2px solid #ffb300; padding: 10px; border-radius: 10px; margin-top: 10px; display: none; }
+        
+        .bank-card { width: 100%; border-radius: 8px; margin: 10px 0; box-shadow: 0 4px 8px rgba(0,0,0,0.4); }
+        .bank-blur { filter: blur(3px) grayscale(50%); pointer-events: none; opacity: 0.7;}
+        
+        /* استایل پیام‌ها */
+        .msg-item { background: #fff; border-right: 4px solid #ff9800; padding: 8px; margin-bottom: 8px; border-radius: 5px; text-align: right; font-size: 11px; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+        .msg-time { font-size: 9px; color: #888; display: block; margin-top: 4px; }
     </style>
 </head>
 <body>
@@ -156,8 +158,7 @@
             <h4 style="margin: 0 0 15px 0; white-space: nowrap; font-size: 12px; color:#d32f2f; text-shadow:1px 1px 0px #fff; font-weight:900;">♥️ به مزرعه زیبای خودت خوش اومدی ♥️</h4>
             <input type="text" id="username" class="login-input" placeholder="نام کاربری">
             <input type="password" id="password" class="login-input" placeholder="رمز عبور">
-            <button class="btn-action" style="background:#4caf50; box-shadow:0 4px 0 #2e7d32; font-size:16px; padding:10px;" onclick="attemptLogin()">ورود به بازی</button>
-            <div id="loadingMsg" style="display:none;">در حال اتصال... ⏳</div>
+            <button class="btn-action" style="background:#4caf50; box-shadow:0 4px 0 #2e7d32; font-size:16px; padding:10px;" onclick="attemptLogin()">ورود</button>
         </div>
     </div>
 
@@ -174,7 +175,7 @@
         </div>
         <div class="currency-panel">
             <div class="curr-row">💵 <span id="cash">100</span></div>
-            <div class="curr-row">☀️ <span id="sun">0</span> <button class="btn-plus" onclick="openModal('exchangeModal')" title="تبدیل">+</button></div>
+            <div class="curr-row">☀️ <span id="sun">0</span></div>
         </div>
     </div>
 
@@ -201,7 +202,13 @@
                     <div class="b-label" id="crowLabel">آشیانه</div>
                     <img src="https://raw.githubusercontent.com/persiancom/farm/main/file_00000000c9ec81f4b0f7578df0859c1a.png">
                 </div>
-                <!-- عناصر حمله -->
+                <!-- ساختمان بانک -->
+                <div class="building" id="cabin-bank" onclick="onBuildingClick('bank')">
+                    <div class="b-label" id="bankLabel">بانک (قفل)</div>
+                    <div id="bankCashIcon" class="bank-cash-icon">💵</div>
+                    <img src="https://raw.githubusercontent.com/persiancom/farm/main/BackgroundEraser_%DB%B2%DB%B0%DB%B2%DB%B6%DB%B0%DB%B7%DB%B2%DB%B4_%DB%B1%DB%B9%DB%B0%DB%B7%DB%B1%DB%B5%DB%B3%DB%B9%DB%B7.png" style="width:105px;">
+                </div>
+                
                 <div id="battleCrow">🐦‍⬛</div>
                 <div id="battleArrow">🏹</div>
             </div>
@@ -217,8 +224,9 @@
     <div class="toolbar" id="toolbar-normal">
         <button class="action-btn" onclick="openModal('shopModal')" title="فروشگاه">🛒</button>
         <button class="action-btn" onclick="openModal('marketModal')" title="بورس">📈</button>
-        <button class="action-btn" onclick="openModal('luckyModal')" title="گردونه شانس">🎁</button>
+        <button class="action-btn" onclick="openModal('luckyModal')" title="گردونه">🎁</button>
         <button class="action-btn" onclick="openModal('leaderboardModal')" title="لیدربرد">🏆</button>
+        <button class="action-btn" onclick="openMessages()" title="پیام‌ها">✉️<div class="msg-badge" id="msgBadge"></div></button>
         <button class="action-btn" id="adminBtn" onclick="openAdminPanel()" title="مدیریت">⚙️</button>
     </div>
 
@@ -253,9 +261,9 @@
     <div class="modal" id="exchangeModal">
         <div class="modal-content">
             <h3 style="margin-top:0;">💱 صرافی مزرعه</h3>
-            <p style="font-size:11px; color:#666;">(۱۰ ☀️ = ۳۰ 💵)</p>
-            <input type="number" id="sunInput" class="exchange-input" value="10" min="10" step="10" oninput="updateExchangeCalc()">
-            <p style="font-weight:bold; color:#2e7d32; font-size:13px;">دریافت: <span id="cashOutput">30</span> 💵</p>
+            <p style="font-size:11px; color:#666;">خورشید باارزش است! (۵۰ ☀️ = ۱۰ 💵)</p>
+            <input type="number" id="sunInput" class="exchange-input" value="50" min="50" step="50" oninput="updateExchangeCalc()">
+            <p style="font-weight:bold; color:#2e7d32; font-size:13px;">دریافت: <span id="cashOutput">10</span> 💵</p>
             <button class="btn-action" style="background:#ff9800; box-shadow:0 3px 0 #e65100;" onclick="exchangeSunBulk()">تبدیل</button>
             <button class="btn-close" onclick="closeModal('exchangeModal')">بستن</button>
         </div>
@@ -275,6 +283,10 @@
                     <div style="display:flex; align-items:center; gap:8px;"><span style="font-size:24px;">🟫</span> <div><span>زمین کشاورزی جدید</span><span style="font-size:10px; display:block; color:#666;">افزایش زمین زراعی</span></div></div>
                     <span style="color:#2e7d32;" id="landCostLabel">💵 150</span>
                 </div>
+                <div class="list-item" onclick="openModal('exchangeModal')">
+                    <div style="display:flex; align-items:center; gap:8px;"><span style="font-size:24px;">💱</span> <div><span>صرافی مزرعه</span><span style="font-size:10px; display:block; color:#666;">تبدیل خورشید به اسکناس</span></div></div>
+                    <span style="color:#2e7d32;">باز</span>
+                </div>
                 <div id="tab-equip-other"></div>
             </div>
             <div id="tab-deco" class="tab-content"><p style="color:#666; font-size:12px; margin:15px 0;">تزئینات به زودی...</p></div>
@@ -282,64 +294,51 @@
         </div>
     </div>
 
-    <div class="modal" id="inventoryModal">
+    <!-- بانک -->
+    <div class="modal" id="bankModal">
         <div class="modal-content">
-            <h3 style="margin-top:0;">📦 کلبه انبار (<span id="invCount">0</span>/200)</h3>
-            <p style="font-size:10px; color:red;">محصولات پس از ۲۴ ساعت فاسد می‌شوند!</p>
-            <div id="inventory-list"></div>
-            <button class="btn-move-cabin" onclick="startMoveMode('inv')">تغییر مکان ساختمان 📍</button>
-            <button class="btn-close" onclick="closeModal('inventoryModal')">بستن</button>
+            <h3 style="margin-top:0; color:#1b5e20;">🏦 بانک مرکزی</h3>
+            <div id="bank-content-top"></div>
+            <hr style="border:1px solid #ccc; margin:10px 0;">
+            <div id="bank-content-bottom"></div>
+            <button class="btn-move-cabin" onclick="startMoveMode('bank')">تغییر مکان ساختمان 📍</button>
+            <button class="btn-close" onclick="closeModal('bankModal')">بستن</button>
         </div>
     </div>
-    
+
+    <div class="modal" id="messagesModal">
+        <div class="modal-content">
+            <h3 style="margin-top:0;">✉️ صندوق پیام‌ها</h3>
+            <div id="messagesList" style="max-height: 200px; overflow-y: auto; text-align:right;"></div>
+            <button class="btn-close" onclick="closeModal('messagesModal')">بستن</button>
+        </div>
+    </div>
+
+    <div class="modal" id="inventoryModal"><div class="modal-content"><h3 style="margin-top:0;">📦 کلبه انبار (<span id="invCount">0</span>/200)</h3><p style="font-size:10px; color:red;">محصولات پس از ۲۴ ساعت فاسد می‌شوند!</p><div id="inventory-list"></div><button class="btn-move-cabin" onclick="startMoveMode('inv')">تغییر مکان ساختمان 📍</button><button class="btn-close" onclick="closeModal('inventoryModal')">بستن</button></div></div>
     <div class="modal" id="marketModal"><div class="modal-content"><h3 style="margin-top:0;">📈 بورس جهانی</h3><p style="font-size:11px;">نوسان قیمت‌ها هر ۶۰ ثانیه</p><div id="market-list"></div><button class="btn-close" onclick="closeModal('marketModal')">بستن</button></div></div>
-    
     <div class="modal" id="leaderboardModal"><div class="modal-content"><h3 style="margin-top:0;">🏆 رقبا</h3><p style="font-size:10px; color:#666;">برای بازدید روی نام ضربه بزنید</p><div id="leaderboard-list"></div><button class="btn-close" onclick="closeModal('leaderboardModal')">بستن</button></div></div>
     
     <div class="modal" id="adminModal">
         <div class="modal-content">
             <h3 style="margin-top:0; color:#b71c1c;">⚙️ پنل مدیریت</h3>
-            <button class="btn-action" style="background:#673ab7; margin-bottom:15px;" onclick="removeLimits()">🔓 حذف محدودیت کلاغ/گردونه</button>
+            <button class="btn-action" style="background:#673ab7; margin-bottom:15px;" onclick="removeLimits()">🔓 حذف محدودیت کلاغ/گردونه/بانک</button>
             <div id="admin-user-list"></div>
             <button class="btn-close" onclick="closeModal('adminModal')">بستن</button>
         </div>
     </div>
 
-    <div class="modal" id="luckyModal">
-        <div class="modal-content">
-            <h3 style="margin-top:0;">🎁 گردونه شانس</h3>
-            <div class="wheel-container">
-                <div class="wheel-pointer"></div>
-                <svg viewBox="0 0 200 200" class="wheel" id="wheel">
-                    <g transform="rotate(0 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#f44336" /><text x="135" y="45" font-size="12" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">20 💵</text></g>
-                    <g transform="rotate(60 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#ff9800" /><text x="135" y="45" font-size="12" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">50 ☀️</text></g>
-                    <g transform="rotate(120 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#4caf50" /><text x="135" y="45" font-size="12" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">10 💵</text></g>
-                    <g transform="rotate(180 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#2196f3" /><text x="135" y="45" font-size="12" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">100 ☀️</text></g>
-                    <g transform="rotate(240 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#9c27b0" /><text x="135" y="45" font-size="12" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">50 💵</text></g>
-                    <g transform="rotate(300 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#e91e63" /><text x="135" y="45" font-size="12" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">200 ☀️</text></g>
-                </svg>
-            </div>
-            <div id="luckyResult" style="font-weight:bold; font-size:14px; margin:10px; color:#d32f2f; min-height:20px;"></div>
-            <button class="btn-spin" id="spinBtn" onclick="spinWheel()">بچرخان!</button>
-            <button class="btn-close" onclick="closeModal('luckyModal')">بستن</button>
-        </div>
-    </div>
-
+    <div class="modal" id="luckyModal"><div class="modal-content"><h3 style="margin-top:0;">🎁 گردونه شانس</h3><div class="wheel-container"><div class="wheel-pointer"></div><svg viewBox="0 0 200 200" class="wheel" id="wheel"><g transform="rotate(0 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#f44336" /><text x="135" y="45" font-size="12" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">20 💵</text></g><g transform="rotate(60 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#ff9800" /><text x="135" y="45" font-size="12" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">50 ☀️</text></g><g transform="rotate(120 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#4caf50" /><text x="135" y="45" font-size="12" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">10 💵</text></g><g transform="rotate(180 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#2196f3" /><text x="135" y="45" font-size="12" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">100 ☀️</text></g><g transform="rotate(240 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#9c27b0" /><text x="135" y="45" font-size="12" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">50 💵</text></g><g transform="rotate(300 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#e91e63" /><text x="135" y="45" font-size="12" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">200 ☀️</text></g></svg></div><div id="luckyResult" style="font-weight:bold; font-size:14px; margin:10px; color:#d32f2f; min-height:20px;"></div><button class="btn-spin" id="spinBtn" onclick="spinWheel()">بچرخان!</button><button class="btn-close" onclick="closeModal('luckyModal')">بستن</button></div></div>
     <div class="modal" id="guardModal"><div class="modal-content"><h3 style="margin-top:0;">🛡️ کلبه نگهبانی</h3><div id="guard-content"></div><button class="btn-move-cabin" onclick="startMoveMode('guard')">تغییر مکان ساختمان 📍</button><button class="btn-close" onclick="closeModal('guardModal')">بستن</button></div></div>
     
     <div class="modal" id="crowModal">
         <div class="modal-content">
             <h3 style="margin-top:0;">🦅 آشیانه کلاغ‌ها</h3>
             <div id="crow-content"></div>
-            
-            <!-- کادر حمله جدید به سبک کلش -->
             <div id="crow-attack-box" class="attack-box">
                 <p style="font-size:12px; margin:0 0 10px 0; color:#4e342e; font-weight:bold;">نام رقیب رو برای حمله بنویس!</p>
-                <!-- کادر جستجو بدون نام اولیه -->
                 <input type="text" id="targetOpponent" class="exchange-input" placeholder="">
                 <button class="btn-action" style="background:#e53935; box-shadow:0 3px 0 #b71c1c;" onclick="attackOpponent()">⚔️ شروع حمله لایو!</button>
             </div>
-
             <button class="btn-move-cabin" onclick="startMoveMode('crow')">تغییر مکان ساختمان 📍</button>
             <button class="btn-close" onclick="closeModal('crowModal')">بستن</button>
         </div>
@@ -359,7 +358,9 @@
             tulip: 'https://raw.githubusercontent.com/persiancom/farm/main/file_00000000dbe882439707cf9c1ecd1006.png',
             wheat: 'https://raw.githubusercontent.com/persiancom/farm/main/file_000000005f9081f4b5d953a40cfc5ded.png',
             apple: 'https://raw.githubusercontent.com/persiancom/farm/main/file_00000000b8f88246b9e8a046b7651710.png',
-            pine: 'https://raw.githubusercontent.com/persiancom/farm/main/file_0000000034cc81f48397f265581aef66.png'
+            pine: 'https://raw.githubusercontent.com/persiancom/farm/main/file_0000000034cc81f48397f265581aef66.png',
+            cardElahe: 'https://raw.githubusercontent.com/persiancom/farm/main/BackgroundEraser_%DB%B2%DB%B0%DB%B2%DB%B6%DB%B0%DB%B7%DB%B2%DB%B4_%DB%B1%DB%B9%DB%B3%DB%B0%DB%B2%DB%B7%DB%B6%DB%B0%DB%B7.png',
+            cardHamid: 'https://raw.githubusercontent.com/persiancom/farm/main/BackgroundEraser_%DB%B2%DB%B0%DB%B2%DB%B6%DB%B0%DB%B7%DB%B2%DB%B4_%DB%B1%DB%B9%DB%B3%DB%B2%DB%B5%DB%B7%DB%B6%DB%B2%DB%B2.png'
         };
         const svgSeed = `<svg viewBox="0 0 100 100" width="100%" height="100%"><ellipse cx="50" cy="85" rx="15" ry="6" fill="#3e2723"/><path d="M50 85 Q40 65 30 60 Q45 55 50 80" fill="#388e3c"/><path d="M50 85 Q65 60 70 65 Q60 70 50 80" fill="#2e7d32"/></svg>`;
 
@@ -377,49 +378,54 @@
             uid: null, stats: { hrv: 0, atk: 0, def: 0, maxS: 0, pTime: 0, lt: 0 },
             items: { redFlower: [], pinkFlower: [], wheat: [], appleTree: [], pineTree: [] },
             guard: { level: 0, kills: 0, sleeping: false },
-            crow: { level: 0, lastSent: 0 }, news: [],
-            positions: { inv: { t: -100, l: -30 }, guard: { t: 220, l: -30 }, crow: { t: -50, l: 220 } }
+            crow: { level: 0, lastSent: 0 },
+            bank: { level: 0, lastCol: Date.now(), acc: false, inv: 0, invStart: 0, ready: false },
+            messages: [],
+            positions: { inv: { t: -100, l: -30 }, guard: { t: 150, l: -30 }, crow: { t: -50, l: 150 }, bank: { t: -150, l: 80 } },
+            incomingAttack: false
         };
 
-        // --- دوربین آزاد و زوم ---
+        // --- دوربین ---
         let panX = 0, panY = 0, zoom = 1;
-        let isDraggingMap = false, isClick = true, dragStartX = 0, dragStartY = 0;
+        let isDraggingMap = false, mapDragDist = 0, dragStartX = 0, dragStartY = 0;
         const viewport = document.getElementById('gameViewport');
         const camera = document.getElementById('cameraContainer');
+        const bg = document.getElementById('groundBg');
 
-        function updateTransform() { camera.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`; }
+        function updateTransform() { 
+            camera.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`; 
+            bg.style.transform = `translate(${-panX/zoom}px, ${-panY/zoom}px)`; 
+        }
 
         viewport.addEventListener('pointerdown', e => {
             if (e.target.closest('.modal') || e.target.closest('.hud-top') || e.target.closest('.toolbar') || isMovingMode || isAttacking) return;
-            isDraggingMap = true; isClick = true;
+            isDraggingMap = true; mapDragDist = 0;
             dragStartX = e.clientX - (panX * zoom); dragStartY = e.clientY - (panY * zoom);
+            viewport.setPointerCapture(e.pointerId);
         });
         viewport.addEventListener('pointermove', e => {
             if (!isDraggingMap) return;
             let dx = (e.clientX - dragStartX) / zoom; let dy = (e.clientY - dragStartY) / zoom;
-            const LIMIT = 400; dx = Math.max(-LIMIT, Math.min(LIMIT, dx)); dy = Math.max(-LIMIT, Math.min(LIMIT, dy));
-            if (Math.abs(dx - panX) > 2 || Math.abs(dy - panY) > 2) isClick = false;
+            mapDragDist += Math.abs(dx - panX) + Math.abs(dy - panY);
+            
+            const LIMIT = 350; dx = Math.max(-LIMIT, Math.min(LIMIT, dx)); dy = Math.max(-LIMIT, Math.min(LIMIT, dy));
             panX = dx; panY = dy; updateTransform();
         });
-        viewport.addEventListener('pointerup', e => { isDraggingMap = false; setTimeout(() => { isClick = true; }, 50); });
+        viewport.addEventListener('pointerup', e => { isDraggingMap = false; viewport.releasePointerCapture(e.pointerId); });
         
         viewport.addEventListener('wheel', e => {
             if(e.target.closest('.modal') || e.target.closest('.hud-top')) return;
             e.preventDefault(); zoom += e.deltaY * -0.001; zoom = Math.min(Math.max(0.6, zoom), 1.8); updateTransform();
         }, {passive: false});
 
-        function resizeGame() {
-            panX = 0; panY = 0; zoom = Math.min(window.innerWidth / 400, window.innerHeight / 650);
-            if (zoom > 1.1) zoom = 1.1; updateTransform();
-        }
+        function resizeGame() { panX = 0; panY = 0; zoom = Math.min(window.innerWidth / 400, window.innerHeight / 650); if (zoom > 1.1) zoom = 1.1; updateTransform(); }
         window.addEventListener('resize', resizeGame); resizeGame();
 
-        // --- لامپ و زمان ---
+        // --- لامپ ---
         let isLampOn = false;
         function toggleLamp() {
             isLampOn = !isLampOn; const lamp = document.getElementById('hangingLamp'); const overlay = document.getElementById('timeOverlay');
-            if (isLampOn) { lamp.classList.add('on'); overlay.classList.add('lamp-on'); } 
-            else { lamp.classList.remove('on'); overlay.classList.remove('lamp-on'); }
+            if (isLampOn) { lamp.classList.add('on'); overlay.classList.add('lamp-on'); } else { lamp.classList.remove('on'); overlay.classList.remove('lamp-on'); }
         }
 
         function updateTimeOfDay() {
@@ -437,11 +443,28 @@
         }
         setInterval(updateTimeOfDay, 60000); updateTimeOfDay();
 
+        // --- چک کردن تایم‌ها ---
         setInterval(() => {
             if(!currentPlayer || isVisiting) return;
             let now = Date.now(); let diff = Math.floor((now - state.stats.lt) / 1000);
             if (diff > 0 && diff < 300) state.stats.pTime += diff; 
             state.stats.lt = now;
+
+            // بانک: آیکون پول
+            if (state.bank && state.bank.level > 0) {
+                let diffMins = Math.floor((now - state.bank.lastCol) / 60000);
+                document.getElementById('bankCashIcon').style.display = diffMins >= 1 ? 'block' : 'none';
+            }
+            
+            // بانک: سرمایه گذاری
+            if (state.bank && state.bank.inv > 0 && !state.bank.ready) {
+                if (now - state.bank.invStart >= 24 * 3600 * 1000) {
+                    state.bank.ready = true;
+                    let profit = Math.floor(state.bank.inv * 0.05);
+                    state.messages.unshift({ id: now, text: `مشتری گرامی ${currentPlayer} سود شما به مبلغ ${profit} اسکناس قابل برداشت است. (بانک تجارت)`, read: false });
+                    saveCloudData(); updateMsgBadge();
+                }
+            }
         }, 5000);
 
         async function saveCloudData() {
@@ -459,10 +482,12 @@
                 cash = data.cash; sun = data.sun; level = data.level; xp = data.xp; gridSize = data.grid_size;
                 if(data.inventory && data.inventory.items) { 
                     state = data.inventory; 
-                    if(!state.positions) state.positions = { inv: { t: -100, l: -30 }, guard: { t: 220, l: -30 }, crow: { t: -50, l: 220 } };
+                    if(!state.positions) state.positions = { inv: { t: -100, l: -30 }, guard: { t: 220, l: -30 }, crow: { t: -50, l: 220 }, bank: { t: -150, l: 80 } };
+                    if(!state.positions.bank) state.positions.bank = { t: -150, l: 80 };
                     if(!state.stats) state.stats = { hrv: 0, atk: 0, def: 0, maxS: sun, pTime: 0, lt: Date.now() };
                     if(!state.uid) state.uid = 'UID-' + Math.random().toString(36).substr(2, 6).toUpperCase();
-                    if(!state.news) state.news = [];
+                    if(!state.messages) state.messages = [];
+                    if(!state.bank) state.bank = { level: 0, lastCol: Date.now(), acc: false, inv: 0, invStart: 0, ready: false };
                 }
                 if(data.last_spin) localStorage.setItem(`lastSpin_${currentPlayer}`, data.last_spin);
             } else {
@@ -471,22 +496,18 @@
                 await saveCloudData(); 
             }
             
-            cleanSpoiledItems(); applyBuildingPositions(); updateLabels();
+            cleanSpoiledItems(); applyBuildingPositions(); updateLabels(); updateMsgBadge();
             updateHUD(); renderGarden(); checkSpinCooldown();
             if(currentPlayer === 'حمیدرضا') document.getElementById('adminBtn').style.display = 'flex';
         }
 
-        // سینک آنلاین
         setInterval(async () => {
             if(!currentPlayer || isVisiting || isAttacking) return;
             const { data } = await db.from('farm_players').select('inventory, cash, sun, level, xp').eq('username', currentPlayer).single();
             if (data) {
                 let s = data.inventory;
-                if(s.news && s.news.length > 0) {
-                    s.news.forEach(n => showAlert(n));
-                    s.news = []; state = s;
-                    await db.from('farm_players').update({ inventory: s }).eq('username', currentPlayer);
-                    renderGarden(); // آپدیت محصولات در صورت سرقت
+                if(s.messages && s.messages.length > state.messages.length) {
+                    state.messages = s.messages; updateMsgBadge();
                 }
                 if (data.cash !== cash || data.level !== level) {
                     cash = data.cash; level = data.level; sun = data.sun; xp = data.xp; updateHUD();
@@ -497,16 +518,13 @@
         async function attemptLogin() {
             const user = document.getElementById('username').value.trim(); const pass = document.getElementById('password').value.trim();
             if ((user === 'حمیدرضا' && pass === 'CTF_22') || (user === 'الهه' && pass === 'CTF_11')) {
-                document.getElementById('loginScreen').style.display = 'none'; 
-                const overlay = document.getElementById('cloudOverlay');
-                document.getElementById('cloudText').innerText = 'در حال بارگذاری مزرعه...';
-                overlay.classList.add('active');
-                
-                currentPlayer = user; await loadCloudData(); 
-                
-                overlay.classList.remove('active');
-                showAlert(`سلام ${user}! خوش آمدی.`);
-            } else { alert('رمز اشتباه است!'); }
+                document.getElementById('loginScreen').style.opacity = '0';
+                setTimeout(async () => { 
+                    document.getElementById('loginScreen').style.display = 'none'; 
+                    const overlay = document.getElementById('cloudOverlay'); document.getElementById('cloudText').innerText = 'در حال بارگذاری مزرعه...'; overlay.classList.add('active');
+                    currentPlayer = user; await loadCloudData(); overlay.classList.remove('active');
+                }, 500);
+            } else { document.getElementById('loadingMsg').style.display = 'block'; document.getElementById('loadingMsg').innerText = 'رمز اشتباه است!'; }
         }
 
         function getRequiredXp(lvl) { return lvl * lvl * 50; }
@@ -544,7 +562,7 @@
         function formatTime(s) { let h = Math.floor(s / 3600); let m = Math.floor((s % 3600) / 60); return `${h}ساعت و ${m}دقیقه`; }
 
         function openProfile() {
-            if(isMovingMode || isAttacking) return; // !isClick Removed
+            if(mapDragDist > 5 || isMovingMode || isAttacking) return;
             let dataToShow = isVisiting ? visitingData.inventory : state;
             document.getElementById('profName').innerText = isVisiting ? visitingData.username : currentPlayer;
             document.getElementById('profUid').innerText = 'UID: ' + (dataToShow.uid || '---');
@@ -554,6 +572,25 @@
             document.getElementById('profHarvest').innerText = st.hrv; document.getElementById('profAtk').innerText = st.atk; document.getElementById('profDef').innerText = st.def;
             document.getElementById('profSun').innerText = st.maxS; document.getElementById('profTime').innerText = formatTime(st.pTime);
             openModal('profileModal');
+        }
+
+        function updateMsgBadge() {
+            let unread = state.messages.filter(m => !m.read).length;
+            const badge = document.getElementById('msgBadge');
+            if(unread > 0) { badge.style.display = 'block'; } else { badge.style.display = 'none'; }
+        }
+
+        function openMessages() {
+            const list = document.getElementById('messagesList'); list.innerHTML = '';
+            if(state.messages.length === 0) list.innerHTML = '<p style="text-align:center; color:#666; font-size:12px;">صندوق پیام خالی است.</p>';
+            else {
+                state.messages.forEach(m => {
+                    list.innerHTML += `<div class="msg-item">${m.text}<span class="msg-time">${new Date(m.id).toLocaleString('fa-IR')}</span></div>`;
+                    m.read = true;
+                });
+                saveCloudData(); updateMsgBadge();
+            }
+            openModal('messagesModal');
         }
 
         function updateLabels() {
@@ -567,7 +604,6 @@
             if(lToUse < 10) { gl.innerText = "قفل"; gl.classList.add('locked'); document.getElementById('guardSpriteContainer').innerHTML=''; }
             else { 
                 gl.classList.remove('locked'); gl.innerText = dataToUse.guard.level === 0 ? "خرید نگهبان" : `نگهبان ${dataToUse.guard.sleeping?'(خواب)':'👁️'}`; 
-                // رسم آدمک
                 if (dataToUse.guard.level > 0) {
                     let c = dataToUse.guard.level >= 4 ? 2 : 1;
                     document.getElementById('guardSpriteContainer').innerHTML = `<div class="guard-sprite">${dataToUse.guard.sleeping ? '💤' : '🏹'.repeat(c)}</div>`;
@@ -577,25 +613,33 @@
             const cl = document.getElementById('crowLabel');
             if(lToUse < 10) { cl.innerText = "قفل"; cl.classList.add('locked'); }
             else { cl.classList.remove('locked'); cl.innerText = dataToUse.crow.level === 0 ? "خرید آشیانه" : `آشیانه Lvl.${dataToUse.crow.level}`; }
+
+            const bl = document.getElementById('bankLabel');
+            if(lToUse < 3) { bl.innerText = "قفل"; bl.classList.add('locked'); }
+            else { bl.classList.remove('locked'); bl.innerText = (dataToUse.bank && dataToUse.bank.level > 0) ? `بانک Lvl.${dataToUse.bank.level}` : "ساخت بانک"; }
         }
 
         function applyBuildingPositions() {
             let p = isVisiting ? visitingData.inventory.positions : state.positions;
+            if(!p.bank) p.bank = { t: -150, l: 80 };
             document.getElementById('cabin-inv').style.top = p.inv.t + 'px'; document.getElementById('cabin-inv').style.left = p.inv.l + 'px';
             document.getElementById('cabin-guard').style.top = p.guard.t + 'px'; document.getElementById('cabin-guard').style.left = p.guard.l + 'px';
             document.getElementById('cabin-crow').style.top = p.crow.t + 'px'; document.getElementById('cabin-crow').style.left = p.crow.l + 'px';
+            document.getElementById('cabin-bank').style.top = p.bank.t + 'px'; document.getElementById('cabin-bank').style.left = p.bank.l + 'px';
         }
 
-        // --- جابجایی کلبه‌ها ---
+        // --- جابجایی ساختمان‌ها ---
+        let activeB = null, isDraggingB = false, bStartT, bStartL, pStartX, pStartY;
         function onBuildingClick(id) {
-            if(!isClick || isMovingMode || isVisiting || isAttacking) return;
+            if(mapDragDist > 5 || isMovingMode || isVisiting || isAttacking) return;
             if(id === 'inv') openModal('inventoryModal'); 
             if(id === 'guard') openGuardModal(); 
             if(id === 'crow') openCrowModal();
+            if(id === 'bank') openBankModal();
         }
 
         function startMoveMode(id) {
-            closeModal('inventoryModal'); closeModal('guardModal'); closeModal('crowModal');
+            closeModal('inventoryModal'); closeModal('guardModal'); closeModal('crowModal'); closeModal('bankModal');
             isMovingMode = true; activeB = document.getElementById(`cabin-${id}`); activeB.classList.add('moving');
             bStartT = activeB.offsetTop; bStartL = activeB.offsetLeft;
             document.getElementById('moveUI').style.display = 'flex'; document.getElementById('toolbar-normal').style.display = 'none';
@@ -640,9 +684,9 @@
                 const pf = document.createElement('div'); pf.className = 'progress-fill';
                 pb.appendChild(pf); content.append(tb, svg, pb); plot.appendChild(content);
                 
-                let saved = layoutToUse[i];
-                plot.dataset.state = saved.state;
-                if(saved.state !== 'empty') {
+                if(layoutToUse[i] && layoutToUse[i].state !== 'empty') {
+                    let saved = layoutToUse[i];
+                    plot.dataset.state = saved.state;
                     let item = itemsData[saved.plant];
                     let elapsed = Math.floor((Date.now() - saved.startTime) / 1000);
                     if (elapsed >= item.time) {
@@ -653,14 +697,13 @@
                         else { startGrowthTimer(plot, svg, pb, pf, tb, item, item.time - elapsed, saved); }
                     }
                 }
-                
-                if (!isVisiting && !isAttacking) { plot.onclick = () => handlePlotClick(plot, svg, pb, pf, tb, saved); }
+                if (!isVisiting && !isAttacking) { plot.onclick = () => handlePlotClick(plot, svg, pb, pf, tb, layoutToUse[i]); }
                 garden.appendChild(plot);
             }
         }
 
         function handlePlotClick(plot, svg, pb, pf, tb, savedData) {
-            if(!isClick || isMovingMode || isAttacking) return;
+            if(mapDragDist > 5 || isMovingMode || isAttacking) return;
             if (plot.dataset.state === 'empty' && selectedSeed && itemsData[selectedSeed].type === 'crop') {
                 const item = itemsData[selectedSeed];
                 if (cash >= item.cost) {
@@ -673,8 +716,7 @@
             } else if (plot.dataset.state === 'ready') {
                 const pid = savedData.plant;
                 if (getInvCount() >= 200) { alert('انبار پر است!'); return; }
-                state.items[pid].push(Date.now()); addXp(itemsData[pid].xp);
-                state.stats.hrv++;
+                state.items[pid].push(Date.now()); addXp(itemsData[pid].xp); state.stats.hrv++;
                 savedData.state = 'empty'; savedData.plant = null; savedData.startTime = 0; plot.dataset.state = 'empty';
                 svg.innerHTML = ''; pb.style.display = 'none'; pf.style.width = '0%'; tb.style.display = 'none';
                 updateLabels(); saveCloudData();
@@ -690,8 +732,9 @@
             }, 1000);
         }
 
-        // --- بازدید و حمله زنده (Live Attack) ---
+        // --- بازدید و حمله زنده ---
         async function visitFarm(username) {
+            if(mapDragDist > 5) return;
             closeModal('leaderboardModal');
             const overlay = document.getElementById('cloudOverlay'); document.getElementById('cloudText').innerText = `🔍 در حال سفر به مزرعه ${username}...`;
             overlay.classList.add('active');
@@ -700,7 +743,6 @@
                 if(data) {
                     isVisiting = true; visitingData = data;
                     document.getElementById('toolbar-normal').style.display = 'none'; document.getElementById('toolbar-visit').style.display = 'flex';
-                    
                     applyBuildingPositions(); updateLabels(); updateHUD();
                     renderGarden({ size: data.grid_size, plots: data.inventory.gardenLayout || [] });
                     overlay.classList.remove('active');
@@ -737,17 +779,15 @@
                 renderGarden({ size: data.grid_size, plots: data.inventory.gardenLayout || [] });
                 overlay.classList.remove('active');
                 
-                setTimeout(() => { executeLiveAttack(data); }, 1000); // شروع انیمیشن نبرد
+                setTimeout(() => { executeLiveAttack(data); }, 1000); 
             }, 800);
         }
 
         async function executeLiveAttack(oppData) {
             const crow = document.getElementById('battleCrow'); const arrow = document.getElementById('battleArrow');
             crow.style.opacity = '1'; crow.innerHTML = '🐦‍⬛';
-            let oppInv = oppData.inventory;
-            if(!oppInv.news) oppInv.news = [];
+            let oppInv = oppData.inventory; if(!oppInv.messages) oppInv.messages = [];
             
-            // پوزیشن کلاغ
             crow.style.top = (oppInv.positions.crow.t - 50) + 'px'; crow.style.left = (oppInv.positions.crow.l - 50) + 'px';
             
             setTimeout(async () => {
@@ -758,7 +798,6 @@
                 }
 
                 if(defended) {
-                    // شلیک تیر
                     arrow.style.opacity = '1';
                     arrow.style.top = oppInv.positions.guard.t + 'px'; arrow.style.left = oppInv.positions.guard.l + 'px';
                     setTimeout(() => {
@@ -769,17 +808,14 @@
                         }, 500);
                     }, 100);
 
-                    // آپدیت حریف
                     oppInv.guard.kills++; oppInv.stats.def++;
                     if(oppInv.guard.kills >= 2) oppInv.guard.sleeping = true;
-                    oppInv.news.push(`🏹 نگهبان شما، کلاغِ ${currentPlayer} را شکار کرد!`);
+                    oppInv.messages.unshift({ id: Date.now(), text: `🏹 نگهبان شما، کلاغِ ${currentPlayer} را شکار کرد!`, read: false });
                     await db.from('farm_players').update({ inventory: oppInv }).eq('username', oppData.username);
                     
                     setTimeout(() => { alert('دفاع حریف موفق بود! کلاغت کشته شد.'); state.crow.lastSent = Date.now(); saveCloudData(); returnHome(); }, 2000);
                 } else {
-                    // پیدا کردن هدف
-                    let layout = oppInv.gardenLayout || [];
-                    let targets = [];
+                    let layout = oppInv.gardenLayout || []; let targets = [];
                     for(let i=0; i<layout.length; i++) if(layout[i].state === 'growing' || layout[i].state === 'ready') targets.push(i);
                     
                     if(targets.length === 0) {
@@ -789,7 +825,6 @@
                     
                     let targetIdx = targets[Math.floor(Math.random() * targets.length)];
                     let targetPlot = document.getElementById(`plot-${targetIdx}`);
-                    // حرکت به سمت محصول
                     crow.style.top = targetPlot.offsetTop + 'px'; crow.style.left = targetPlot.offsetLeft + 'px';
                     
                     setTimeout(async () => {
@@ -801,9 +836,8 @@
                                 targetPlot.dataset.state = 'empty'; targetPlot.querySelector('.svg-container').innerHTML=''; targetPlot.querySelector('.progress-bar').style.display='none'; targetPlot.querySelector('.timer-badge').style.display='none';
                                 crow.style.opacity = '0';
                                 
-                                // آپدیت حریف و خودمون
                                 layout[targetIdx] = { state: 'empty', plant: null, startTime: 0 };
-                                oppInv.news.push(`🦅 کلاغِ ${currentPlayer} یکی از محصولات شما را دزدید!`);
+                                oppInv.messages.unshift({ id: Date.now(), text: `🦅 کلاغِ ${currentPlayer} محصول شما را دزدید!`, read: false });
                                 db.from('farm_players').update({ inventory: oppInv }).eq('username', oppData.username);
                                 
                                 state.stats.atk++; state.crow.lastSent = Date.now(); saveCloudData();
@@ -822,20 +856,19 @@
         }
 
         function openModal(id) {
-            if(isMovingMode || isAttacking) return; // !isClick برداشته شد تا دکمه ها همیشه کار کنند
             cleanSpoiledItems(); document.getElementById(id).style.display = 'flex';
             if(id === 'shopModal') { document.getElementById('landCostLabel').innerText = `💵 ${gridSize * 150}`; renderShop(); }
             if(id === 'inventoryModal') renderInventory();
             if(id === 'marketModal') renderMarket();
-            if(id === 'leaderboardModal') { renderLeaderboard(); }
+            if(id === 'leaderboardModal') renderLeaderboard();
         }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-        function updateExchangeCalc() { let val = parseInt(document.getElementById('sunInput').value) || 0; document.getElementById('cashOutput').innerText = val * 3; }
+        function updateExchangeCalc() { let val = parseInt(document.getElementById('sunInput').value) || 0; document.getElementById('cashOutput').innerText = Math.floor(val / 5); }
         function exchangeSunBulk() {
             let val = parseInt(document.getElementById('sunInput').value) || 0;
-            if(val <= 0) { alert('مقدار نامعتبر!'); return; }
-            if (sun >= val) { sun -= val; cash += (val * 3); updateHUD(); saveCloudData(); closeModal('exchangeModal'); } else { alert('خورشید کافی نداری!'); }
+            if(val <= 0 || val % 50 !== 0) { alert('مقدار باید مضربی از ۵۰ باشد!'); return; }
+            if (sun >= val) { sun -= val; cash += Math.floor(val / 5); updateHUD(); saveCloudData(); closeModal('exchangeModal'); } else { alert('خورشید کافی نداری!'); }
         }
 
         function renderShop() {
@@ -862,7 +895,7 @@
         }
 
         function expandLand() {
-            if (gridSize >= 5) { alert('زمین به نهایت رسیده!'); return; }
+            if (gridSize >= 6) { alert('زمین به نهایت رسیده!'); return; }
             let cost = gridSize * 150; 
             if (cash >= cost) { if(confirm(`گسترش زمین با ${cost} اسکناس؟`)) { cash -= cost; gridSize++; renderGarden(); updateHUD(); saveCloudData(); closeModal('shopModal'); } } 
             else alert(`به ${cost} اسکناس نیاز داری.`);
@@ -881,9 +914,7 @@
             if (isEmpty) list.innerHTML = '<p>انبار خالی است.</p>';
         }
 
-        function sellItem(key) {
-            if (state.items[key].length > 0) { state.items[key].pop(); sun += currentPrices[key]; updateHUD(); saveCloudData(); renderInventory(); updateLabels(); }
-        }
+        function sellItem(key) { if (state.items[key].length > 0) { state.items[key].pop(); sun += currentPrices[key]; updateHUD(); saveCloudData(); renderInventory(); updateLabels(); } }
 
         function renderMarket() {
             const list = document.getElementById('market-list'); list.innerHTML = '';
@@ -916,7 +947,7 @@
                             <div style="display:flex; gap:6px; align-items:center;"><button style="background:#ff9800; color:white; border:none; padding:2px 6px; border-radius:4px; cursor:pointer;" onclick="changeLvl('${u.username}', ${u.level}, -1)">-</button><span style="font-weight:bold; width:45px; text-align:center;">سطح ${u.level}</span><button style="background:#4caf50; color:white; border:none; padding:2px 6px; border-radius:4px; cursor:pointer;" onclick="changeLvl('${u.username}', ${u.level}, 1)">+</button></div>
                         </div>
                         <div style="width:100%; display:flex; gap:8px; margin-top:5px;">
-                            <input type="number" id="addCash_${u.username}" placeholder="تعداد اسکناس" style="width:100%; padding:5px; border-radius:5px; border:1px solid #ffb300; text-align:center; font-size:12px;">
+                            <input type="number" id="addCash_${u.username}" placeholder="اسکناس" style="width:100%; padding:5px; border-radius:5px; border:1px solid #ffb300; text-align:center; font-size:12px;">
                             <button style="background:#4caf50; color:white; border:none; padding:5px; border-radius:5px; cursor:pointer; font-weight:bold; font-size:12px;" onclick="addCashToUser('${u.username}')">واریز 💵</button>
                         </div></div>`;
                 });
@@ -924,7 +955,7 @@
         }
 
         async function removeLimits() {
-            state.crow.lastSent = 0; localStorage.setItem(`lastSpin_${currentPlayer}`, 0);
+            state.crow.lastSent = 0; state.bank.invStart = 0; localStorage.setItem(`lastSpin_${currentPlayer}`, 0);
             await saveCloudData(); alert('محدودیت‌ها برداشته شد!');
         }
 
@@ -940,29 +971,141 @@
         }
         async function resetPlayer(targetUser) {
             if(!confirm(`آیا مطمئن هستید؟`)) return;
-            const defaultState = { uid: 'UID-'+Math.random().toString(36).substr(2, 6).toUpperCase(), stats:{hrv:0,atk:0,def:0,maxS:0,pTime:0,lt:Date.now()}, items: { redFlower: [], pinkFlower: [], wheat: [], appleTree: [], pineTree: [] }, guard: { level: 0, kills: 0, sleeping: false }, crow: { level: 0, lastSent: 0 }, positions: { inv: { t: -100, l: -140 }, guard: { t: 80, l: -140 }, crow: { t: -100, l: 80 } }, incomingAttack: false, gardenLayout:[] };
+            const defaultState = { uid: 'UID-'+Math.random().toString(36).substr(2, 6).toUpperCase(), stats:{hrv:0,atk:0,def:0,maxS:0,pTime:0,lt:Date.now()}, items: { redFlower: [], pinkFlower: [], wheat: [], appleTree: [], pineTree: [] }, guard: { level: 0, kills: 0, sleeping: false }, crow: { level: 0, lastSent: 0 }, bank: { level: 0, lastCol: Date.now(), acc: false, inv: 0, invStart: 0, ready: false }, messages: [], positions: { inv: { t: -100, l: -30 }, guard: { t: 220, l: -30 }, crow: { t: -50, l: 220 }, bank: { t: -150, l: 80 } }, incomingAttack: false, gardenLayout:[] };
             const { error } = await db.from('farm_players').update({ cash: 100, sun: 0, level: 1, xp: 0, grid_size: 3, inventory: defaultState }).eq('username', targetUser);
             if(!error) { alert(`ریست شد.`); openAdminPanel(); }
         }
 
-        // --- لیدربرد ---
+        // --- کلبه نگهبانی و کلاغ ---
+        function openGuardModal() {
+            if(level < 10) { alert('باید به سطح 10 برسی!'); return; }
+            const costs = [500, 1000, 2000, 4000]; const acc = [30, 50, 75, 100];
+            const div = document.getElementById('guard-content'); let gl = state.guard.level;
+            let html = `<p>با خرید نگهبان از دزدی کلاغ‌ها جلوگیری کن.</p>`;
+            if (gl === 0) { html += `<button class="btn-action" onclick="upgradeGuard()">خرید سطح 1 (${costs[0]}💵)</button>`; } 
+            else {
+                html += `<p style="font-weight:bold;">سطح: ${gl} | شانس شلیک: ${acc[gl-1]}%<br>وضعیت: ${state.guard.sleeping ? '😴 خواب' : '👁️ بیدار'}</p>`;
+                if (gl < 4) html += `<button class="btn-action" onclick="upgradeGuard()">ارتقا به سطح ${gl+1} (${costs[gl]}💵)</button>`; else html += `<p style="color:green;">نهایت! (2 سرباز)</p>`;
+            }
+            div.innerHTML = html; openModal('guardModal');
+        }
+        function upgradeGuard() {
+            const costs = [500, 1000, 2000, 4000]; let gl = state.guard.level;
+            if(cash >= costs[gl]) { cash -= costs[gl]; state.guard.level++; updateHUD(); saveCloudData(); updateLabels(); openGuardModal(); } else alert('پول کافی نیست!');
+        }
+
+        function openCrowModal() {
+            if(level < 10) { alert('باید به سطح 10 برسی!'); return; }
+            const costs = [800, 1500, 3000, 5000]; const times = [24, 12, 6, 4];
+            const div = document.getElementById('crow-content'); let cl = state.crow.level;
+            
+            let html = `<p>با کلاغ می‌تونی محصولات حریف رو بدزدی!</p>`;
+            if (cl === 0) { html += `<button class="btn-action" onclick="upgradeCrow()">خرید سطح 1 (${costs[0]}💵)</button>`; } 
+            else {
+                let canAttack = (Date.now() - state.crow.lastSent) > (times[cl-1] * 3600000);
+                let remain = !canAttack ? Math.ceil(((times[cl-1] * 3600000) - (Date.now() - state.crow.lastSent)) / 60000) : 0;
+                html += `<p style="font-weight:bold;">سطح: ${cl} | حمله هر ${times[cl-1]} ساعت<br></p>`;
+                
+                if(canAttack) { document.getElementById('crow-attack-box').style.display = 'block'; } 
+                else { document.getElementById('crow-attack-box').style.display = 'none'; html += `<button class="btn-action" disabled style="background:#888;">استراحت کلاغ - ${remain} دقیقه دیگه</button>`; }
+                
+                if (cl < 4) html += `<button class="btn-action" onclick="upgradeCrow()">ارتقا به سطح ${cl+1} (${costs[cl]}💵)</button>`; else html += `<p style="color:green;">نهایت!</p>`;
+            }
+            div.innerHTML = html; openModal('crowModal');
+        }
+        function upgradeCrow() {
+            const costs = [800, 1500, 3000, 5000]; let cl = state.crow.level;
+            if(cash >= costs[cl]) { cash -= costs[cl]; state.crow.level++; updateHUD(); saveCloudData(); updateLabels(); openCrowModal(); } else alert('پول کافی نیست!');
+        }
+
+        // --- ساختمان بانک مرکزی ---
+        function openBankModal() {
+            if(level < 3) { alert('برای بازگشایی بانک باید به سطح 3 برسی!'); return; }
+            const costs = [200, 400, 800, 1500, 3000];
+            const topDiv = document.getElementById('bank-content-top'); const botDiv = document.getElementById('bank-content-bottom');
+            let b = state.bank;
+            
+            let htmlTop = '';
+            if (b.level === 0) { htmlTop = `<p>بانک هر دقیقه اسکناس تولید می‌کند.</p><button class="btn-action" onclick="upgradeBank()">خرید سطح 1 (${costs[0]}💵)</button>`; botDiv.innerHTML = ''; }
+            else {
+                let cap = b.level * 100; let diffMins = Math.floor((Date.now() - b.lastCol) / 60000); let gen = Math.min(diffMins, cap);
+                htmlTop = `<p style="font-weight:bold; font-size:12px;">سطح بانک: ${b.level} (ظرفیت: ${cap})</p>
+                           <div style="background:#e8f5e9; padding:10px; border-radius:8px; border:2px solid #4caf50;">
+                               <span style="font-size:20px; color:#2e7d32;">💵 ${gen}</span>
+                               <button class="btn-action" style="margin-top:5px; background:#4caf50;" onclick="collectBank()">برداشت از صندوق</button>
+                           </div>`;
+                if(b.level < 5) htmlTop += `<button class="btn-action" style="background:#ff9800; font-size:11px;" onclick="upgradeBank()">ارتقا به سطح ${b.level+1} (${costs[b.level]}💵)</button>`;
+                
+                let htmlBot = '';
+                if (b.level < 5) {
+                    htmlBot = `<div class="bank-blur"><p style="font-weight:bold;">بانک تجارت (سرمایه‌گذاری)</p><p>برای دسترسی به این بخش، سطح ۵ بانک ضروری است 🔒</p></div>`;
+                } else {
+                    if (!b.acc) {
+                        htmlBot = `<p style="font-weight:bold;">💳 بانک تجارت (سرمایه‌گذاری)</p><button class="btn-action" style="background:#0288d1;" onclick="openBankAccount()">افتتاح حساب (5000 💵)</button>`;
+                    } else {
+                        let cardImg = imgs.cardHamid; if(currentPlayer === 'الهه') cardImg = imgs.cardElahe;
+                        htmlBot = `<img src="${cardImg}" class="bank-card">`;
+                        
+                        if (b.inv === 0) {
+                            htmlBot += `<input type="number" id="investInput" class="exchange-input" placeholder="مقدار اسکناس سرمایه" min="100" step="100">
+                                        <button class="btn-action" style="background:#00897b;" onclick="startInvest()">سرمایه‌گذاری (قفل ۲۴ ساعته)</button>`;
+                        } else {
+                            if (!b.ready) {
+                                let remainH = Math.ceil(((24 * 3600 * 1000) - (Date.now() - b.invStart)) / 3600000);
+                                htmlBot += `<p style="color:#e65100; font-weight:bold;">سرمایه شما (${b.inv} 💵) قفل است.<br>⏳ ${remainH} ساعت تا دریافت سود.</p>`;
+                            } else {
+                                let profit = Math.floor(b.inv * 0.05);
+                                htmlBot += `<p style="color:#2e7d32; font-weight:bold;">مبلغ سود شما: ${profit} 💵</p>
+                                            <div style="display:flex; gap:10px;">
+                                                <button class="btn-action" style="background:#4caf50;" onclick="collectInvestProfit()">برداشت سود</button>
+                                                <button class="btn-action" style="background:#d32f2f;" onclick="collectInvestTotal()">برداشت کل پول</button>
+                                            </div>`;
+                            }
+                        }
+                    }
+                }
+                botDiv.innerHTML = htmlBot;
+            }
+            topDiv.innerHTML = htmlTop; openModal('bankModal');
+        }
+
+        function upgradeBank() {
+            const costs = [200, 400, 800, 1500, 3000]; let bl = state.bank.level;
+            if(cash >= costs[bl]) { cash -= costs[bl]; state.bank.level++; updateHUD(); saveCloudData(); updateLabels(); openBankModal(); } else alert('پول کافی نیست!');
+        }
+
+        function collectBank() {
+            let cap = state.bank.level * 100; let diffMins = Math.floor((Date.now() - state.bank.lastCol) / 60000); let gen = Math.min(diffMins, cap);
+            if(gen > 0) { cash += gen; state.bank.lastCol = Date.now(); updateHUD(); saveCloudData(); openBankModal(); }
+        }
+
+        function openBankAccount() { if(cash >= 5000) { cash -= 5000; state.bank.acc = true; updateHUD(); saveCloudData(); openBankModal(); } else alert('به ۵۰۰۰ اسکناس نیاز دارید!'); }
+
+        function startInvest() {
+            let val = parseInt(document.getElementById('investInput').value);
+            if(val >= 100 && cash >= val) { cash -= val; state.bank.inv = val; state.bank.invStart = Date.now(); state.bank.ready = false; updateHUD(); saveCloudData(); openBankModal(); } else alert('مقدار نامعتبر یا پول ناکافی!');
+        }
+
+        function collectInvestProfit() {
+            let profit = Math.floor(state.bank.inv * 0.05); cash += profit; state.bank.invStart = Date.now(); state.bank.ready = false; updateHUD(); saveCloudData(); openBankModal();
+        }
+
+        function collectInvestTotal() {
+            let profit = Math.floor(state.bank.inv * 0.05); cash += (state.bank.inv + profit); state.bank.inv = 0; state.bank.ready = false; updateHUD(); saveCloudData(); openBankModal();
+        }
+
         async function renderLeaderboard() {
             const list = document.getElementById('leaderboard-list'); list.innerHTML = '<p>در حال دریافت...</p>';
-            try {
-                const { data, error } = await db.from('farm_players').select('username, sun').order('sun', { ascending: false }).limit(10);
-                if(error) throw error;
-                list.innerHTML = '';
-                if(data && data.length > 0) {
-                    data.forEach((p, index) => {
-                        const div = document.createElement('div'); div.className = 'list-item';
-                        if(p.username === currentPlayer) div.style.background = '#e3f2fd';
-                        let visitBtn = p.username !== currentPlayer ? `<button style="background:#4facfe; border:none; color:white; padding:4px 8px; border-radius:5px; cursor:pointer;" onclick="visitFarm('${p.username}')">👁️ بازدید</button>` : '';
-                        div.innerHTML = `<span>${index + 1}. ${p.username}</span><div style="display:flex; gap:10px; align-items:center;"><span style="color:#ff8f00;">☀️ ${p.sun}</span>${visitBtn}</div>`;
-                        list.appendChild(div);
-                    });
-                } else { list.innerHTML = '<p>بازیکنی یافت نشد.</p>'; }
-            } catch (err) {
-                list.innerHTML = '<p>خطا در دریافت لیست!</p>';
+            const { data } = await db.from('farm_players').select('username, sun').order('sun', { ascending: false }).limit(10);
+            list.innerHTML = '';
+            if(data) {
+                data.forEach((p, index) => {
+                    const div = document.createElement('div'); div.className = 'list-item';
+                    if(p.username === currentPlayer) div.style.background = '#e3f2fd';
+                    let visitBtn = p.username !== currentPlayer ? `<button style="background:#4facfe; border:none; color:white; padding:4px 8px; border-radius:5px; cursor:pointer;" onclick="visitFarm('${p.username}')">👁️ بازدید</button>` : '';
+                    div.innerHTML = `<span>${index + 1}. ${p.username}</span><div style="display:flex; gap:10px; align-items:center;"><span style="color:#ff8f00;">☀️ ${p.sun}</span>${visitBtn}</div>`;
+                    list.appendChild(div);
+                });
             }
         }
 
