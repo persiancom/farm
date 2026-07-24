@@ -23,128 +23,125 @@
         :root { --grid-size: 3; }
         * { box-sizing: border-box; user-select: none; font-family: 'Vazirmatn', sans-serif; -webkit-tap-highlight-color: transparent; }
 
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #558b2f; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #558b2f; background-image: url('https://raw.githubusercontent.com/persiancom/farm/main/file_00000000f91881f5a58514cf07c9b1dd.png'); background-size: 150px; }
 
         #timeOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 40; transition: background 2s; }
         #timeOverlay.lamp-on { background: radial-gradient(circle at top center, rgba(255, 255, 180, 0.4) 0%, rgba(0, 10, 40, 0.7) 80%) !important; mix-blend-mode: hard-light; }
 
-        /* لامپ کاملاً متصل و ریسه LED */
         #hangingLamp { position: fixed; top: -150px; left: 50%; transform: translateX(-50%); z-index: 55; cursor: pointer; transition: top 0.6s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; align-items: center; }
-        #hangingLamp.active { top: -10px; } /* آوردن بالاتر برای اتصال دقیق */
-        .lamp-wire { width: 5px; height: 100px; background: #fff; box-shadow: 0 0 10px #00f2fe, 0 0 20px #00f2fe; border-radius: 2px; position: relative; z-index: 1; }
-        .lamp-bulb { font-size: 55px; transform: rotate(180deg); margin-top: -30px; filter: grayscale(100%) brightness(0.4); transition: 0.3s; position: relative; z-index: 2; }
+        #hangingLamp.active { top: -10px; } 
+        .lamp-wire { width: 4px; height: 100px; background: #fff; box-shadow: 0 0 10px #00f2fe, 0 0 20px #00f2fe; border-radius: 2px; position: relative; z-index: 1; }
+        .lamp-bulb { font-size: 50px; transform: rotate(180deg); margin-top: -26px; filter: grayscale(100%) brightness(0.4); transition: 0.3s; position: relative; z-index: 2; }
         #hangingLamp.on .lamp-bulb { filter: grayscale(0) drop-shadow(0 -30px 60px #ffeb3b); }
 
         #loginScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://raw.githubusercontent.com/persiancom/farm/main/file_00000000f91881f5a58514cf07c9b1dd.png'); background-size: 150px; z-index: 99999; display: flex; justify-content: center; align-items: center; }
-        .login-box { background: linear-gradient(to bottom, #fff8e1, #ffecb3); border: 5px solid #ff8f00; border-radius: 20px; padding: 25px 20px; width: 85%; max-width: 320px; text-align: center; box-shadow: 0 15px 40px rgba(0,0,0,0.8); }
-        .login-input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #ffb300; border-radius: 10px; font-size: 16px; text-align: center; font-weight: bold; outline: none; }
+        .login-box { background: linear-gradient(to bottom, #fff8e1, #ffecb3); border: 4px solid #ff8f00; border-radius: 15px; padding: 25px 20px; width: 85%; max-width: 320px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.7); }
+        .login-input { width: 100%; padding: 10px; margin: 8px 0; border: 2px solid #ffb300; border-radius: 8px; font-size: 14px; text-align: center; font-weight: bold; outline: none; }
         .login-input:focus { border-color: #e65100; }
-        #loadingMsg { display: none; margin-top: 15px; font-weight: bold; color: #2e7d32; }
+        #loadingMsg { display: none; margin-top: 15px; font-weight: bold; color: #2e7d32; font-size: 13px; }
 
-        /* پنل پروفایل و اطلاعات */
-        .hud-top { position: fixed; top: 12px; left: 12px; right: 12px; display: flex; justify-content: space-between; align-items:flex-start; z-index: 50; pointer-events: none;}
+        /* پنل‌های بسیار ظریف و مینیمال */
+        .hud-top { position: fixed; top: 10px; left: 10px; right: 10px; display: flex; justify-content: space-between; align-items:flex-start; z-index: 50; pointer-events: none;}
         
-        .profile-panel { background: rgba(0, 0, 0, 0.85); border: 2px solid #ffb300; border-radius: 12px; padding: 6px 12px; color: white; font-weight: bold; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.5); cursor: pointer; pointer-events: auto; }
-        .profile-panel:active { transform: scale(0.98); }
-        .profile-pic { width: 35px; height: 35px; background: #fff; border: 2px solid #ffb300; border-radius: 8px; display: flex; justify-content: center; align-items: center; font-size: 20px; }
+        .profile-panel { background: rgba(0, 0, 0, 0.85); border: 2px solid #ffb300; border-radius: 10px; padding: 5px 10px; color: white; font-weight: bold; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.5); cursor: pointer; pointer-events: auto; transition: 0.1s;}
+        .profile-panel:active { transform: scale(0.95); }
+        .profile-pic { width: 28px; height: 28px; background: #fff; border: 2px solid #ffb300; border-radius: 6px; display: flex; justify-content: center; align-items: center; font-size: 16px; }
         .profile-info { display: flex; flex-direction: column; align-items: flex-start; }
-        .profile-name { font-size: 13px; color: #fff8e1; }
-        .profile-lvl { font-size: 11px; color: #00e676; margin-top: 2px; }
-        .xp-bar-bg { width: 70px; height: 4px; background: #333; border-radius: 2px; margin-top: 2px; overflow: hidden; }
+        .profile-name { font-size: 11px; color: #fff8e1; }
+        .profile-lvl { font-size: 10px; color: #00e676; margin-top: 2px; }
+        .xp-bar-bg { width: 60px; height: 3px; background: #333; border-radius: 2px; margin-top: 2px; overflow: hidden; }
         .xp-bar-fill { height: 100%; background: #00e676; width: 0%; transition: width 0.3s; }
 
-        .currency-panel { background: rgba(0, 0, 0, 0.85); border: 2px solid #aed581; border-radius: 12px; padding: 6px 12px; color: white; font-size: 13px; font-weight: bold; display: flex; gap: 12px; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.5); pointer-events: auto; flex-direction: column;}
+        .currency-panel { background: rgba(0, 0, 0, 0.85); border: 2px solid #aed581; border-radius: 10px; padding: 5px 10px; color: white; font-size: 12px; font-weight: bold; display: flex; gap: 8px; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.5); pointer-events: auto; flex-direction: column;}
         .curr-row { display: flex; align-items: center; gap: 5px; width:100%; justify-content: space-between;}
-        .btn-plus { background: #4caf50; border: none; color: white; border-radius: 5px; padding:2px 6px; font-size: 14px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 0 #2e7d32; margin-right:5px;}
+        .btn-plus { background: #4caf50; border: none; color: white; border-radius: 4px; padding:2px 5px; font-size: 12px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 0 #2e7d32; margin-right:5px;}
         .btn-plus:active { transform: translateY(2px); box-shadow: none; }
 
-        .alert-box { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); background: #d32f2f; color: white; padding: 6px 15px; border-radius: 12px; font-weight: bold; border: 2px solid #ff5252; display: none; z-index: 60; box-shadow: 0 4px 10px rgba(0,0,0,0.5); font-size: 13px; }
-        .seed-indicator { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); background: linear-gradient(to bottom, #ffb300, #ff8f00); color: white; padding: 6px 15px; border-radius: 15px; font-weight: bold; border: 2px solid #e65100; display: none; z-index: 50; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5); font-size: 13px; pointer-events:auto;}
+        .alert-box { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); background: #d32f2f; color: white; padding: 6px 12px; border-radius: 10px; font-weight: bold; border: 2px solid #ff5252; display: none; z-index: 60; box-shadow: 0 4px 8px rgba(0,0,0,0.5); font-size: 12px; }
+        .seed-indicator { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); background: linear-gradient(to bottom, #ffb300, #ff8f00); color: white; padding: 6px 15px; border-radius: 12px; font-weight: bold; border: 2px solid #e65100; display: none; z-index: 50; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.5); font-size: 12px; pointer-events:auto;}
 
-        .toolbar { position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 50; flex-wrap: nowrap; justify-content: center; pointer-events: auto;}
-        .action-btn { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(to bottom, #fffde7, #ffc107); border: 2px solid #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.5); font-size: 18px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.1s; flex-shrink: 0; }
-        .action-btn:active { transform: scale(0.9); box-shadow: 0 2px 4px rgba(0,0,0,0.4); }
+        /* تولبار مینیمال */
+        .toolbar { position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 50; flex-wrap: nowrap; justify-content: center; pointer-events: auto;}
+        .action-btn { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(to bottom, #fffde7, #ffc107); border: 2px solid #fff; box-shadow: 0 3px 6px rgba(0,0,0,0.5); font-size: 16px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.1s; flex-shrink: 0; }
+        .action-btn:active { transform: scale(0.9); box-shadow: 0 1px 2px rgba(0,0,0,0.4); }
         #adminBtn { display: none; background: linear-gradient(to bottom, #f44336, #b71c1c); }
 
-        #moveUI { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); gap: 20px; z-index: 100; pointer-events: auto;}
-        .btn-move { width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 26px; box-shadow: 0 5px 10px rgba(0,0,0,0.5); border: 3px solid white; cursor: pointer; }
+        #moveUI { display: none; position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); gap: 15px; z-index: 100; pointer-events: auto;}
+        .btn-move { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 22px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); border: 2px solid white; cursor: pointer; }
 
-        /* --- دوربین آزاد و زمین (بدون معلق شدن کلبه ها) --- */
+        /* --- دوربین آزاد و زمین (اصلاح شده) --- */
         #gameViewport { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; touch-action: none; z-index: 10; }
-        #groundBg { position: absolute; top: -1500px; left: -1500px; width: 3000px; height: 3000px; background-color: #558b2f; background-image: url('https://raw.githubusercontent.com/persiancom/farm/main/file_00000000f91881f5a58514cf07c9b1dd.png'); background-size: 150px; z-index: -10; pointer-events: none; }
         .game-wrapper { position: absolute; top: 50%; left: 50%; width: 0; height: 0; }
         
-        .garden {
-            position: absolute; top: 50%; left: 50%; display: grid;
-            grid-template-columns: repeat(var(--grid-size), 75px); grid-template-rows: repeat(var(--grid-size), 75px); gap: 4px;
-            transform: translate(-50%, -50%) rotateX(60deg) rotateZ(-45deg); transform-style: preserve-3d; transition: all 0.5s ease;
+        /* کل محیط ایزومتریک یکپارچه شد تا مشکل له شدن برطرف شود */
+        #isoWorld {
+            position: absolute; top: 0; left: 0;
+            transform: translate(-50%, -50%) rotateX(60deg) rotateZ(-45deg);
+            transform-style: preserve-3d;
         }
 
-        .plot {
-            width: 75px; height: 75px; background: #6d4c41; border: 3px solid #4e342e; border-radius: 10px;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.4), -6px 6px 0px rgba(62, 39, 35, 0.95);
-            position: relative; cursor: pointer; transform-style: preserve-3d; transition: background 0.2s;
-        }
+        .garden { display: grid; grid-template-columns: repeat(var(--grid-size), 75px); grid-template-rows: repeat(var(--grid-size), 75px); gap: 4px; transform-style: preserve-3d; transition: all 0.5s ease; }
+
+        .plot { width: 75px; height: 75px; background: #6d4c41; border: 3px solid #4e342e; border-radius: 10px; box-shadow: inset 0 0 15px rgba(0,0,0,0.4), -6px 6px 0px rgba(62, 39, 35, 0.95); position: relative; cursor: pointer; transform-style: preserve-3d; transition: background 0.2s; }
         .plot:hover { background: #795548; }
 
-        .plot-content {
-            position: absolute; bottom: 15px; left: 0; width: 100%; height: 100%;
-            display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
-            transform: rotateZ(45deg) rotateX(-60deg) scale(1.3); transform-origin: bottom center; pointer-events: none !important; 
+        /* گیاهان و کلبه‌ها باید معکوس بچرخند تا ایستاده دیده شوند */
+        .plot-content, .building {
+            transform: rotateZ(45deg) rotateX(-60deg);
+            transform-origin: bottom center;
+            transform-style: preserve-3d;
         }
+
+        .plot-content { position: absolute; bottom: 15px; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; pointer-events: none !important; scale: 1.3; }
         .plot-content img { max-height: 55px; object-fit: contain; filter: drop-shadow(0 4px 3px rgba(0,0,0,0.4)); pointer-events: none; }
 
-        .timer-badge { background: rgba(0, 0, 0, 0.85); color: #fff; padding: 2px 6px; border-radius: 6px; font-size: 10px; font-weight: bold; border: 1px solid #fff; margin-bottom: 5px; display: none; box-shadow: 0 2px 4px rgba(0,0,0,0.4); white-space: nowrap; pointer-events: none; }
-        .progress-bar { width: 40px; height: 5px; background-color: #222; border: 1px solid #fff; border-radius: 4px; display: none; overflow: hidden; margin-bottom: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-        .progress-fill { height: 100%; background-color: #76ff03; width: 0%; transition: width 1s linear; }
-
-        /* کلبه‌های ایستاده روی زمین (حذف سایه معلق) */
-        .building { position: absolute; cursor: pointer; z-index: 10; transform: rotateZ(45deg) rotateX(-60deg) scale(1.1); transform-origin: bottom center; transition: filter 0.2s; }
+        .building { position: absolute; cursor: pointer; z-index: 10; transition: filter 0.2s; }
         .building:hover { filter: brightness(1.15); } 
-        /* سایه معلق (0 15px 10px) به سایه روی زمین (-2px 5px 3px) تغییر کرد تا طبیعی شود */
-        .building img { width: 110px; object-fit: contain; filter: drop-shadow(-2px 5px 3px rgba(0,0,0,0.5)); pointer-events: none; }
+        .building img { width: 110px; object-fit: contain; pointer-events: none; }
         
         .building.moving { filter: drop-shadow(0 0 15px #4caf50) brightness(1.2) !important; z-index: 99 !important; animation: floatMove 1s infinite alternate; touch-action: none; }
-        @keyframes floatMove { from { transform: rotateZ(45deg) rotateX(-60deg) scale(1.1) translateY(-10px); } to { transform: rotateZ(45deg) rotateX(-60deg) scale(1.1) translateY(-20px); } }
+        @keyframes floatMove { from { transform: rotateZ(45deg) rotateX(-60deg) translateY(-10px); } to { transform: rotateZ(45deg) rotateX(-60deg) translateY(-20px); } }
 
-        .b-label { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.85); color: #fff; font-size: 10px; padding: 3px 8px; border-radius: 6px; font-weight: bold; white-space: nowrap; border: 1px solid #ffb300; pointer-events: none;}
+        .timer-badge { background: rgba(0, 0, 0, 0.85); color: #fff; padding: 2px 6px; border-radius: 6px; font-size: 9px; font-weight: bold; border: 1px solid #fff; margin-bottom: 5px; display: none; box-shadow: 0 2px 4px rgba(0,0,0,0.4); white-space: nowrap; pointer-events: none; }
+        .progress-bar { width: 35px; height: 4px; background-color: #222; border: 1px solid #fff; border-radius: 3px; display: none; overflow: hidden; margin-bottom: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .progress-fill { height: 100%; background-color: #76ff03; width: 0%; transition: width 1s linear; }
+
+        .b-label { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.85); color: #fff; font-size: 9px; padding: 2px 6px; border-radius: 4px; font-weight: bold; white-space: nowrap; border: 1px solid #ffb300; pointer-events: none;}
         .b-label.locked { background: rgba(180,0,0,0.9); border-color: #d32f2f; }
-        
-        /* نشانگر نگهبان */
-        .guard-sprite { position: absolute; top: -5px; right: 10px; font-size: 22px; z-index: 15; pointer-events: none; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5)); }
+        .guard-sprite { position: absolute; top: -5px; right: 10px; font-size: 20px; z-index: 15; pointer-events: none; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5)); }
 
         #cloudOverlay { position: fixed; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%); z-index: 999999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: left 0.7s cubic-bezier(0.4, 0, 0.2, 1); pointer-events:none;}
         #cloudOverlay.active { left: 0; pointer-events:auto;}
-        .cloud-icon { font-size: 80px; animation: float 2s infinite ease-in-out alternate; text-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-        @keyframes float { from { transform: translateY(-15px); } to { transform: translateY(15px); } }
-        .cloud-text { color: white; font-size: 20px; font-weight: bold; margin-top: 20px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+        .cloud-icon { font-size: 60px; animation: float 2s infinite ease-in-out alternate; text-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        @keyframes float { from { transform: translateY(-10px); } to { transform: translateY(10px); } }
+        .cloud-text { color: white; font-size: 16px; font-weight: bold; margin-top: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
 
-        .tabs { display: flex; gap: 5px; margin-bottom: 15px; border-bottom: 2px solid #ffb300; padding-bottom: 5px; }
-        .tab-btn { flex: 1; padding: 6px; background: #ffe082; border: 2px solid #ffb300; border-radius: 8px; font-weight: bold; color: #5d4037; cursor: pointer; font-size: 13px; }
-        .tab-btn.active { background: #ff8f00; color: #fff; box-shadow: inset 0 2px 5px rgba(0,0,0,0.3); border-color: #e65100; }
+        .tabs { display: flex; gap: 4px; margin-bottom: 12px; border-bottom: 2px solid #ffb300; padding-bottom: 4px; }
+        .tab-btn { flex: 1; padding: 5px; background: #ffe082; border: 2px solid #ffb300; border-radius: 6px; font-weight: bold; color: #5d4037; cursor: pointer; font-size: 12px; }
+        .tab-btn.active { background: #ff8f00; color: #fff; box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); border-color: #e65100; }
         .tab-content { display: none; max-height: 55vh; overflow-y: auto; }
         .tab-content.active { display: block; }
 
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); z-index: 100; justify-content: center; align-items: center; pointer-events:auto;}
-        .modal-content { background: linear-gradient(to bottom, #fff8e1, #ffecb3); border: 4px solid #ff8f00; border-radius: 15px; padding: 15px; width: 90%; max-width: 340px; text-align: center; max-height: 85vh; overflow-y: auto; }
-        .list-item { background: #fff; border: 2px solid #ffb300; padding: 8px; margin-bottom: 8px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; box-shadow: 0 3px 0 #ffe082; font-size: 13px; position: relative; }
-        .list-item img { width: 40px; height: 40px; object-fit: contain; }
+        .modal-content { background: linear-gradient(to bottom, #fff8e1, #ffecb3); border: 3px solid #ff8f00; border-radius: 12px; padding: 12px; width: 90%; max-width: 300px; text-align: center; max-height: 85vh; overflow-y: auto; }
+        .list-item { background: #fff; border: 2px solid #ffb300; padding: 6px; margin-bottom: 6px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; box-shadow: 0 2px 0 #ffe082; font-size: 12px; position: relative; }
+        .list-item img { width: 35px; height: 35px; object-fit: contain; }
         .locked { opacity: 0.6; filter: grayscale(100%); pointer-events: none; }
-        .btn-close { background: #e53935; color: white; border: none; padding: 8px; margin-top: 10px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; box-shadow: 0 4px 0 #b71c1c; }
-        .btn-action { background: #29b6f6; border: none; width: 100%; padding: 8px; border-radius: 8px; font-weight: bold; margin-top: 10px; color: white; box-shadow: 0 4px 0 #0277bd; cursor: pointer; }
-        .btn-move-cabin { background: #4caf50; border: none; width: 100%; padding: 8px; border-radius: 8px; font-weight: bold; margin-top: 5px; color: white; box-shadow: 0 4px 0 #2e7d32; cursor: pointer; }
+        .btn-close { background: #e53935; color: white; border: none; padding: 6px; margin-top: 8px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; box-shadow: 0 3px 0 #b71c1c; font-size:13px;}
+        .btn-action { background: #29b6f6; border: none; width: 100%; padding: 6px; border-radius: 6px; font-weight: bold; margin-top: 8px; color: white; box-shadow: 0 3px 0 #0277bd; cursor: pointer; font-size:13px;}
+        .btn-move-cabin { background: #4caf50; border: none; width: 100%; padding: 6px; border-radius: 6px; font-weight: bold; margin-top: 4px; color: white; box-shadow: 0 3px 0 #2e7d32; cursor: pointer; font-size:12px;}
         
-        .wheel-container { position: relative; width: 220px; height: 220px; margin: 15px auto; border-radius: 50%; border: 6px solid #3e2723; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .wheel-container { position: relative; width: 200px; height: 200px; margin: 10px auto; border-radius: 50%; border: 5px solid #3e2723; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
         .wheel { width: 100%; height: 100%; border-radius: 50%; transition: transform 3s cubic-bezier(0.1, 0.7, 0.1, 1); }
-        .wheel-pointer { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 25px solid #212121; z-index: 10; }
-        .btn-spin { background: #4caf50; border: none; color: white; padding: 10px; width: 100%; border-radius: 10px; font-size: 15px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 0 #2e7d32; margin-top:10px; }
+        .wheel-pointer { position: absolute; top: -8px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-top: 20px solid #212121; z-index: 10; }
+        .btn-spin { background: #4caf50; border: none; color: white; padding: 8px; width: 100%; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 0 #2e7d32; margin-top:8px; }
         
         .price-up { color: #2e7d32; font-weight: bold; }
         .price-down { color: #d32f2f; font-weight: bold; }
-        .exchange-input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 8px; border: 2px solid #ffb300; text-align: center; font-weight: bold; font-size: 16px; outline: none; }
+        .exchange-input { width: 100%; padding: 8px; margin: 8px 0; border-radius: 6px; border: 2px solid #ffb300; text-align: center; font-weight: bold; font-size: 14px; outline: none; }
         
         /* استایل‌های پروفایل */
-        .stat-row { display: flex; justify-content: space-between; font-size: 13px; font-weight: bold; color: #4e342e; margin: 5px 0; border-bottom: 1px dashed #ccc; padding-bottom: 3px;}
+        .stat-row { display: flex; justify-content: space-between; font-size: 12px; font-weight: bold; color: #4e342e; margin: 4px 0; border-bottom: 1px dashed #ccc; padding-bottom: 2px;}
     </style>
 </head>
 <body>
@@ -158,12 +155,11 @@
 
     <div id="loginScreen">
         <div class="login-box">
-            <!-- عکس درخواستی صفحه ورود -->
-            <img src="https://raw.githubusercontent.com/persiancom/farm/main/file_0000000073dc81f5bc7991afd0bca56c.png" style="width: 280px; max-width: 95%; margin: 0 auto 5px auto; display: block; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));">
-            <h4 style="margin: 0 0 20px 0; white-space: nowrap; font-size: 13px; color:#d32f2f; text-shadow:1px 1px 0px #fff; font-weight:900;">♥️ به مزرعه زیبای خودت خوش اومدی ♥️</h4>
+            <img src="https://raw.githubusercontent.com/persiancom/farm/main/file_0000000073dc81f5bc7991afd0bca56c.png" style="width: 250px; max-width: 90%; margin: 0 auto 5px auto; display: block; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));">
+            <h4 style="margin: 0 0 15px 0; white-space: nowrap; font-size: 12px; color:#d32f2f; text-shadow:1px 1px 0px #fff; font-weight:900;">♥️ به مزرعه زیبای خودت خوش اومدی ♥️</h4>
             <input type="text" id="username" class="login-input" placeholder="نام کاربری">
             <input type="password" id="password" class="login-input" placeholder="رمز عبور">
-            <button class="btn-action" style="background:#4caf50; box-shadow:0 4px 0 #2e7d32; font-size:18px; padding:12px;" onclick="attemptLogin()">ورود</button>
+            <button class="btn-action" style="background:#4caf50; box-shadow:0 4px 0 #2e7d32; font-size:16px; padding:10px;" onclick="attemptLogin()">ورود</button>
             <div id="loadingMsg">در حال اتصال... ⏳</div>
         </div>
     </div>
@@ -171,12 +167,11 @@
     <div id="cloudOverlay"><div class="cloud-icon">☁️ ✈️ ☁️</div><div class="cloud-text" id="cloudText">🔍 لطفاً صبر کنید...</div></div>
 
     <div class="hud-top">
-        <!-- پروفایل کاربری جدید به سبک کلش -->
         <div class="profile-panel" onclick="openProfile()">
             <div class="profile-pic">👤</div>
             <div class="profile-info">
                 <span class="profile-name" id="hudName">کاربر</span>
-                <span class="profile-lvl">لول: <span id="hudLevel">1</span></span>
+                <span class="profile-lvl">سطح: <span id="hudLevel">1</span></span>
                 <div class="xp-bar-bg"><div class="xp-bar-fill" id="xpBar"></div></div>
             </div>
         </div>
@@ -192,23 +187,22 @@
     <!-- محیط بازی و دوربین -->
     <div id="gameViewport">
         <div class="game-wrapper" id="gameWrapper">
-            <div id="groundBg"></div>
-            
-            <div class="building" id="cabin-inv" onclick="onBuildingClick('inv')">
-                <div class="b-label" id="invLabel">انبار (0/200)</div>
-                <img src="https://raw.githubusercontent.com/persiancom/farm/main/file_000000005acc8243af0f42016d01ef45.png">
+            <div id="isoWorld">
+                <div class="garden" id="garden"></div>
+                <div class="building" id="cabin-inv" onclick="onBuildingClick('inv')">
+                    <div class="b-label" id="invLabel">انبار (0/200)</div>
+                    <img src="https://raw.githubusercontent.com/persiancom/farm/main/file_000000005acc8243af0f42016d01ef45.png">
+                </div>
+                <div class="building" id="cabin-guard" onclick="onBuildingClick('guard')">
+                    <div class="b-label" id="guardLabel">نگهبانی</div>
+                    <div id="guardSpriteContainer"></div>
+                    <img src="https://raw.githubusercontent.com/persiancom/farm/main/file_00000000318c81f488176e9d1c9220d5.png">
+                </div>
+                <div class="building" id="cabin-crow" onclick="onBuildingClick('crow')">
+                    <div class="b-label" id="crowLabel">آشیانه</div>
+                    <img src="https://raw.githubusercontent.com/persiancom/farm/main/file_00000000c9ec81f4b0f7578df0859c1a.png">
+                </div>
             </div>
-            <div class="building" id="cabin-guard" onclick="onBuildingClick('guard')">
-                <div class="b-label" id="guardLabel">نگهبانی</div>
-                <div id="guardSpriteContainer"></div>
-                <img src="https://raw.githubusercontent.com/persiancom/farm/main/file_00000000318c81f488176e9d1c9220d5.png">
-            </div>
-            <div class="building" id="cabin-crow" onclick="onBuildingClick('crow')">
-                <div class="b-label" id="crowLabel">آشیانه</div>
-                <img src="https://raw.githubusercontent.com/persiancom/farm/main/file_00000000c9ec81f4b0f7578df0859c1a.png">
-            </div>
-            
-            <div class="garden" id="garden"></div>
         </div>
     </div>
 
@@ -217,7 +211,6 @@
         <div class="btn-move" style="background:#f44336;" onclick="cancelMove()">❌</div>
     </div>
 
-    <!-- تولبار اصلاح شده و یک ردیفه -->
     <div class="toolbar" id="toolbar-normal">
         <button class="action-btn" onclick="openModal('shopModal')" title="فروشگاه">🛒</button>
         <button class="action-btn" onclick="openModal('marketModal')" title="بورس">📈</button>
@@ -227,24 +220,24 @@
     </div>
 
     <div class="toolbar" id="toolbar-visit" style="display:none;">
-        <button class="btn-action" style="background:#d32f2f; box-shadow:0 4px 0 #b71c1c; font-size:16px; padding:12px; width:auto; border-radius:12px; margin:0;" onclick="returnHome()">🏡 بازگشت به مزرعه خودم</button>
+        <button class="btn-action" style="background:#d32f2f; box-shadow:0 4px 0 #b71c1c; font-size:14px; padding:10px; width:auto; border-radius:10px; margin:0;" onclick="returnHome()">🏡 بازگشت به مزرعه خودم</button>
     </div>
 
-    <!-- مودال پروفایل اختصاصی -->
+    <!-- مودال‌ها -->
     <div class="modal" id="profileModal">
         <div class="modal-content" style="text-align:right;">
-            <div style="display:flex; gap:15px; align-items:center;">
-                <div style="width:65px; height:65px; border:2px solid #ffb300; border-radius:10px; background:#fff; display:flex; justify-content:center; align-items:center; font-size:35px;">👤</div>
+            <div style="display:flex; gap:12px; align-items:center;">
+                <div style="width:50px; height:50px; border:2px solid #ffb300; border-radius:8px; background:#fff; display:flex; justify-content:center; align-items:center; font-size:25px;">👤</div>
                 <div>
-                    <h3 style="margin:0; color:#3e2723;" id="profName">نام</h3>
-                    <span style="color:#888; font-size:12px;" id="profUid">UID: ---</span>
+                    <h3 style="margin:0; color:#3e2723; font-size:16px;" id="profName">نام</h3>
+                    <span style="color:#888; font-size:11px;" id="profUid">UID: ---</span>
                 </div>
             </div>
-            <hr style="border:1px solid #ffb300; margin:15px 0;">
+            <hr style="border:1px solid #ffb300; margin:10px 0;">
             <div class="stat-row"><span>⭐ سطح اصلی:</span> <span id="profLvl">1</span></div>
             <div class="stat-row"><span>🦅 سطح آشیانه کلاغ‌ها:</span> <span id="profCrow">0</span></div>
             <div class="stat-row"><span>🛡️ سطح کلبه نگهبانان:</span> <span id="profGuard">0</span></div>
-            <hr style="border:1px dashed #ffb300; margin:15px 0;">
+            <hr style="border:1px dashed #ffb300; margin:10px 0;">
             <div class="stat-row"><span>🌾 برداشت گیاهان:</span> <span id="profHarvest">0</span></div>
             <div class="stat-row"><span>⚔️ حمله‌های ارسالی:</span> <span id="profAtk">0</span></div>
             <div class="stat-row"><span>🛡️ دفاع‌های موفق:</span> <span id="profDef">0</span></div>
@@ -254,14 +247,13 @@
         </div>
     </div>
 
-    <!-- مودال‌ها -->
     <div class="modal" id="exchangeModal">
         <div class="modal-content">
             <h3 style="margin-top:0;">💱 صرافی مزرعه</h3>
-            <p style="font-size:12px; color:#666;">خورشید باارزش است! (۱۰ ☀️ = ۳۰ 💵)</p>
+            <p style="font-size:11px; color:#666;">(۱۰ ☀️ = ۳۰ 💵)</p>
             <input type="number" id="sunInput" class="exchange-input" value="10" min="10" step="10" oninput="updateExchangeCalc()">
-            <p style="font-weight:bold; color:#2e7d32;">دریافت: <span id="cashOutput">30</span> 💵</p>
-            <button class="btn-action" style="background:#ff9800; box-shadow:0 4px 0 #e65100;" onclick="exchangeSunBulk()">تبدیل</button>
+            <p style="font-weight:bold; color:#2e7d32; font-size:13px;">دریافت: <span id="cashOutput">30</span> 💵</p>
+            <button class="btn-action" style="background:#ff9800; box-shadow:0 3px 0 #e65100;" onclick="exchangeSunBulk()">تبدیل</button>
             <button class="btn-close" onclick="closeModal('exchangeModal')">بستن</button>
         </div>
     </div>
@@ -277,30 +269,29 @@
             <div id="tab-seeds" class="tab-content active"></div>
             <div id="tab-equip" class="tab-content">
                 <div class="list-item" onclick="expandLand()">
-                    <div style="display:flex; align-items:center; gap:10px;"><span style="font-size:30px;">🟫</span> <div><span>زمین کشاورزی جدید</span><span style="font-size:11px; display:block; color:#666;">افزایش زمین زراعی</span></div></div>
+                    <div style="display:flex; align-items:center; gap:8px;"><span style="font-size:24px;">🟫</span> <div><span>زمین کشاورزی جدید</span><span style="font-size:10px; display:block; color:#666;">افزایش زمین زراعی</span></div></div>
                     <span style="color:#2e7d32;" id="landCostLabel">💵 150</span>
                 </div>
                 <div id="tab-equip-other"></div>
             </div>
-            <div id="tab-deco" class="tab-content"><p style="color:#666; font-size:14px; margin:20px 0;">تزئینات به زودی...</p></div>
+            <div id="tab-deco" class="tab-content"><p style="color:#666; font-size:12px; margin:15px 0;">تزئینات به زودی...</p></div>
             <button class="btn-close" onclick="closeModal('shopModal')">بستن</button>
         </div>
     </div>
 
     <div class="modal" id="inventoryModal">
         <div class="modal-content">
-            <h3 style="margin-top:0;">📦 کلبه انبار (<span id="invCount">0</span>/200)</h3>
-            <p style="font-size:11px; color:red;">محصولات پس از ۲۴ ساعت فاسد می‌شوند!</p>
+            <h3 style="margin-top:0;">📦 انبار (<span id="invCount">0</span>/200)</h3>
+            <p style="font-size:10px; color:red;">محصولات پس از ۲۴ ساعت فاسد می‌شوند!</p>
             <div id="inventory-list"></div>
             <button class="btn-move-cabin" onclick="startMoveMode('inv')">تغییر مکان ساختمان 📍</button>
             <button class="btn-close" onclick="closeModal('inventoryModal')">بستن</button>
         </div>
     </div>
     
-    <div class="modal" id="marketModal"><div class="modal-content"><h3 style="margin-top:0;">📈 بورس جهانی</h3><p style="font-size:12px;">نوسان قیمت‌ها هر ۶۰ ثانیه</p><div id="market-list"></div><button class="btn-close" onclick="closeModal('marketModal')">بستن</button></div></div>
-    <div class="modal" id="leaderboardModal"><div class="modal-content"><h3 style="margin-top:0;">🏆 رقبا</h3><p style="font-size:11px; color:#666;">برای بازدید روی نام ضربه بزنید</p><div id="leaderboard-list"></div><button class="btn-close" onclick="closeModal('leaderboardModal')">بستن</button></div></div>
-    
-    <div class="modal" id="adminModal"><div class="modal-content"><h3 style="margin-top:0; color:#b71c1c;">⚙️ پنل مدیریت (ادمین)</h3><div id="admin-user-list"></div><button class="btn-close" onclick="closeModal('adminModal')">بستن</button></div></div>
+    <div class="modal" id="marketModal"><div class="modal-content"><h3 style="margin-top:0;">📈 بورس جهانی</h3><p style="font-size:11px;">نوسان قیمت‌ها هر ۶۰ ثانیه</p><div id="market-list"></div><button class="btn-close" onclick="closeModal('marketModal')">بستن</button></div></div>
+    <div class="modal" id="leaderboardModal"><div class="modal-content"><h3 style="margin-top:0;">🏆 رقبا</h3><p style="font-size:10px; color:#666;">برای بازدید روی نام ضربه بزنید</p><div id="leaderboard-list"></div><button class="btn-close" onclick="closeModal('leaderboardModal')">بستن</button></div></div>
+    <div class="modal" id="adminModal"><div class="modal-content"><h3 style="margin-top:0; color:#b71c1c;">⚙️ پنل مدیریت</h3><div id="admin-user-list"></div><button class="btn-close" onclick="closeModal('adminModal')">بستن</button></div></div>
 
     <div class="modal" id="luckyModal">
         <div class="modal-content">
@@ -308,15 +299,15 @@
             <div class="wheel-container">
                 <div class="wheel-pointer"></div>
                 <svg viewBox="0 0 200 200" class="wheel" id="wheel">
-                    <g transform="rotate(0 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#f44336" /><text x="135" y="45" font-size="14" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">20 💵</text></g>
-                    <g transform="rotate(60 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#ff9800" /><text x="135" y="45" font-size="14" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">50 ☀️</text></g>
-                    <g transform="rotate(120 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#4caf50" /><text x="135" y="45" font-size="14" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">10 💵</text></g>
-                    <g transform="rotate(180 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#2196f3" /><text x="135" y="45" font-size="14" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">100 ☀️</text></g>
-                    <g transform="rotate(240 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#9c27b0" /><text x="135" y="45" font-size="14" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">50 💵</text></g>
-                    <g transform="rotate(300 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#e91e63" /><text x="135" y="45" font-size="14" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">200 ☀️</text></g>
+                    <g transform="rotate(0 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#f44336" /><text x="135" y="45" font-size="12" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">20 💵</text></g>
+                    <g transform="rotate(60 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#ff9800" /><text x="135" y="45" font-size="12" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">50 ☀️</text></g>
+                    <g transform="rotate(120 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#4caf50" /><text x="135" y="45" font-size="12" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">10 💵</text></g>
+                    <g transform="rotate(180 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#2196f3" /><text x="135" y="45" font-size="12" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">100 ☀️</text></g>
+                    <g transform="rotate(240 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#9c27b0" /><text x="135" y="45" font-size="12" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">50 💵</text></g>
+                    <g transform="rotate(300 100 100)"><path d="M100,100 L100,0 A100,100 0 0,1 186.6,50 Z" fill="#e91e63" /><text x="135" y="45" font-size="12" fill="white" font-weight="bold" transform="rotate(30 135 45)" text-anchor="middle">200 ☀️</text></g>
                 </svg>
             </div>
-            <div id="luckyResult" style="font-weight:bold; font-size:16px; margin:10px; color:#d32f2f; min-height:25px;"></div>
+            <div id="luckyResult" style="font-weight:bold; font-size:14px; margin:10px; color:#d32f2f; min-height:20px;"></div>
             <button class="btn-spin" id="spinBtn" onclick="spinWheel()">بچرخان!</button>
             <button class="btn-close" onclick="closeModal('luckyModal')">بستن</button>
         </div>
@@ -358,44 +349,41 @@
             items: { redFlower: [], pinkFlower: [], wheat: [], appleTree: [], pineTree: [] },
             guard: { level: 0, kills: 0, sleeping: false },
             crow: { level: 0, lastSent: 0 },
-            positions: { inv: { t: -100, l: -30 }, guard: { t: 220, l: -30 }, crow: { t: -50, l: 220 } },
+            positions: { inv: { t: -100, l: -140 }, guard: { t: 80, l: -140 }, crow: { t: -100, l: 80 } },
             incomingAttack: false
         };
 
-        // --- دوربین آزاد و زوم ---
+        // --- دوربین آزاد متصل به چمن ---
         let panX = 0, panY = 0, zoom = 1;
-        let isDraggingMap = false, dragThreshold = false;
+        let isDraggingMap = false, isClick = true;
         let dragStartX = 0, dragStartY = 0;
         const viewport = document.getElementById('gameViewport');
         const wrapper = document.getElementById('gameWrapper');
-        const bg = document.getElementById('groundBg');
 
         function updateTransform() { 
             wrapper.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`; 
-            bg.style.transform = `translate(${-panX/zoom}px, ${-panY/zoom}px)`; // برای رفع معلق بودن
+            // با حرکت موس، پس‌زمینه چمن هم جابجا می‌شود (توهم یکپارچگی)
+            document.body.style.backgroundPosition = `${panX}px ${panY}px`;
         }
 
         viewport.addEventListener('pointerdown', e => {
             if (e.target.closest('.modal') || e.target.closest('.hud-top') || e.target.closest('.toolbar') || isMovingMode) return;
-            isDraggingMap = true; dragThreshold = false;
+            isDraggingMap = true; isClick = true;
             dragStartX = e.clientX - (panX * zoom); dragStartY = e.clientY - (panY * zoom);
             viewport.setPointerCapture(e.pointerId);
         });
         viewport.addEventListener('pointermove', e => {
             if (!isDraggingMap) return;
             let dx = (e.clientX - dragStartX) / zoom; let dy = (e.clientY - dragStartY) / zoom;
-            
-            // محدودیت کشیدن صفحه (جلوگیری از گم شدن)
             const LIMIT = 300; dx = Math.max(-LIMIT, Math.min(LIMIT, dx)); dy = Math.max(-LIMIT, Math.min(LIMIT, dy));
-            
-            if (Math.abs(dx - panX) > 3 || Math.abs(dy - panY) > 3) dragThreshold = true;
+            if (Math.abs(dx - panX) > 3 || Math.abs(dy - panY) > 3) isClick = false;
             panX = dx; panY = dy; updateTransform();
         });
         viewport.addEventListener('pointerup', e => { isDraggingMap = false; viewport.releasePointerCapture(e.pointerId); });
         
         viewport.addEventListener('wheel', e => {
             if(e.target.closest('.modal') || e.target.closest('.hud-top')) return;
-            e.preventDefault(); zoom += e.deltaY * -0.001; zoom = Math.min(Math.max(0.6, zoom), 2.0); updateTransform();
+            e.preventDefault(); zoom += e.deltaY * -0.001; zoom = Math.min(Math.max(0.6, zoom), 1.5); updateTransform();
         }, {passive: false});
 
         function resizeGame() {
@@ -404,7 +392,7 @@
         }
         window.addEventListener('resize', resizeGame); resizeGame();
 
-        // --- لامپ و زمان ---
+        // --- لامپ ---
         let isLampOn = false;
         function toggleLamp() {
             isLampOn = !isLampOn; const lamp = document.getElementById('hangingLamp'); const overlay = document.getElementById('timeOverlay');
@@ -427,11 +415,10 @@
         }
         setInterval(updateTimeOfDay, 60000); updateTimeOfDay();
 
-        // محاسبه تایم پلی
         setInterval(() => {
             if(!currentPlayer || isVisiting) return;
             let now = Date.now(); let diff = Math.floor((now - state.stats.lt) / 1000);
-            if (diff > 0 && diff < 300) state.stats.pTime += diff; // فقط اگه وقفه کم بود
+            if (diff > 0 && diff < 300) state.stats.pTime += diff; 
             state.stats.lt = now;
         }, 5000);
 
@@ -450,7 +437,7 @@
                 cash = data.cash; sun = data.sun; level = data.level; xp = data.xp; gridSize = data.grid_size;
                 if(data.inventory && data.inventory.items) { 
                     state = data.inventory; 
-                    if(!state.positions) state.positions = { inv: { t: -100, l: -30 }, guard: { t: 220, l: -30 }, crow: { t: -50, l: 220 } };
+                    if(!state.positions) state.positions = { inv: { t: -100, l: -140 }, guard: { t: 80, l: -140 }, crow: { t: -100, l: 80 } };
                     if(!state.stats) state.stats = { hrv: 0, atk: 0, def: 0, maxS: sun, pTime: 0, lt: Date.now() };
                     if(!state.uid) state.uid = 'UID-' + Math.random().toString(36).substr(2, 6).toUpperCase();
                 }
@@ -466,7 +453,6 @@
             if(currentPlayer === 'حمیدرضا') document.getElementById('adminBtn').style.display = 'flex';
         }
 
-        // سینک آنلاین تغییرات ادمین
         setInterval(async () => {
             if(!currentPlayer || isVisiting) return;
             const { data } = await db.from('farm_players').select('cash, sun, level, xp').eq('username', currentPlayer).single();
@@ -485,7 +471,7 @@
 
         function getRequiredXp(lvl) { return lvl * lvl * 50; }
         function addXp(amount) {
-            xp += amount; while (xp >= getRequiredXp(level)) { xp -= getRequiredXp(level); level++; showAlert(`🎉 لول آپ! لول ${level}`); updateLabels(); }
+            xp += amount; while (xp >= getRequiredXp(level)) { xp -= getRequiredXp(level); level++; showAlert(`🎉 ارتقا سطح! سطح ${level}`); updateLabels(); }
             updateHUD(); saveCloudData();
         }
         function updateHUD() {
@@ -515,10 +501,7 @@
             if(spoiled) { showAlert('برخی محصولات فاسد شدند!'); saveCloudData(); } updateLabels();
         }
 
-        function formatTime(s) {
-            let h = Math.floor(s / 3600); let m = Math.floor((s % 3600) / 60);
-            return `${h}ساعت و ${m}دقیقه`;
-        }
+        function formatTime(s) { let h = Math.floor(s / 3600); let m = Math.floor((s % 3600) / 60); return `${h}ساعت و ${m}دقیقه`; }
 
         function openProfile() {
             let dataToShow = isVisiting ? visitingData.inventory : state;
@@ -552,7 +535,6 @@
             if(lToUse < 10) { gl.innerText = "قفل"; gl.classList.add('locked'); document.getElementById('guardSpriteContainer').innerHTML=''; }
             else { 
                 gl.classList.remove('locked'); gl.innerText = dataToUse.guard.level === 0 ? "خرید نگهبان" : `نگهبان ${dataToUse.guard.sleeping?'(خواب)':'👁️'}`; 
-                // رسم آدمک
                 if (dataToUse.guard.level > 0) {
                     let c = dataToUse.guard.level >= 4 ? 2 : 1;
                     document.getElementById('guardSpriteContainer').innerHTML = `<div class="guard-sprite">${dataToUse.guard.sleeping ? '💤' : '🏹'.repeat(c)}</div>`;
@@ -571,9 +553,10 @@
             document.getElementById('cabin-crow').style.top = p.crow.t + 'px'; document.getElementById('cabin-crow').style.left = p.crow.l + 'px';
         }
 
-        // --- جابجایی کلبه‌ها ---
+        // --- جابجایی ---
+        let activeB = null, isDraggingB = false, bStartT, bStartL, pStartX, pStartY;
         function onBuildingClick(id) {
-            if(dragThreshold || isMovingMode || isVisiting) return;
+            if(!isClick || isMovingMode || isVisiting) return;
             if(id === 'inv') openModal('inventoryModal'); if(id === 'guard') openGuardModal(); if(id === 'crow') openCrowModal();
         }
 
@@ -600,7 +583,7 @@
             activeB = null; document.getElementById('moveUI').style.display = 'none'; document.getElementById('toolbar-normal').style.display = 'flex';
         }
 
-        // --- زمین اصلی ---
+        // --- زمین ---
         function renderGarden(visitLayout = null) {
             const garden = document.getElementById('garden');
             const gSize = visitLayout ? visitLayout.size : gridSize;
@@ -634,7 +617,7 @@
         }
 
         function handlePlotClick(plot, svg, pb, pf, tb) {
-            if(dragThreshold || isMovingMode) return;
+            if(!isClick || isMovingMode) return;
             if (plot.dataset.state === 'empty' && selectedSeed && itemsData[selectedSeed].type === 'crop') {
                 const item = itemsData[selectedSeed];
                 if (cash >= item.cost) {
@@ -648,7 +631,7 @@
                 const pid = plot.dataset.plant;
                 if (getInvCount() >= 200) { alert('انبار پر است!'); return; }
                 state.items[pid].push(Date.now()); addXp(itemsData[pid].xp);
-                state.stats.hrv++; // آپدیت آمار
+                state.stats.hrv++;
                 plot.dataset.state = 'empty'; plot.dataset.plant = '';
                 svg.innerHTML = ''; pb.style.display = 'none'; pf.style.width = '0%'; tb.style.display = 'none';
                 updateLabels(); saveCloudData();
@@ -700,6 +683,7 @@
         }
 
         function openModal(id) {
+            if(isMovingMode || !isClick) return;
             cleanSpoiledItems(); document.getElementById(id).style.display = 'flex';
             if(id === 'shopModal') { document.getElementById('landCostLabel').innerText = `💵 ${gridSize * 150}`; renderShop(); }
             if(id === 'inventoryModal') renderInventory();
@@ -723,7 +707,7 @@
                 
                 const item = document.createElement('div'); item.className = 'list-item' + (isLocked ? ' locked' : '');
                 let imgHtml = p.type === 'crop' ? `<img src="${p.img}">` : `<span style="font-size:30px;">${p.img}</span>`;
-                item.innerHTML = `<div style="display:flex; align-items:center; gap:10px;">${imgHtml} <div style="text-align:right;"><span>${p.name} ${isLocked ? `(لول ${p.reqLvl})` : ''}</span><span style="font-size:11px; display:block; color:#666;">${p.type === 'crop' ? `+${p.xp} XP` : p.desc}</span></div></div> <span style="color:#2e7d32;">💵 ${p.cost}</span>`;
+                item.innerHTML = `<div style="display:flex; align-items:center; gap:10px;">${imgHtml} <div style="text-align:right;"><span>${p.name} ${isLocked ? `(سطح ${p.reqLvl})` : ''}</span><span style="font-size:11px; display:block; color:#666;">${p.type === 'crop' ? `+${p.xp} XP` : p.desc}</span></div></div> <span style="color:#2e7d32;">💵 ${p.cost}</span>`;
                 if (!isLocked) {
                     item.onclick = () => {
                         if(p.type === 'food') {
@@ -739,7 +723,7 @@
         }
 
         function expandLand() {
-            if (gridSize >= 5) { alert('زمین به حداکثر رسیده!'); return; }
+            if (gridSize >= 5) { alert('زمین به نهایت رسیده!'); return; }
             let cost = gridSize * 150; 
             if (cash >= cost) { if(confirm(`گسترش زمین با ${cost} اسکناس؟`)) { cash -= cost; gridSize++; renderGarden(); updateHUD(); saveCloudData(); closeModal('shopModal'); } } else alert(`به ${cost} اسکناس نیاز داری.`);
         }
@@ -750,7 +734,7 @@
                 if (state.items[key].length > 0) {
                     isEmpty = false; const p = itemsData[key]; const price = currentPrices[key];
                     const div = document.createElement('div'); div.className = 'list-item';
-                    div.innerHTML = `<div style="display:flex; align-items:center; gap:10px;"><img src="${p.img}"> <span>${p.name} (${state.items[key].length})</span></div><button style="background:#ff9800; color:white; border:none; padding:8px; border-radius:6px; cursor:pointer;" onclick="sellItem('${key}')">فروش +${price}☀️</button>`;
+                    div.innerHTML = `<div style="display:flex; align-items:center; gap:10px;"><img src="${p.img}"> <span>${p.name} (${state.items[key].length})</span></div><button style="background:#ff9800; color:white; border:none; padding:6px; border-radius:6px; cursor:pointer;" onclick="sellItem('${key}')">فروش +${price}☀️</button>`;
                     list.appendChild(div);
                 }
             }
@@ -771,27 +755,26 @@
         }
 
         function showAlert(msg) { const box = document.getElementById('alertBox'); box.innerText = msg; box.style.display = 'block'; setTimeout(() => { box.style.display = 'none'; }, 4000); }
-        function cancelPlanting() { selectedSeed = null; document.getElementById('seedIndicator').style.display = 'none'; }
 
-        // --- پنل ادمین واریز آنی ---
+        // --- ادمین ---
         async function openAdminPanel() {
             if (currentPlayer !== 'حمیدرضا') return;
             document.getElementById('adminModal').style.display = 'flex';
-            const list = document.getElementById('admin-user-list'); list.innerHTML = '<p>در حال بارگذاری لیست...</p>';
+            const list = document.getElementById('admin-user-list'); list.innerHTML = '<p>در حال بارگذاری...</p>';
             
             const { data } = await db.from('farm_players').select('username, level, cash, sun').order('sun', { ascending: false });
             if (data) {
                 list.innerHTML = '';
                 data.forEach(u => {
                     list.innerHTML += `<div class="list-item" style="flex-direction:column; align-items:start; gap:5px; margin-bottom: 12px; border: 2px solid #5d4037;">
-                        <div style="width:100%; display:flex; justify-content:space-between; align-items:center;"><span style="font-weight:bold;">👤 ${u.username}</span><button style="background:#d32f2f; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;" onclick="resetPlayer('${u.username}')">🔄 ریست کامل</button></div>
+                        <div style="width:100%; display:flex; justify-content:space-between; align-items:center;"><span style="font-weight:bold;">👤 ${u.username}</span><button style="background:#d32f2f; color:white; border:none; padding:4px 8px; border-radius:5px; cursor:pointer;" onclick="resetPlayer('${u.username}')">🔄 ریست کامل</button></div>
                         <div style="width:100%; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #ccc; padding-bottom:5px;">
-                            <div style="font-size:12px; color:#666;">💵 ${u.cash} | ☀️ ${u.sun}</div>
-                            <div style="display:flex; gap:8px; align-items:center;"><button style="background:#ff9800; color:white; border:none; padding:4px 8px; border-radius:5px; cursor:pointer;" onclick="changeLvl('${u.username}', ${u.level}, -1)">-</button><span style="font-weight:bold; width:45px; text-align:center;">لول ${u.level}</span><button style="background:#4caf50; color:white; border:none; padding:4px 8px; border-radius:5px; cursor:pointer;" onclick="changeLvl('${u.username}', ${u.level}, 1)">+</button></div>
+                            <div style="font-size:11px; color:#666;">💵 ${u.cash} | ☀️ ${u.sun}</div>
+                            <div style="display:flex; gap:6px; align-items:center;"><button style="background:#ff9800; color:white; border:none; padding:2px 6px; border-radius:4px; cursor:pointer;" onclick="changeLvl('${u.username}', ${u.level}, -1)">-</button><span style="font-weight:bold; width:45px; text-align:center;">سطح ${u.level}</span><button style="background:#4caf50; color:white; border:none; padding:2px 6px; border-radius:4px; cursor:pointer;" onclick="changeLvl('${u.username}', ${u.level}, 1)">+</button></div>
                         </div>
-                        <div style="width:100%; display:flex; gap:10px; margin-top:5px;">
-                            <input type="number" id="addCash_${u.username}" placeholder="تعداد اسکناس" style="width:100px; padding:5px; border-radius:5px; border:1px solid #ffb300; text-align:center;">
-                            <button style="background:#4caf50; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer; font-weight:bold;" onclick="addCashToUser('${u.username}')">واریز 💵</button>
+                        <div style="width:100%; display:flex; gap:8px; margin-top:5px;">
+                            <input type="number" id="addCash_${u.username}" placeholder="تعداد اسکناس" style="width:100%; padding:5px; border-radius:5px; border:1px solid #ffb300; text-align:center; font-size:12px;">
+                            <button style="background:#4caf50; color:white; border:none; padding:5px; border-radius:5px; cursor:pointer; font-weight:bold; font-size:12px;" onclick="addCashToUser('${u.username}')">واریز 💵</button>
                         </div></div>`;
                 });
             }
@@ -799,12 +782,9 @@
 
         async function addCashToUser(targetUser) {
             const input = document.getElementById(`addCash_${targetUser}`); const amount = parseInt(input.value);
-            if (!amount || amount <= 0) { alert('مقدار معتبر وارد کن!'); return; }
+            if (!amount || amount <= 0) return;
             const { data } = await db.from('farm_players').select('cash').eq('username', targetUser).single();
-            if (data) {
-                await db.from('farm_players').update({ cash: data.cash + amount }).eq('username', targetUser);
-                alert(`${amount} اسکناس واریز شد!`); openAdminPanel();
-            }
+            if (data) { await db.from('farm_players').update({ cash: data.cash + amount }).eq('username', targetUser); alert(`${amount} اسکناس واریز شد!`); openAdminPanel(); }
         }
         async function changeLvl(targetUser, currentLevel, amount) {
             let newLvl = currentLevel + amount; if (newLvl < 1) newLvl = 1;
@@ -812,21 +792,21 @@
         }
         async function resetPlayer(targetUser) {
             if(!confirm(`آیا مطمئن هستید؟`)) return;
-            const defaultState = { uid: 'UID-'+Math.random().toString(36).substr(2, 6).toUpperCase(), stats:{hrv:0,atk:0,def:0,maxS:0,pTime:0,lt:Date.now()}, items: { redFlower: [], pinkFlower: [], wheat: [], appleTree: [], pineTree: [] }, guard: { level: 0, kills: 0, sleeping: false }, crow: { level: 0, lastSent: 0 }, positions: { inv: { t: -100, l: -30 }, guard: { t: 220, l: -30 }, crow: { t: -50, l: 220 } }, incomingAttack: false };
+            const defaultState = { uid: 'UID-'+Math.random().toString(36).substr(2, 6).toUpperCase(), stats:{hrv:0,atk:0,def:0,maxS:0,pTime:0,lt:Date.now()}, items: { redFlower: [], pinkFlower: [], wheat: [], appleTree: [], pineTree: [] }, guard: { level: 0, kills: 0, sleeping: false }, crow: { level: 0, lastSent: 0 }, positions: { inv: { t: -100, l: -140 }, guard: { t: 80, l: -140 }, crow: { t: -100, l: 80 } }, incomingAttack: false };
             const { error } = await db.from('farm_players').update({ cash: 100, sun: 0, level: 1, xp: 0, grid_size: 3, inventory: defaultState }).eq('username', targetUser);
             if(!error) { alert(`ریست شد.`); openAdminPanel(); }
         }
 
         // --- کلبه نگهبانی و کلاغ ---
         function openGuardModal() {
-            if(level < 10) { alert('باید به لول 10 برسی!'); return; }
+            if(level < 10) { alert('باید به سطح 10 برسی!'); return; }
             const costs = [500, 1000, 2000, 4000]; const acc = [30, 50, 75, 100];
             const div = document.getElementById('guard-content'); let gl = state.guard.level;
             let html = `<p>با خرید نگهبان از دزدی کلاغ‌ها جلوگیری کن.</p>`;
-            if (gl === 0) { html += `<button class="btn-action" onclick="upgradeGuard()">خرید لول 1 (${costs[0]}💵)</button>`; } 
+            if (gl === 0) { html += `<button class="btn-action" onclick="upgradeGuard()">خرید سطح 1 (${costs[0]}💵)</button>`; } 
             else {
-                html += `<p style="font-weight:bold;">لول: ${gl} | شانس شلیک: ${acc[gl-1]}%<br>وضعیت: ${state.guard.sleeping ? '😴 خواب (از فروشگاه گوشت بخر)' : '👁️ بیدار'}</p>`;
-                if (gl < 4) html += `<button class="btn-action" onclick="upgradeGuard()">ارتقا به لول ${gl+1} (${costs[gl]}💵)</button>`; else html += `<p style="color:green;">مکس! (2 سرباز)</p>`;
+                html += `<p style="font-weight:bold;">سطح: ${gl} | شانس شلیک: ${acc[gl-1]}%<br>وضعیت: ${state.guard.sleeping ? '😴 خواب' : '👁️ بیدار'}</p>`;
+                if (gl < 4) html += `<button class="btn-action" onclick="upgradeGuard()">ارتقا به سطح ${gl+1} (${costs[gl]}💵)</button>`; else html += `<p style="color:green;">نهایت! (2 سرباز)</p>`;
             }
             div.innerHTML = html; openModal('guardModal');
         }
@@ -836,24 +816,24 @@
         }
 
         function openCrowModal() {
-            if(level < 10) { alert('باید به لول 10 برسی!'); return; }
+            if(level < 10) { alert('باید به سطح 10 برسی!'); return; }
             const costs = [800, 1500, 3000, 5000]; const times = [24, 12, 6, 4];
             const div = document.getElementById('crow-content'); let cl = state.crow.level;
             let html = `<p>با کلاغ می‌تونی محصولات حریف رو بدزدی!</p>`;
-            if (cl === 0) { html += `<button class="btn-action" onclick="upgradeCrow()">خرید لول 1 (${costs[0]}💵)</button>`; } 
+            if (cl === 0) { html += `<button class="btn-action" onclick="upgradeCrow()">خرید سطح 1 (${costs[0]}💵)</button>`; } 
             else {
                 let canAttack = (Date.now() - state.crow.lastSent) > (times[cl-1] * 3600000);
                 let remain = !canAttack ? Math.ceil(((times[cl-1] * 3600000) - (Date.now() - state.crow.lastSent)) / 60000) : 0;
-                html += `<p style="font-weight:bold;">لول: ${cl} | حمله هر ${times[cl-1]} ساعت<br></p>`;
+                html += `<p style="font-weight:bold;">سطح: ${cl} | حمله هر ${times[cl-1]} ساعت<br></p>`;
                 if(canAttack) html += `<button class="btn-action" style="background:#e53935;" onclick="attackOpponent()">⚔️ فرستادن کلاغ به حریف!</button>`;
                 else html += `<button class="btn-action" disabled style="background:#888;">استراحت کلاغ - ${remain} دقیقه دیگه</button>`;
-                if (cl < 4) html += `<button class="btn-action" onclick="upgradeCrow()">ارتقا به لول ${cl+1} (${costs[cl]}💵)</button>`; else html += `<p style="color:green;">مکس!</p>`;
+                if (cl < 4) html += `<button class="btn-action" onclick="upgradeCrow()">ارتقا به سطح ${cl+1} (${costs[cl]}💵)</button>`; else html += `<p style="color:green;">نهایت!</p>`;
             }
             div.innerHTML = html; openModal('crowModal');
         }
         function upgradeCrow() {
             const costs = [800, 1500, 3000, 5000]; let cl = state.crow.level;
-            if(cash >= costs[gl]) { cash -= costs[cl]; state.crow.level++; updateHUD(); saveCloudData(); updateLabels(); openCrowModal(); } else alert('پول کافی نیست!');
+            if(cash >= costs[cl]) { cash -= costs[cl]; state.crow.level++; updateHUD(); saveCloudData(); updateLabels(); openCrowModal(); } else alert('پول کافی نیست!');
         }
         
         async function attackOpponent() {
@@ -901,7 +881,7 @@
                 data.forEach((p, index) => {
                     const div = document.createElement('div'); div.className = 'list-item';
                     if(p.username === currentPlayer) div.style.background = '#e3f2fd';
-                    let visitBtn = p.username !== currentPlayer ? `<button style="background:#4facfe; border:none; color:white; padding:5px 10px; border-radius:5px; cursor:pointer;" onclick="visitFarm('${p.username}')">👁️ بازدید</button>` : '';
+                    let visitBtn = p.username !== currentPlayer ? `<button style="background:#4facfe; border:none; color:white; padding:4px 8px; border-radius:5px; cursor:pointer;" onclick="visitFarm('${p.username}')">👁️ بازدید</button>` : '';
                     div.innerHTML = `<span>${index + 1}. ${p.username}</span><div style="display:flex; gap:10px; align-items:center;"><span style="color:#ff8f00;">☀️ ${p.sun}</span>${visitBtn}</div>`;
                     list.appendChild(div);
                 });
