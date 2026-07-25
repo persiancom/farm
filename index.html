@@ -46,7 +46,7 @@
         #moveUI { display: none; position: fixed; bottom: 60px; left: 50%; transform: translateX(-50%); gap: 15px; z-index: 1000; pointer-events: auto;}
         .btn-move { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 22px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); border: 2px solid white; cursor: pointer; }
 
-        /* --- دوربین آزاد با قابلیت زوم و پوشش کامل عکس --- */
+        /* --- دوربین و محدوده‌بندی دقیق پس‌زمینه --- */
         #gameViewport { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; touch-action: none; z-index: 10; }
         #cameraContainer { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-origin: center center; }
         
@@ -66,6 +66,7 @@
         .plot-content { position: absolute; bottom: 8px; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; pointer-events: none !important; }
         .plot-content img { max-height: 40px; object-fit: contain; filter: drop-shadow(0 3px 2px rgba(0,0,0,0.4)); pointer-events: none; }
 
+        /* اصلاح پوینتر و کلیک‌پذیری ساختمان‌ها */
         .building { position: absolute; cursor: pointer; z-index: 20; transition: filter 0.2s; pointer-events: auto !important; }
         .building:hover { filter: brightness(1.15); } 
         .building img { width: 120px; object-fit: contain; filter: drop-shadow(-2px 5px 3px rgba(0,0,0,0.5)); pointer-events: none; }
@@ -172,7 +173,7 @@
     <div class="alert-box" id="alertBox">پیام!</div>
     <div class="seed-indicator" id="seedIndicator" onclick="cancelPlanting()">در حال کاشت: <span id="seedName"></span> (لغو ✖)</div>
 
-    <!-- دوربین آزاد با محدوده کامل عکس پس‌زمینه و زوم -->
+    <!-- دوربین بازی با محدودیت اسکرول -->
     <div id="gameViewport">
         <div id="cameraContainer">
             <div id="groundBg"></div>
@@ -361,8 +362,7 @@
                 <input type="text" id="targetOpponent" class="exchange-input" placeholder="">
                 <button class="btn-action" style="background:#e53935; box-shadow:0 3px 0 #b71c1c;" onclick="attackOpponent()">⚔️ شروع حمله لایو!</button>
             </div>
-            <button class="btn-move-cabin" onclick="startMoveMode('crow')">تغییر مکان ساختمان 📍</button>
-            <button class="btn-close" onclick="closeModal('crowModal')">بستن</button>
+            <button class="btn-move-cabin" onclick="startMoveMode('crow')">تغییر مکان ساختمان 📍</button><button class="btn-close" onclick="closeModal('crowModal')">بستن</button>
         </div>
     </div>
 
@@ -407,7 +407,7 @@
             liveAlert: null, incomingAttack: false
         };
 
-        // --- دوربین آزاد با بک‌زوم و پوشش کامل عکس پس‌زمینه ---
+        // --- دوربین و محدوده‌بندی حرکتی برای جلوگیری از رد کردن محدوده عکس ---
         let panX = 0, panY = 0, zoom = 1;
         let isDraggingMap = false, mapDragDist = 0, dragStartX = 0, dragStartY = 0, startPanX = 0, startPanY = 0;
         const viewport = document.getElementById('gameViewport');
@@ -415,7 +415,7 @@
 
         function updateTransform() { camera.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`; }
 
-        // ثبت کلیکرهای مطمئن روی دکمه‌ها و ساختمان‌ها
+        // ثبت دقیق رویدادها روی دکمه‌ها و کلیدهای ساختمان
         document.getElementById('profBtn').onclick = () => { if(mapDragDist < 10) openProfile(); };
         document.getElementById('btnShop').onclick = () => { if(mapDragDist < 10) openModal('shopModal'); };
         document.getElementById('btnMarket').onclick = () => { if(mapDragDist < 10) openModal('marketModal'); };
@@ -445,13 +445,16 @@
             mapDragDist += Math.abs(dx) + Math.abs(dy);
             
             let nX = startPanX + (dx / zoom); let nY = startPanY + (dy / zoom);
-            const LIMIT = 700; panX = Math.max(-LIMIT, Math.min(LIMIT, nX)); panY = Math.max(-LIMIT, Math.min(LIMIT, nY));
+            // اعمال محدودیت دقیق حرکت دوربین متناسب با اندازه پس‌زمینه
+            const LIMIT = 300; 
+            panX = Math.max(-LIMIT, Math.min(LIMIT, nX)); 
+            panY = Math.max(-LIMIT, Math.min(LIMIT, nY));
             updateTransform();
         });
         
         viewport.addEventListener('pointerup', e => { isDraggingMap = false; viewport.releasePointerCapture(e.pointerId); });
         
-        // زوم و بک‌زوم با دو انگشت و موس
+        // مدیریت زوم
         let initialPinchDist = 0; let initialZoom = 1; let isPinching = false;
         viewport.addEventListener('touchstart', e => {
             if(e.touches.length === 2) {
@@ -463,20 +466,20 @@
             if (e.touches.length === 2 && isPinching) {
                 e.preventDefault();
                 let dist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
-                zoom = initialZoom * (dist / initialPinchDist); zoom = Math.max(0.4, Math.min(zoom, 2.0)); updateTransform();
+                zoom = initialZoom * (dist / initialPinchDist); zoom = Math.max(0.7, Math.min(zoom, 1.5)); updateTransform();
             }
         }, {passive: false});
         viewport.addEventListener('touchend', e => { if(e.touches.length < 2) isPinching = false; });
 
         viewport.addEventListener('wheel', e => {
             if(e.target.closest('.modal') || e.target.closest('.hud-top')) return;
-            e.preventDefault(); zoom += e.deltaY * -0.001; zoom = Math.min(Math.max(0.4, zoom), 2.0); updateTransform();
+            e.preventDefault(); zoom += e.deltaY * -0.001; zoom = Math.min(Math.max(0.7, zoom), 1.5); updateTransform();
         }, {passive: false});
 
         function resizeGame() { panX = 0; panY = 0; zoom = Math.min(window.innerWidth / 500, window.innerHeight / 700); if (zoom > 1.0) zoom = 1.0; updateTransform(); }
         window.addEventListener('resize', resizeGame); resizeGame();
 
-        // --- تایم‌ها ---
+        // --- تایم‌ها و ذخیره‌سازی ابری ---
         setInterval(() => {
             if(!currentPlayer || isVisiting) return;
             let now = Date.now(); let diff = Math.floor((now - state.stats.lt) / 1000);
@@ -671,7 +674,7 @@
             document.getElementById('cabin-bank').style.top = p.bank.t + 'px'; document.getElementById('cabin-bank').style.left = p.bank.l + 'px';
         }
 
-        // --- جابجایی ساختمان ---
+        // --- جابجایی ساختمان‌ها ---
         let activeB = null, isDraggingB = false, bStartT, bStartL, dragBX, dragBY;
         function startMoveMode(id) {
             closeModal('inventoryModal'); closeModal('guardModal'); closeModal('crowModal'); closeModal('bankModal');
@@ -695,7 +698,7 @@
             activeB = null; document.getElementById('moveUI').style.display = 'none'; document.getElementById('toolbar-normal').style.display = 'flex';
         }
 
-        // --- زمین ---
+        // --- زمین مزرعه ---
         function renderGarden(visitLayout = null) {
             const garden = document.getElementById('garden'); const gSize = visitLayout ? visitLayout.size : gridSize; garden.style.setProperty('--grid-size', gSize); garden.innerHTML = '';
             let layoutToUse = visitLayout ? visitLayout.plots : (state.gardenLayout || []);
@@ -868,7 +871,7 @@
             }, 1000);
         }
 
-        // --- مودال‌ها ---
+        // --- مودال‌ها و تب‌ها ---
         function switchShopTab(tab) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.getElementById(`tab-btn-${tab}`).classList.add('active'); document.getElementById(`tab-${tab}`).classList.add('active');
@@ -1043,7 +1046,7 @@
         async function changeLvl(targetUser, currentLevel, amount) { let newLvl = currentLevel + amount; if (newLvl < 1) newLvl = 1; await db.from('farm_players').update({ level: newLvl }).eq('username', targetUser); openAdminPanel(); }
         async function resetPlayer(targetUser) { if(!confirm(`مطمئن هستید؟`)) return; const defaultState = { uid: 'UID-'+Math.random().toString(36).substr(2, 6).toUpperCase(), stats:{hrv:0,atk:0,def:0,maxS:0,pTime:0,lt:Date.now()}, items: { redFlower: [], pinkFlower: [], wheat: [], appleTree: [], pineTree: [] }, guard: { level: 0, kills: 0, sleeping: false }, crow: { level: 0, lastSent: 0 }, bank: { level: 0, lastCol: Date.now(), acc: false, inv: 0, invStart: 0, ready: false }, messages: [], positions: { inv: { t: -100, l: -30 }, guard: { t: 220, l: -30 }, crow: { t: -50, l: 220 }, bank: { t: -150, l: 80 } }, incomingAttack: false, gardenLayout:[] }; const { error } = await db.from('farm_players').update({ cash: 100, sun: 0, level: 1, xp: 0, grid_size: 3, inventory: defaultState }).eq('username', targetUser); if(!error) { alert(`ریست شد.`); openAdminPanel(); } }
 
-        // --- کلبه نگهبانی و کلاغ ---
+        // --- کلبه نگهبانی و آشیانه کلاغ ---
         function openGuardModal() {
             if(level < 10) { alert('باید به سطح 10 برسی!'); return; }
             const costs = [500, 1000, 2000, 4000]; const acc = [30, 50, 75, 100];
