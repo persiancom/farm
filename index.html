@@ -17,20 +17,11 @@
 
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #2e5c1e; }
 
-        #timeOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 40; transition: background 2s; }
-        #timeOverlay.lamp-on { background: radial-gradient(circle at 50% 25%, rgba(255, 255, 150, 0.4) 0%, rgba(0, 5, 20, 0.85) 90%) !important; mix-blend-mode: hard-light; }
-
-        #hangingLamp { position: fixed; top: -120px; left: 50%; transform: translateX(-50%); z-index: 55; cursor: pointer; transition: top 0.6s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; align-items: center; }
-        #hangingLamp.active { top: -5px; } 
-        .lamp-wire { width: 5px; height: 100px; background: #fff; box-shadow: 0 0 10px #00f2fe, 0 0 20px #00f2fe; border-radius: 2px; position: relative; z-index: 1; }
-        .lamp-bulb { font-size: 55px; transform: rotate(180deg); margin-top: -15px; filter: grayscale(100%) brightness(0.4); transition: 0.3s; position: relative; z-index: 2; }
-        #hangingLamp.on .lamp-bulb { filter: grayscale(0) drop-shadow(0 -30px 60px #ffeb3b); }
-
         #loginScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #2e5c1e; z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.4s; }
         .login-box { background: linear-gradient(to bottom, #fff8e1, #ffecb3); border: 4px solid #ff8f00; border-radius: 15px; padding: 25px 20px; width: 85%; max-width: 320px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.7); }
         .login-input { width: 100%; padding: 10px; margin: 8px 0; border: 2px solid #ffb300; border-radius: 8px; font-size: 14px; text-align: center; font-weight: bold; outline: none; }
 
-        .hud-top { position: fixed; top: 10px; left: 10px; right: 10px; display: flex; justify-content: space-between; align-items:flex-start; z-index: 50; pointer-events: none;}
+        .hud-top { position: fixed; top: 10px; left: 10px; right: 10px; display: flex; justify-content: space-between; align-items:flex-start; z-index: 500; pointer-events: none;}
         .profile-panel { background: rgba(0, 0, 0, 0.85); border: 2px solid #ffb300; border-radius: 10px; padding: 5px 10px; color: white; font-weight: bold; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.5); cursor: pointer; pointer-events: auto; }
         .profile-pic { width: 28px; height: 28px; background: #fff; border: 2px solid #ffb300; border-radius: 6px; display: flex; justify-content: center; align-items: center; font-size: 16px; }
         .profile-info { display: flex; flex-direction: column; align-items: flex-start; }
@@ -41,46 +32,44 @@
 
         .currency-panel { background: rgba(0, 0, 0, 0.85); border: 2px solid #aed581; border-radius: 10px; padding: 5px 10px; color: white; font-size: 12px; font-weight: bold; display: flex; gap: 8px; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.5); pointer-events: auto; flex-direction: column;}
         .curr-row { display: flex; align-items: center; gap: 5px; width:100%; justify-content: space-between;}
-        .btn-plus { background: #4caf50; border: none; color: white; border-radius: 4px; padding:2px 5px; font-size: 12px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 0 #2e7d32; margin-right:5px;}
 
         .alert-box { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); background: #d32f2f; color: white; padding: 6px 12px; border-radius: 10px; font-weight: bold; border: 2px solid #ff5252; display: none; z-index: 3000; box-shadow: 0 4px 8px rgba(0,0,0,0.5); font-size: 12px; text-align:center;}
-        .seed-indicator { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); background: linear-gradient(to bottom, #ffb300, #ff8f00); color: white; padding: 6px 15px; border-radius: 12px; font-weight: bold; border: 2px solid #e65100; display: none; z-index: 50; cursor: pointer; font-size: 12px; pointer-events:auto;}
+        .seed-indicator { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); background: linear-gradient(to bottom, #ffb300, #ff8f00); color: white; padding: 6px 15px; border-radius: 12px; font-weight: bold; border: 2px solid #e65100; display: none; z-index: 500; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.5); font-size: 12px; pointer-events:auto;}
 
         /* تولبار پایین */
-        .toolbar { position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 50; flex-wrap: nowrap; justify-content: center; pointer-events: auto;}
+        .toolbar { position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 500; flex-wrap: nowrap; justify-content: center; pointer-events: auto;}
         .action-btn { position: relative; width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(to bottom, #fffde7, #ffc107); border: 2px solid #fff; box-shadow: 0 3px 6px rgba(0,0,0,0.5); font-size: 16px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.1s; flex-shrink: 0; }
         .action-btn:active { transform: scale(0.9); }
         .msg-badge { position: absolute; top: -3px; right: -3px; width: 12px; height: 12px; background: #e53935; border: 2px solid #fff; border-radius: 50%; display: none; }
         #adminBtn { display: none; background: linear-gradient(to bottom, #f44336, #b71c1c); color:white;}
 
-        #moveUI { display: none; position: fixed; bottom: 60px; left: 50%; transform: translateX(-50%); gap: 15px; z-index: 100; pointer-events: auto;}
+        #moveUI { display: none; position: fixed; bottom: 60px; left: 50%; transform: translateX(-50%); gap: 15px; z-index: 1000; pointer-events: auto;}
         .btn-move { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 22px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); border: 2px solid white; cursor: pointer; }
 
-        /* --- دوربین آزاد با محدودیت دقیق روی عکس جدید --- */
+        /* --- دوربین آزاد با قابلیت زوم و پوشش کامل عکس --- */
         #gameViewport { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; touch-action: none; z-index: 10; }
-        #cameraContainer { position: absolute; top: 50%; left: 50%; width: 0; height: 0; }
+        #cameraContainer { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-origin: center center; }
         
-        /* عکس جدید پس‌زمینه که کل نقشه محدود به آن است */
         #groundBg {
-            position: absolute; top: -750px; left: -750px; width: 1500px; height: 1500px;
+            position: absolute; top: -1000px; left: -1000px; width: 2000px; height: 2000px;
             background-image: url('https://raw.githubusercontent.com/persiancom/farm/main/1784961753226.png');
             background-size: cover; background-position: center; z-index: -10; pointer-events: none;
         }
 
         #isoWorld { position: absolute; top: 0; left: 0; transform: rotateX(60deg) rotateZ(-45deg); transform-style: preserve-3d; }
 
-        .garden { display: grid; grid-template-columns: repeat(var(--grid-size), 40px); grid-template-rows: repeat(var(--grid-size), 40px); gap: 3px; transform-style: preserve-3d; transition: all 0.5s ease; }
-        .plot { width: 40px; height: 40px; background: #6d4c41; border: 2px solid #4e342e; border-radius: 5px; box-shadow: inset 0 0 8px rgba(0,0,0,0.4), -3px 3px 0px rgba(62, 39, 35, 0.95); position: relative; cursor: pointer; transform-style: preserve-3d; transition: background 0.2s; }
+        .garden { display: grid; grid-template-columns: repeat(var(--grid-size), 45px); grid-template-rows: repeat(var(--grid-size), 45px); gap: 3px; transform-style: preserve-3d; transition: all 0.5s ease; }
+        .plot { width: 45px; height: 45px; background: #6d4c41; border: 2px solid #4e342e; border-radius: 6px; box-shadow: inset 0 0 8px rgba(0,0,0,0.4), -3px 3px 0px rgba(62, 39, 35, 0.95); position: relative; cursor: pointer; transform-style: preserve-3d; transition: background 0.2s; z-index: 5; }
         .plot:hover { background: #795548; }
 
         .plot-content, .building { transform: rotateZ(45deg) rotateX(-60deg) !important; transform-origin: bottom center; transform-style: preserve-3d; }
         .plot-content { position: absolute; bottom: 8px; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; pointer-events: none !important; }
-        .plot-content img { max-height: 35px; object-fit: contain; filter: drop-shadow(0 3px 2px rgba(0,0,0,0.4)); pointer-events: none; }
+        .plot-content img { max-height: 40px; object-fit: contain; filter: drop-shadow(0 3px 2px rgba(0,0,0,0.4)); pointer-events: none; }
 
-        .building { position: absolute; cursor: pointer; z-index: 10; transition: filter 0.2s; }
+        .building { position: absolute; cursor: pointer; z-index: 20; transition: filter 0.2s; pointer-events: auto !important; }
         .building:hover { filter: brightness(1.15); } 
-        .building img { width: 110px; object-fit: contain; filter: drop-shadow(-2px 5px 3px rgba(0,0,0,0.5)); pointer-events: none; }
-        .building.moving { filter: drop-shadow(0 0 15px #4caf50) brightness(1.2) !important; z-index: 99 !important; animation: floatMove 1s infinite alternate; touch-action: none; }
+        .building img { width: 120px; object-fit: contain; filter: drop-shadow(-2px 5px 3px rgba(0,0,0,0.5)); pointer-events: none; }
+        .building.moving { filter: drop-shadow(0 0 15px #4caf50) brightness(1.2) !important; z-index: 999 !important; animation: floatMove 1s infinite alternate; touch-action: none; }
         @keyframes floatMove { from { transform: rotateZ(45deg) rotateX(-60deg) translateY(-10px) !important; } to { transform: rotateZ(45deg) rotateX(-60deg) translateY(-20px) !important; } }
 
         .timer-badge { background: rgba(0, 0, 0, 0.85); color: #fff; padding: 2px 4px; border-radius: 4px; font-size: 8px; font-weight: bold; border: 1px solid #fff; margin-bottom: 2px; display: none; box-shadow: 0 2px 4px rgba(0,0,0,0.4); white-space: nowrap; pointer-events: none; }
@@ -99,11 +88,11 @@
         .cloud-icon { font-size: 60px; animation: float 2s infinite ease-in-out alternate; text-shadow: 0 10px 20px rgba(0,0,0,0.3); }
         .cloud-text { color: white; font-size: 16px; font-weight: bold; margin-top: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
 
-        #battleCrow { position: absolute; font-size: 30px; z-index: 100; transition: all 1s ease; transform: rotateZ(45deg) rotateX(-60deg) !important; transform-origin: bottom center; pointer-events: none; filter: drop-shadow(0 15px 5px rgba(0,0,0,0.5)); opacity: 0; text-shadow: none; display:flex; flex-direction:column; align-items:center;}
+        #battleCrow { position: absolute; font-size: 30px; z-index: 100; transition: all 1s ease; transform: rotateZ(45deg) rotateX(-60deg) !important; transform-origin: bottom center; pointer-events: none; filter: drop-shadow(0 15px 5px rgba(0,0,0,0.5)); opacity: 0; display:flex; flex-direction:column; align-items:center;}
         .crow-timer { font-size:10px; color:#fff; font-weight:bold; text-shadow:0 1px 2px #000; margin-top:-5px; }
         #battleArrow { position: absolute; font-size: 20px; z-index: 101; transition: all 0.4s linear; transform: rotateZ(45deg) rotateX(-60deg) !important; pointer-events: none; opacity: 0;}
 
-        /* بالن سه بعدی و جذاب */
+        /* بالن پیام */
         #chatBalloon {
             position: fixed; top: -200px; left: 50%; transform: translateX(-50%); z-index: 99999;
             width: 280px; background: url('https://raw.githubusercontent.com/persiancom/farm/main/BackgroundEraser_%DB%B2%DB%B0%DB%B2%DB%B6%DB%B0%DB%B7%DB%B2%DB%B5_%DB%B0%DB%B1%DB%B5%DB%B8%DB%B2%DB%B3%DB%B6%DB%B1%DB%B6.png') no-repeat center center;
@@ -120,7 +109,7 @@
         .tab-content { display: none; max-height: 55vh; overflow-y: auto; }
         .tab-content.active { display: block; }
 
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; pointer-events:auto;}
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); z-index: 4000; justify-content: center; align-items: center; pointer-events:auto;}
         .modal-content { background: linear-gradient(to bottom, #fff8e1, #ffecb3); border: 3px solid #ff8f00; border-radius: 12px; padding: 12px; width: 90%; max-width: 300px; text-align: center; max-height: 85vh; overflow-y: auto; }
         .list-item { background: #fff; border: 2px solid #ffb300; padding: 6px; margin-bottom: 6px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; box-shadow: 0 2px 0 #ffe082; font-size: 12px; position: relative; }
         .list-item img { width: 35px; height: 35px; object-fit: contain; }
@@ -145,20 +134,12 @@
 </head>
 <body>
 
-    <div id="timeOverlay"></div>
-    
-    <!-- بالن پیام سه بعدی -->
     <div id="chatBalloon">
         <button class="balloon-close" onclick="closeBalloon()">×</button>
         <div style="margin-top: 25px; max-width: 180px;">
             <p style="margin: 0; font-size: 12px; font-weight: bold; color: #d32f2f;" id="balloonSender">از طرف: ---</p>
             <p style="margin: 5px 0 0 0; font-size: 13px; color: #3e2723; font-weight: bold; word-break: break-word;" id="balloonText">متن پیام...</p>
         </div>
-    </div>
-
-    <div id="hangingLamp" onclick="toggleLamp()">
-        <div class="lamp-wire"></div>
-        <div class="lamp-bulb">💡</div>
     </div>
 
     <div id="loginScreen">
@@ -168,7 +149,6 @@
             <input type="text" id="username" class="login-input" placeholder="نام کاربری">
             <input type="password" id="password" class="login-input" placeholder="رمز عبور">
             <button class="btn-action" style="background:#4caf50; box-shadow:0 4px 0 #2e7d32; font-size:16px; padding:10px;" onclick="attemptLogin()">ورود</button>
-            <div id="loadingMsg" style="display:none; margin-top:10px; font-weight:bold; color:#2e7d32;">در حال اتصال...</div>
         </div>
     </div>
 
@@ -192,7 +172,7 @@
     <div class="alert-box" id="alertBox">پیام!</div>
     <div class="seed-indicator" id="seedIndicator" onclick="cancelPlanting()">در حال کاشت: <span id="seedName"></span> (لغو ✖)</div>
 
-    <!-- دوربین آزاد و محدود به عکس پس‌زمینه -->
+    <!-- دوربین آزاد با محدوده کامل عکس پس‌زمینه و زوم -->
     <div id="gameViewport">
         <div id="cameraContainer">
             <div id="groundBg"></div>
@@ -268,7 +248,6 @@
         </div>
     </div>
 
-    <!-- مودال ارسال پیام جدید -->
     <div class="modal" id="sendMsgModal">
         <div class="modal-content">
             <h3 style="margin-top:0;">💬 ارسال پیام به رقیب</h3>
@@ -428,7 +407,7 @@
             liveAlert: null, incomingAttack: false
         };
 
-        // --- دوربین یکپارچه با محدودیت روی عکس جدید ---
+        // --- دوربین آزاد با بک‌زوم و پوشش کامل عکس پس‌زمینه ---
         let panX = 0, panY = 0, zoom = 1;
         let isDraggingMap = false, mapDragDist = 0, dragStartX = 0, dragStartY = 0, startPanX = 0, startPanY = 0;
         const viewport = document.getElementById('gameViewport');
@@ -436,7 +415,21 @@
 
         function updateTransform() { camera.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`; }
 
+        // ثبت کلیکرهای مطمئن روی دکمه‌ها و ساختمان‌ها
+        document.getElementById('profBtn').onclick = () => { if(mapDragDist < 10) openProfile(); };
+        document.getElementById('btnShop').onclick = () => { if(mapDragDist < 10) openModal('shopModal'); };
+        document.getElementById('btnMarket').onclick = () => { if(mapDragDist < 10) openModal('marketModal'); };
+        document.getElementById('btnLucky').onclick = () => { if(mapDragDist < 10) openModal('luckyModal'); };
+        document.getElementById('btnLeader').onclick = () => { if(mapDragDist < 10) openModal('leaderboardModal'); };
         document.getElementById('btnSendMsg').onclick = () => { if(mapDragDist < 10) openModal('sendMsgModal'); };
+        document.getElementById('btnMsg').onclick = () => { if(mapDragDist < 10) openMessages(); };
+        document.getElementById('adminBtn').onclick = () => { if(mapDragDist < 10) openAdminPanel(); };
+        document.getElementById('btnExpand').onclick = () => { if(mapDragDist < 10) expandLand(); };
+        
+        document.getElementById('cabin-inv').onclick = () => { if(mapDragDist < 10 && !isMovingMode && !isVisiting) openModal('inventoryModal'); };
+        document.getElementById('cabin-guard').onclick = () => { if(mapDragDist < 10 && !isMovingMode && !isVisiting) openGuardModal(); };
+        document.getElementById('cabin-crow').onclick = () => { if(mapDragDist < 10 && !isMovingMode && !isVisiting) openCrowModal(); };
+        document.getElementById('cabin-bank').onclick = () => { if(mapDragDist < 10 && !isMovingMode && !isVisiting) openBankModal(); };
 
         viewport.addEventListener('pointerdown', e => {
             if (e.target.closest('.modal') || e.target.closest('.hud-top') || e.target.closest('.toolbar') || isMovingMode || isAttacking) return;
@@ -452,43 +445,38 @@
             mapDragDist += Math.abs(dx) + Math.abs(dy);
             
             let nX = startPanX + (dx / zoom); let nY = startPanY + (dy / zoom);
-            // محدودیت دقیق برای عدم خروج از بستر عکس جدید
-            const LIMIT = 250; panX = Math.max(-LIMIT, Math.min(LIMIT, nX)); panY = Math.max(-LIMIT, Math.min(LIMIT, nY));
+            const LIMIT = 700; panX = Math.max(-LIMIT, Math.min(LIMIT, nX)); panY = Math.max(-LIMIT, Math.min(LIMIT, nY));
             updateTransform();
         });
         
         viewport.addEventListener('pointerup', e => { isDraggingMap = false; viewport.releasePointerCapture(e.pointerId); });
         
+        // زوم و بک‌زوم با دو انگشت و موس
+        let initialPinchDist = 0; let initialZoom = 1; let isPinching = false;
+        viewport.addEventListener('touchstart', e => {
+            if(e.touches.length === 2) {
+                isPinching = true; initialZoom = zoom;
+                initialPinchDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+            }
+        }, {passive: false});
+        viewport.addEventListener('touchmove', e => {
+            if (e.touches.length === 2 && isPinching) {
+                e.preventDefault();
+                let dist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+                zoom = initialZoom * (dist / initialPinchDist); zoom = Math.max(0.4, Math.min(zoom, 2.0)); updateTransform();
+            }
+        }, {passive: false});
+        viewport.addEventListener('touchend', e => { if(e.touches.length < 2) isPinching = false; });
+
         viewport.addEventListener('wheel', e => {
             if(e.target.closest('.modal') || e.target.closest('.hud-top')) return;
-            e.preventDefault(); zoom += e.deltaY * -0.001; zoom = Math.min(Math.max(0.7, zoom), 1.6); updateTransform();
+            e.preventDefault(); zoom += e.deltaY * -0.001; zoom = Math.min(Math.max(0.4, zoom), 2.0); updateTransform();
         }, {passive: false});
 
-        function resizeGame() { panX = 0; panY = 0; zoom = Math.min(window.innerWidth / 400, window.innerHeight / 650); if (zoom > 1.1) zoom = 1.1; updateTransform(); }
+        function resizeGame() { panX = 0; panY = 0; zoom = Math.min(window.innerWidth / 500, window.innerHeight / 700); if (zoom > 1.0) zoom = 1.0; updateTransform(); }
         window.addEventListener('resize', resizeGame); resizeGame();
 
-        // --- لامپ ---
-        let isLampOn = false;
-        function toggleLamp() {
-            isLampOn = !isLampOn; const lamp = document.getElementById('hangingLamp'); const overlay = document.getElementById('timeOverlay');
-            if (isLampOn) { lamp.classList.add('on'); overlay.classList.add('lamp-on'); } else { lamp.classList.remove('on'); overlay.classList.remove('lamp-on'); }
-        }
-
-        function updateTimeOfDay() {
-            const h = new Date().getHours(); const overlay = document.getElementById('timeOverlay'); const lamp = document.getElementById('hangingLamp');
-            if (h >= 17 && h < 19) { 
-                if(!isLampOn) { overlay.style.background = 'rgba(255, 100, 0, 0.2)'; overlay.style.mixBlendMode = 'color-burn'; }
-                lamp.classList.remove('active'); isLampOn = false; lamp.classList.remove('on'); overlay.classList.remove('lamp-on');
-            } else if (h >= 19 || h < 6) { 
-                if (!isLampOn) { overlay.style.background = 'rgba(0, 5, 20, 0.85)'; overlay.style.mixBlendMode = 'multiply'; }
-                lamp.classList.add('active'); 
-            } else { 
-                overlay.style.background = 'transparent'; overlay.style.mixBlendMode = 'normal';
-                lamp.classList.remove('active'); isLampOn = false; lamp.classList.remove('on'); overlay.classList.remove('lamp-on');
-            }
-        }
-        setInterval(updateTimeOfDay, 60000); updateTimeOfDay();
-
+        // --- تایم‌ها ---
         setInterval(() => {
             if(!currentPlayer || isVisiting) return;
             let now = Date.now(); let diff = Math.floor((now - state.stats.lt) / 1000);
@@ -565,7 +553,7 @@
                     const overlay = document.getElementById('cloudOverlay'); document.getElementById('cloudText').innerText = 'در حال بارگذاری مزرعه...'; overlay.classList.add('active');
                     currentPlayer = user; await loadCloudData(); overlay.classList.remove('active');
                 }, 400);
-            } else { document.getElementById('loadingMsg').style.display = 'block'; document.getElementById('loadingMsg').innerText = 'رمز اشتباه است!'; }
+            } else { alert('رمز اشتباه است!'); }
         }
 
         function getRequiredXp(lvl) { return lvl * lvl * 50; }
@@ -626,17 +614,12 @@
         }
         function clearMessages() { state.messages = []; saveCloudData(); updateMsgBadge(); openMessages(); }
 
-        // سیستم بالن سه بعدی پیام
         function showChatBalloon(sender, text) {
             document.getElementById('balloonSender').innerText = `از طرف: ${sender}`;
             document.getElementById('balloonText').innerText = text;
-            const balloon = document.getElementById('chatBalloon');
-            balloon.classList.add('show');
+            document.getElementById('chatBalloon').classList.add('show');
         }
-        function closeBalloon() {
-            const balloon = document.getElementById('chatBalloon');
-            balloon.classList.remove('show');
-        }
+        function closeBalloon() { document.getElementById('chatBalloon').classList.remove('show'); }
 
         async function sendPlayerMessage() {
             let target = document.getElementById('msgTargetUser').value.trim();
@@ -774,7 +757,7 @@
 
         function showLiveAlert(msg) {
             const box = document.createElement('div');
-            box.style.cssText = `position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.8); color:white; padding:20px; border-radius:15px; border:3px solid #f44336; z-index:9999; font-weight:bold; text-align:center; font-size:18px; box-shadow:0 0 30px red; pointer-events:none; animation: popIn 0.3s;`;
+            box.style.cssText = `position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.8); color:white; padding:20px; border-radius:15px; border:3px solid #f44336; z-index:9999; font-weight:bold; text-align:center; font-size:18px; box-shadow:0 0 30px red; pointer-events:none;`;
             box.innerHTML = msg; document.body.appendChild(box);
             setTimeout(() => box.remove(), 5000);
         }
@@ -1096,10 +1079,9 @@
         }
         function upgradeCrow() {
             const costs = [800, 1500, 3000, 5000]; let cl = state.crow.level;
-            if(cash >= costs[cl]) { cash -= costs[cl]; state.crow.level++; updateHUD(); saveCloudData(); updateLabels(); openCrowModal(); } else alert('پول کافی نیست!');
+            if(cash >= costs[gl]) { cash -= costs[cl]; state.crow.level++; updateHUD(); saveCloudData(); updateLabels(); openCrowModal(); } else alert('پول کافی نیست!');
         }
 
-        // --- لیدربرد ---
         async function renderLeaderboard() {
             const list = document.getElementById('leaderboard-list'); list.innerHTML = '<p>در حال دریافت...</p>';
             const { data } = await db.from('farm_players').select('username, sun').order('sun', { ascending: false }).limit(10);
