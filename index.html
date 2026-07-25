@@ -36,7 +36,6 @@
         .alert-box { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); background: #d32f2f; color: white; padding: 6px 12px; border-radius: 10px; font-weight: bold; border: 2px solid #ff5252; display: none; z-index: 3000; box-shadow: 0 4px 8px rgba(0,0,0,0.5); font-size: 12px; text-align:center;}
         .seed-indicator { position: fixed; top: 70px; left: 50%; transform: translateX(-50%); background: linear-gradient(to bottom, #ffb300, #ff8f00); color: white; padding: 6px 15px; border-radius: 12px; font-weight: bold; border: 2px solid #e65100; display: none; z-index: 500; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.5); font-size: 12px; pointer-events:auto;}
 
-        /* تولبار پایین */
         .toolbar { position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 500; flex-wrap: nowrap; justify-content: center; pointer-events: auto;}
         .action-btn { position: relative; width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(to bottom, #fffde7, #ffc107); border: 2px solid #fff; box-shadow: 0 3px 6px rgba(0,0,0,0.5); font-size: 16px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.1s; flex-shrink: 0; }
         .action-btn:active { transform: scale(0.9); }
@@ -46,12 +45,11 @@
         #moveUI { display: none; position: fixed; bottom: 60px; left: 50%; transform: translateX(-50%); gap: 15px; z-index: 1000; pointer-events: auto;}
         .btn-move { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 22px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); border: 2px solid white; cursor: pointer; }
 
-        /* --- دوربین و محدوده‌بندی دقیق پس‌زمینه --- */
         #gameViewport { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; touch-action: none; z-index: 10; }
         #cameraContainer { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-origin: center center; }
         
         #groundBg {
-            position: absolute; top: -1000px; left: -1000px; width: 2000px; height: 2000px;
+            position: absolute; top: -500px; left: -500px; width: 1000px; height: 1000px;
             background-image: url('https://raw.githubusercontent.com/persiancom/farm/main/1784961753226.png');
             background-size: cover; background-position: center; z-index: -10; pointer-events: none;
         }
@@ -66,7 +64,6 @@
         .plot-content { position: absolute; bottom: 8px; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; pointer-events: none !important; }
         .plot-content img { max-height: 40px; object-fit: contain; filter: drop-shadow(0 3px 2px rgba(0,0,0,0.4)); pointer-events: none; }
 
-        /* اصلاح پوینتر و کلیک‌پذیری ساختمان‌ها */
         .building { position: absolute; cursor: pointer; z-index: 20; transition: filter 0.2s; pointer-events: auto !important; }
         .building:hover { filter: brightness(1.15); } 
         .building img { width: 120px; object-fit: contain; filter: drop-shadow(-2px 5px 3px rgba(0,0,0,0.5)); pointer-events: none; }
@@ -93,16 +90,15 @@
         .crow-timer { font-size:10px; color:#fff; font-weight:bold; text-shadow:0 1px 2px #000; margin-top:-5px; }
         #battleArrow { position: absolute; font-size: 20px; z-index: 101; transition: all 0.4s linear; transform: rotateZ(45deg) rotateX(-60deg) !important; pointer-events: none; opacity: 0;}
 
-        /* بالن پیام */
+        /* سیستم جدید بالن پیام با انیمیشن روان از راست */
         #chatBalloon {
-            position: fixed; top: -200px; left: 50%; transform: translateX(-50%); z-index: 99999;
-            width: 280px; background: url('https://raw.githubusercontent.com/persiancom/farm/main/BackgroundEraser_%DB%B2%DB%B0%DB%B2%DB%B6%DB%B0%DB%B7%DB%B2%DB%B5_%DB%B0%DB%B1%DB%B5%DB%B8%DB%B2%DB%B3%DB%B6%DB%B1%DB%B6.png') no-repeat center center;
-            background-size: contain; height: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            padding: 20px; text-align: center; transition: top 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: auto;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+            position: fixed; bottom: 80px; right: -350px; z-index: 99999;
+            width: 260px; background: rgba(255, 248, 225, 0.95); border: 3px solid #ff8f00; border-radius: 15px;
+            padding: 12px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transition: right 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: auto; cursor: pointer;
         }
-        #chatBalloon.show { top: 100px; }
-        .balloon-close { position: absolute; top: 15px; right: 25px; background: #e53935; color: white; border: none; border-radius: 50%; width: 22px; height: 22px; font-weight: bold; cursor: pointer; font-size: 12px; }
+        #chatBalloon.show { right: 20px; }
+        .balloon-title { background: #ff8f00; color: white; font-size: 11px; font-weight: bold; padding: 2px 8px; border-radius: 6px; display: inline-block; margin-bottom: 5px; }
 
         .tabs { display: flex; gap: 4px; margin-bottom: 12px; border-bottom: 2px solid #ffb300; padding-bottom: 4px; }
         .tab-btn { flex: 1; padding: 5px; background: #ffe082; border: 2px solid #ffb300; border-radius: 6px; font-weight: bold; color: #5d4037; cursor: pointer; font-size: 12px; }
@@ -135,12 +131,11 @@
 </head>
 <body>
 
-    <div id="chatBalloon">
-        <button class="balloon-close" onclick="closeBalloon()">×</button>
-        <div style="margin-top: 25px; max-width: 180px;">
-            <p style="margin: 0; font-size: 12px; font-weight: bold; color: #d32f2f;" id="balloonSender">از طرف: ---</p>
-            <p style="margin: 5px 0 0 0; font-size: 13px; color: #3e2723; font-weight: bold; word-break: break-word;" id="balloonText">متن پیام...</p>
-        </div>
+    <!-- بالن پیام با استایل و انیمیشن جدید -->
+    <div id="chatBalloon" onclick="openMessagesFromBalloon()">
+        <div class="balloon-title">💬 پیام دارید</div>
+        <p style="margin: 0; font-size: 12px; font-weight: bold; color: #d32f2f;" id="balloonSender">فرستنده: ---</p>
+        <p style="margin: 4px 0 0 0; font-size: 12px; color: #3e2723; font-weight: bold;" id="balloonText">برای مشاهده کلیک کنید...</p>
     </div>
 
     <div id="loginScreen">
@@ -173,7 +168,7 @@
     <div class="alert-box" id="alertBox">پیام!</div>
     <div class="seed-indicator" id="seedIndicator" onclick="cancelPlanting()">در حال کاشت: <span id="seedName"></span> (لغو ✖)</div>
 
-    <!-- دوربین بازی با محدودیت اسکرول -->
+    <!-- دوربین بازی با فیت شدن کامل به لبه‌های عکس پس‌زمینه -->
     <div id="gameViewport">
         <div id="cameraContainer">
             <div id="groundBg"></div>
@@ -403,11 +398,11 @@
             items: { redFlower: [], pinkFlower: [], wheat: [], appleTree: [], pineTree: [] },
             guard: { level: 0, kills: 0, sleeping: false }, crow: { level: 0, lastSent: 0 },
             bank: { level: 0, lastCol: Date.now(), acc: false, inv: 0, invStart: 0, ready: false }, messages: [],
-            positions: { inv: { t: -100, l: -30 }, guard: { t: 150, l: -30 }, crow: { t: -50, l: 150 }, bank: { t: -150, l: 80 } },
+            positions: { inv: { t: -120, l: -50 }, guard: { t: 80, l: -80 }, crow: { t: -80, l: 120 }, bank: { t: -140, l: 30 } },
             liveAlert: null, incomingAttack: false
         };
 
-        // --- دوربین و محدوده‌بندی حرکتی برای جلوگیری از رد کردن محدوده عکس ---
+        // --- دوربین فیت شده و محدود به ابعاد عکس پس‌زمینه ---
         let panX = 0, panY = 0, zoom = 1;
         let isDraggingMap = false, mapDragDist = 0, dragStartX = 0, dragStartY = 0, startPanX = 0, startPanY = 0;
         const viewport = document.getElementById('gameViewport');
@@ -415,7 +410,7 @@
 
         function updateTransform() { camera.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`; }
 
-        // ثبت دقیق رویدادها روی دکمه‌ها و کلیدهای ساختمان
+        // ثبت دقیق رخدادها برای دکمه‌ها و کلیک ساختمان‌ها
         document.getElementById('profBtn').onclick = () => { if(mapDragDist < 10) openProfile(); };
         document.getElementById('btnShop').onclick = () => { if(mapDragDist < 10) openModal('shopModal'); };
         document.getElementById('btnMarket').onclick = () => { if(mapDragDist < 10) openModal('marketModal'); };
@@ -426,10 +421,10 @@
         document.getElementById('adminBtn').onclick = () => { if(mapDragDist < 10) openAdminPanel(); };
         document.getElementById('btnExpand').onclick = () => { if(mapDragDist < 10) expandLand(); };
         
-        document.getElementById('cabin-inv').onclick = () => { if(mapDragDist < 10 && !isMovingMode && !isVisiting) openModal('inventoryModal'); };
-        document.getElementById('cabin-guard').onclick = () => { if(mapDragDist < 10 && !isMovingMode && !isVisiting) openGuardModal(); };
-        document.getElementById('cabin-crow').onclick = () => { if(mapDragDist < 10 && !isMovingMode && !isVisiting) openCrowModal(); };
-        document.getElementById('cabin-bank').onclick = () => { if(mapDragDist < 10 && !isMovingMode && !isVisiting) openBankModal(); };
+        document.getElementById('cabin-inv').onclick = (e) => { e.stopPropagation(); if(mapDragDist < 10 && !isMovingMode && !isVisiting) openModal('inventoryModal'); };
+        document.getElementById('cabin-guard').onclick = (e) => { e.stopPropagation(); if(mapDragDist < 10 && !isMovingMode && !isVisiting) openGuardModal(); };
+        document.getElementById('cabin-crow').onclick = (e) => { e.stopPropagation(); if(mapDragDist < 10 && !isMovingMode && !isVisiting) openCrowModal(); };
+        document.getElementById('cabin-bank').onclick = (e) => { e.stopPropagation(); if(mapDragDist < 10 && !isMovingMode && !isVisiting) openBankModal(); };
 
         viewport.addEventListener('pointerdown', e => {
             if (e.target.closest('.modal') || e.target.closest('.hud-top') || e.target.closest('.toolbar') || isMovingMode || isAttacking) return;
@@ -445,8 +440,8 @@
             mapDragDist += Math.abs(dx) + Math.abs(dy);
             
             let nX = startPanX + (dx / zoom); let nY = startPanY + (dy / zoom);
-            // اعمال محدودیت دقیق حرکت دوربین متناسب با اندازه پس‌زمینه
-            const LIMIT = 300; 
+            // محدودسازی اسکرول دقیقاً لبه عکس پس‌زمینه
+            const LIMIT = 110; 
             panX = Math.max(-LIMIT, Math.min(LIMIT, nX)); 
             panY = Math.max(-LIMIT, Math.min(LIMIT, nY));
             updateTransform();
@@ -454,7 +449,6 @@
         
         viewport.addEventListener('pointerup', e => { isDraggingMap = false; viewport.releasePointerCapture(e.pointerId); });
         
-        // مدیریت زوم
         let initialPinchDist = 0; let initialZoom = 1; let isPinching = false;
         viewport.addEventListener('touchstart', e => {
             if(e.touches.length === 2) {
@@ -466,20 +460,20 @@
             if (e.touches.length === 2 && isPinching) {
                 e.preventDefault();
                 let dist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
-                zoom = initialZoom * (dist / initialPinchDist); zoom = Math.max(0.7, Math.min(zoom, 1.5)); updateTransform();
+                zoom = initialZoom * (dist / initialPinchDist); zoom = Math.max(0.9, Math.min(zoom, 1.3)); updateTransform();
             }
         }, {passive: false});
         viewport.addEventListener('touchend', e => { if(e.touches.length < 2) isPinching = false; });
 
         viewport.addEventListener('wheel', e => {
             if(e.target.closest('.modal') || e.target.closest('.hud-top')) return;
-            e.preventDefault(); zoom += e.deltaY * -0.001; zoom = Math.min(Math.max(0.7, zoom), 1.5); updateTransform();
+            e.preventDefault(); zoom += e.deltaY * -0.001; zoom = Math.min(Math.max(0.9, zoom), 1.3); updateTransform();
         }, {passive: false});
 
-        function resizeGame() { panX = 0; panY = 0; zoom = Math.min(window.innerWidth / 500, window.innerHeight / 700); if (zoom > 1.0) zoom = 1.0; updateTransform(); }
+        function resizeGame() { panX = 0; panY = 0; zoom = Math.max(window.innerWidth / 700, window.innerHeight / 900); if (zoom > 1.1) zoom = 1.1; updateTransform(); }
         window.addEventListener('resize', resizeGame); resizeGame();
 
-        // --- تایم‌ها و ذخیره‌سازی ابری ---
+        // --- تایمرها و سیستم پیام فوری بالون ---
         setInterval(() => {
             if(!currentPlayer || isVisiting) return;
             let now = Date.now(); let diff = Math.floor((now - state.stats.lt) / 1000);
@@ -491,11 +485,33 @@
             if (state.bank && state.bank.inv > 0 && !state.bank.ready) {
                 if (now - state.bank.invStart >= 24 * 3600 * 1000) {
                     state.bank.ready = true; let profit = Math.floor(state.bank.inv * 0.05);
-                    state.messages.unshift({ id: now, text: `مشتری گرامی ${currentPlayer} سود شما به مبلغ ${profit} اسکناس آماده است! (بانک تجارت)`, read: false });
-                    saveCloudData(); updateMsgBadge();
+                    addMessage(`سود بانک تجارت به مبلغ ${profit} اسکناس آماده است!`);
                 }
             }
         }, 5000);
+
+        function addMessage(txt) {
+            let msgObj = { id: Date.now(), text: txt, read: false };
+            state.messages.unshift(msgObj);
+            saveCloudData();
+            updateMsgBadge();
+            triggerIncomingBalloon("سیستم بانک/بازی", txt);
+        }
+
+        function triggerIncomingBalloon(sender, text) {
+            document.getElementById('balloonSender').innerText = `فرستنده: ${sender}`;
+            document.getElementById('balloonText').innerText = text;
+            const balloon = document.getElementById('chatBalloon');
+            balloon.classList.add('show');
+            setTimeout(() => {
+                balloon.classList.remove('show');
+            }, 6000);
+        }
+
+        function openMessagesFromBalloon() {
+            document.getElementById('chatBalloon').classList.remove('show');
+            openMessages();
+        }
 
         async function saveCloudData() {
             if(!currentPlayer || isVisiting || isMovingMode || isAttacking) return;
@@ -512,8 +528,8 @@
                 cash = data.cash; sun = data.sun; level = data.level; xp = data.xp; gridSize = data.grid_size;
                 if(data.inventory && data.inventory.items) { 
                     state = data.inventory; 
-                    if(!state.positions) state.positions = { inv: { t: -100, l: -30 }, guard: { t: 150, l: -30 }, crow: { t: -50, l: 150 }, bank: { t: -150, l: 80 } };
-                    if(!state.positions.bank) state.positions.bank = { t: -150, l: 80 };
+                    if(!state.positions) state.positions = { inv: { t: -120, l: -50 }, guard: { t: 80, l: -80 }, crow: { t: -80, l: 120 }, bank: { t: -140, l: 30 } };
+                    if(!state.positions.bank) state.positions.bank = { t: -140, l: 30 };
                     if(!state.stats) state.stats = { hrv: 0, atk: 0, def: 0, maxS: sun, pTime: 0, lt: Date.now() };
                     if(!state.uid) state.uid = 'UID-' + Math.random().toString(36).substr(2, 6).toUpperCase();
                     if(!state.messages) state.messages = [];
@@ -527,14 +543,20 @@
             if(currentPlayer === 'حمیدرضا') document.getElementById('adminBtn').style.display = 'flex';
         }
 
+        // همگام‌سازی لحظه‌ای پیام‌ها
         setInterval(async () => {
             if(!currentPlayer || isVisiting || isAttacking) return;
             const { data } = await db.from('farm_players').select('inventory, cash, sun, level, xp').eq('username', currentPlayer).single();
             if (data) {
                 let s = data.inventory;
-                if(s.messages && s.messages.length > state.messages.length) { state.messages = s.messages; updateMsgBadge(); }
+                if(s.messages && s.messages.length > state.messages.length) {
+                    let latestMsg = s.messages[0];
+                    state.messages = s.messages;
+                    updateMsgBadge();
+                    triggerIncomingBalloon("پیام جدید", latestMsg.text);
+                }
                 if(s.incomingMessage) {
-                    showChatBalloon(s.incomingMessage.sender, s.incomingMessage.text);
+                    triggerIncomingBalloon(s.incomingMessage.sender, s.incomingMessage.text);
                     s.incomingMessage = null; state = s;
                     await db.from('farm_players').update({ inventory: s }).eq('username', currentPlayer);
                 }
@@ -545,7 +567,7 @@
                 } else { state = s; }
                 if (data.cash !== cash || data.level !== level) { cash = data.cash; level = data.level; sun = data.sun; xp = data.xp; updateHUD(); }
             }
-        }, 8000);
+        }, 3000);
 
         async function attemptLogin() {
             const user = document.getElementById('username').value.trim(); const pass = document.getElementById('password').value.trim();
@@ -617,13 +639,6 @@
         }
         function clearMessages() { state.messages = []; saveCloudData(); updateMsgBadge(); openMessages(); }
 
-        function showChatBalloon(sender, text) {
-            document.getElementById('balloonSender').innerText = `از طرف: ${sender}`;
-            document.getElementById('balloonText').innerText = text;
-            document.getElementById('chatBalloon').classList.add('show');
-        }
-        function closeBalloon() { document.getElementById('chatBalloon').classList.remove('show'); }
-
         async function sendPlayerMessage() {
             let target = document.getElementById('msgTargetUser').value.trim();
             let txt = document.getElementById('msgContentText').value.trim();
@@ -667,14 +682,14 @@
 
         function applyBuildingPositions() {
             let p = isVisiting ? visitingData.inventory.positions : state.positions;
-            if(!p.bank) p.bank = { t: -150, l: 80 };
+            if(!p.bank) p.bank = { t: -140, l: 30 };
             document.getElementById('cabin-inv').style.top = p.inv.t + 'px'; document.getElementById('cabin-inv').style.left = p.inv.l + 'px';
             document.getElementById('cabin-guard').style.top = p.guard.t + 'px'; document.getElementById('cabin-guard').style.left = p.guard.l + 'px';
             document.getElementById('cabin-crow').style.top = p.crow.t + 'px'; document.getElementById('cabin-crow').style.left = p.crow.l + 'px';
             document.getElementById('cabin-bank').style.top = p.bank.t + 'px'; document.getElementById('cabin-bank').style.left = p.bank.l + 'px';
         }
 
-        // --- جابجایی ساختمان‌ها ---
+        // --- جابجایی ساختمان‌ها با محدود شدن در محدوده زمین خالی و ایمن ---
         let activeB = null, isDraggingB = false, bStartT, bStartL, dragBX, dragBY;
         function startMoveMode(id) {
             closeModal('inventoryModal'); closeModal('guardModal'); closeModal('crowModal'); closeModal('bankModal');
@@ -687,7 +702,13 @@
         function bDragMove(e) {
             if(!isDraggingB) return; e.preventDefault();
             let dx = (e.clientX - dragBX) / zoom; let dy = (e.clientY - dragBY) / zoom;
-            activeB.style.left = (bStartL + dx) + 'px'; activeB.style.top = (bStartT + dy) + 'px';
+            let nT = bStartT + dy; let nL = bStartL + dx;
+            
+            // جلوگیری از قرارگیری ساختمان روی حاشیه‌ها و درختان (محدود کردن مختصات مجاز وسط مپ)
+            nT = Math.max(-180, Math.min(60, nT));
+            nL = Math.max(-140, Math.min(100, nL));
+
+            activeB.style.left = nL + 'px'; activeB.style.top = nT + 'px';
         }
         function bDragEnd(e) { if(!isDraggingB) return; isDraggingB = false; bStartL = activeB.offsetLeft; bStartT = activeB.offsetTop; activeB.releasePointerCapture(e.pointerId); }
         function confirmMove() { let key = activeB.id.replace('cabin-', ''); state.positions[key] = { t: activeB.offsetTop, l: activeB.offsetLeft }; saveCloudData(); exitMoveMode(); }
@@ -871,7 +892,7 @@
             }, 1000);
         }
 
-        // --- مودال‌ها و تب‌ها ---
+        // --- مودال‌ها ---
         function switchShopTab(tab) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.getElementById(`tab-btn-${tab}`).classList.add('active'); document.getElementById(`tab-${tab}`).classList.add('active');
@@ -1044,7 +1065,7 @@
         async function removeLimits() { state.crow.lastSent = 0; state.bank.invStart = 0; localStorage.setItem(`lastSpin_${currentPlayer}`, 0); await saveCloudData(); alert('محدودیت‌ها برداشته شد!'); }
         async function addCashToUser(targetUser) { const input = document.getElementById(`addCash_${targetUser}`); const amount = parseInt(input.value); if (!amount || amount <= 0) return; const { data } = await db.from('farm_players').select('cash').eq('username', targetUser).single(); if (data) { await db.from('farm_players').update({ cash: data.cash + amount }).eq('username', targetUser); alert(`واریز شد!`); openAdminPanel(); } }
         async function changeLvl(targetUser, currentLevel, amount) { let newLvl = currentLevel + amount; if (newLvl < 1) newLvl = 1; await db.from('farm_players').update({ level: newLvl }).eq('username', targetUser); openAdminPanel(); }
-        async function resetPlayer(targetUser) { if(!confirm(`مطمئن هستید؟`)) return; const defaultState = { uid: 'UID-'+Math.random().toString(36).substr(2, 6).toUpperCase(), stats:{hrv:0,atk:0,def:0,maxS:0,pTime:0,lt:Date.now()}, items: { redFlower: [], pinkFlower: [], wheat: [], appleTree: [], pineTree: [] }, guard: { level: 0, kills: 0, sleeping: false }, crow: { level: 0, lastSent: 0 }, bank: { level: 0, lastCol: Date.now(), acc: false, inv: 0, invStart: 0, ready: false }, messages: [], positions: { inv: { t: -100, l: -30 }, guard: { t: 220, l: -30 }, crow: { t: -50, l: 220 }, bank: { t: -150, l: 80 } }, incomingAttack: false, gardenLayout:[] }; const { error } = await db.from('farm_players').update({ cash: 100, sun: 0, level: 1, xp: 0, grid_size: 3, inventory: defaultState }).eq('username', targetUser); if(!error) { alert(`ریست شد.`); openAdminPanel(); } }
+        async function resetPlayer(targetUser) { if(!confirm(`مطمئن هستید؟`)) return; const defaultState = { uid: 'UID-'+Math.random().toString(36).substr(2, 6).toUpperCase(), stats:{hrv:0,atk:0,def:0,maxS:0,pTime:0,lt:Date.now()}, items: { redFlower: [], pinkFlower: [], wheat: [], appleTree: [], pineTree: [] }, guard: { level: 0, kills: 0, sleeping: false }, crow: { level: 0, lastSent: 0 }, bank: { level: 0, lastCol: Date.now(), acc: false, inv: 0, invStart: 0, ready: false }, messages: [], positions: { inv: { t: -120, l: -50 }, guard: { t: 80, l: -80 }, crow: { t: -80, l: 120 }, bank: { t: -140, l: 30 } }, incomingAttack: false, gardenLayout:[] }; const { error } = await db.from('farm_players').update({ cash: 100, sun: 0, level: 1, xp: 0, grid_size: 3, inventory: defaultState }).eq('username', targetUser); if(!error) { alert(`ریست شد.`); openAdminPanel(); } }
 
         // --- کلبه نگهبانی و آشیانه کلاغ ---
         function openGuardModal() {
