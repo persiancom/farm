@@ -94,15 +94,16 @@
         .bank-cash-icon { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 20px; z-index: 15; pointer-events: none; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5)); display: none; animation: floatIcon 1.5s infinite alternate;}
         @keyframes floatIcon { from { transform: translateX(-50%) translateY(0); } to { transform: translateX(-50%) translateY(-5px); } }
 
+        /* کلاغ */
         #battleCrow { position: absolute; z-index: 100; transition: all 1s ease; transform: rotateZ(45deg) rotateX(-60deg) !important; transform-origin: bottom center; pointer-events: none; opacity: 0; display:flex; flex-direction:column; align-items:center;}
         .crow-icon-style { font-size: 38px; filter: drop-shadow(0 15px 5px rgba(0,0,0,0.6)); text-shadow: none; background: none;}
         .crow-timer { font-size:10px; color:#fff; font-weight:bold; text-shadow:0 1px 2px #000; margin-top:-5px; }
         #battleArrow { position: absolute; font-size: 20px; z-index: 101; transition: all 0.4s linear; transform: rotateZ(45deg) rotateX(-60deg) !important; pointer-events: none; opacity: 0;}
 
-        /* بالن پیام فوق نرم و آروم با ترانزیشن طولانی */
+        /* بالن پیام */
         #chatBalloon {
             position: fixed; top: 90px; left: -350px; z-index: 9000;
-            width: 250px; background: url('https://raw.githubusercontent.com/persiancom/farm/main/BackgroundEraser_%DB%B2%DB%B0%DB%B2%DB%B6%DB%B0%DB%B7%DB%B2%DB%B۵_%DB%B۰%DB%B۱%DB%B۵%DB%B۸%DB%B۲%DB%B۳%DB%B۶%DB%B۱%DB%B۶.png') no-repeat center center;
+            width: 250px; background: url('https://raw.githubusercontent.com/persiancom/farm/main/BackgroundEraser_%DB%B2%DB%B0%DB%B2%DB%B6%DB%B0%DB%B7%DB%B2%DB%B5_%DB%B0%DB%B1%DB%B۵%DB%B۸%DB%B۲%DB%B۳%DB%B۶%DB%B۱%DB%B۶.png') no-repeat center center;
             background-size: contain; height: 160px; display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; pointer-events: auto; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.6));
             transition: left 4s cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -159,7 +160,6 @@
 </head>
 <body>
 
-    <!-- بالن پیام با انیمیشن عبوری بسیار آرام و طبیعی -->
     <div id="chatBalloon" class="state-hidden-left">
         <button class="balloon-close" onclick="closeBalloon(event)">×</button>
         <div class="balloon-inner" onclick="openMessagesFromBalloon()">
@@ -180,9 +180,8 @@
         </div>
     </div>
 
-    <!-- لودینگ اختصاصی لاگین بدون متن -->
+    <!-- لودینگ‌های دقیقاً 5 ثانیه‌ای (با عکس‌های ارسالی بدون متن) -->
     <div id="loginLoading" class="full-overlay"></div>
-    <!-- لودینگ اختصاصی بازدید بدون متن -->
     <div id="visitLoading" class="full-overlay"></div>
 
     <div class="hud-top">
@@ -203,16 +202,14 @@
     <div class="alert-box" id="alertBox">پیام!</div>
     <div class="seed-indicator" id="seedIndicator" onclick="cancelPlanting()">در حال کاشت: <span id="seedName"></span> (لغو ✖)</div>
 
-    <!-- دوربین و مپ با محدودسازی دقیق لبه‌ها -->
+    <!-- دوربین فیت شده و مپ -->
     <div id="gameViewport">
         <div id="cameraContainer">
-            <!-- تصویر مپ اصلی -->
             <img src="https://raw.githubusercontent.com/persiancom/farm/main/file_00000000cb2481f58a273ef7caeb058d.png" class="map-bg-img">
             
             <div id="isoWorld">
                 <div class="garden" id="garden"></div>
                 
-                <!-- ساختمان‌ها -->
                 <div class="building" id="cabin-inv">
                     <div class="b-label" id="invLabel">انبار (0/200)</div>
                     <img src="https://raw.githubusercontent.com/persiancom/farm/main/file_000000005acc8243af0f42016d01ef45.png">
@@ -229,9 +226,8 @@
                 <div class="building" id="cabin-bank">
                     <div class="b-label" id="bankLabel">بانک (قفل)</div>
                     <div id="bankCashIcon" class="bank-cash-icon">💵</div>
-                    <img src="https://raw.githubusercontent.com/persiancom/farm/main/BackgroundEraser_%DB%B2%DB%B0%DB%B2%DB%B۶%DB%B۰%DB%B۷%DB%B۲%DB%B۴_%DB%B۱%DB%B۹%DB%B۰%DB%B۷%DB%B۱%DB%B۵%DB%B۳%DB%B۹%DB%B۷.png">
+                    <img src="https://raw.githubusercontent.com/persiancom/farm/main/BackgroundEraser_%DB%B2%DB%B0%DB%B2%DB%B6%DB%B0%DB%B7%DB%B2%DB%B۴_%DB%B۱%DB%B۹%DB%B۰%DB%B۷%DB%B۱%DB%B۵%DB%B۳%DB%B۹%DB%B۷.png">
                 </div>
-                <!-- کلبه جدید مدرسه Ravora -->
                 <div class="building" id="cabin-school">
                     <div class="b-label" id="schoolLabel">مدرسه Ravora</div>
                     <img src="https://raw.githubusercontent.com/persiancom/farm/main/BackgroundEraser_%DB%B2%DB%B0%DB%B2%DB%B6%DB%B0%DB%B7%DB%B2%DB%B8_%DB%B0%DB%B0%DB%B1%DB%B4%DB%B3%DB%B3%DB%B3%DB%B0%DB%B5.png" style="width:140px;">
@@ -248,7 +244,6 @@
         <div class="btn-move" style="background:#f44336;" onclick="cancelMove()">❌</div>
     </div>
 
-    <!-- تولبار اصلی -->
     <div class="toolbar" id="toolbar-normal">
         <button class="action-btn" onclick="openModal('shopModal')" title="فروشگاه">🛒</button>
         <button class="action-btn" onclick="openModal('marketModal')" title="بورس">📈</button>
@@ -277,7 +272,6 @@
         </div>
     </div>
 
-    <!-- مودال مدرسه -->
     <div class="modal" id="schoolModal">
         <div class="modal-content">
             <h3 style="margin-top:0; color:#00838f;">🏫 مدرسه Ravora</h3>
@@ -288,7 +282,6 @@
         </div>
     </div>
 
-    <!-- سایر مودال‌ها -->
     <div class="modal" id="profileModal">
         <div class="modal-content" style="text-align:right;">
             <div style="display:flex; gap:12px; align-items:center;">
@@ -495,26 +488,7 @@
             liveAlert: null, incomingAttack: false, incomingCrow: null, incomingQuiz: null, quizState: null
         };
 
-        // --- تضمین کلیک‌ها با هوش محاسبه فاصله ---
-        let isDragClick = false;
-        function setupBuildingEvents() {
-            document.querySelectorAll('.building').forEach(b => {
-                b.onpointerdown = () => { isDragClick = false; };
-                b.onpointermove = () => { isDragClick = true; };
-                b.onpointerup = (e) => {
-                    if(!isDragClick && !isMovingMode && !isVisiting && !isQuizMode) {
-                        e.stopPropagation();
-                        if(b.id === 'cabin-inv') openModal('inventoryModal');
-                        if(b.id === 'cabin-guard') openGuardModal();
-                        if(b.id === 'cabin-crow') openCrowModal();
-                        if(b.id === 'cabin-bank') openBankModal();
-                        if(b.id === 'cabin-school') openSchoolModal();
-                    }
-                };
-            });
-        }
-
-        // --- دوربین فیت شده بر اساس مپ 1500px ---
+        // دوربین فیت شده
         const BG_W = 1500; const BG_H = 1500;
         let camX = 0, camY = 0, zoom = 1;
         let isDraggingMap = false, lastDragX, lastDragY;
@@ -536,16 +510,13 @@
             if (isMovingMode || isAttacking || isQuizMode) return;
             isDraggingMap = true; lastDragX = e.clientX; lastDragY = e.clientY;
         });
-
         window.addEventListener('pointermove', e => {
             if (!isDraggingMap) return;
-            let dx = e.clientX - lastDragX; let dy = e.clientY - lastDragY;
-            camX += dx; camY += dy; lastDragX = e.clientX; lastDragY = e.clientY; updateCamera();
+            camX += (e.clientX - lastDragX); camY += (e.clientY - lastDragY); 
+            lastDragX = e.clientX; lastDragY = e.clientY; updateCamera();
         });
-
         window.addEventListener('pointerup', () => { isDraggingMap = false; });
 
-        // زوم لمسی
         let initDist = 0, initZoom = 1, initCamX = 0, initCamY = 0, pinchCenterX = 0, pinchCenterY = 0, isPinching = false;
         viewport.addEventListener('touchstart', e => {
             if(e.touches.length === 2) {
@@ -555,7 +526,6 @@
                 pinchCenterX = (e.touches[0].clientX + e.touches[1].clientX) / 2; pinchCenterY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
             }
         }, {passive: false});
-
         viewport.addEventListener('touchmove', e => {
             if(e.touches.length === 2 && isPinching) {
                 e.preventDefault();
@@ -566,9 +536,7 @@
                 camX = pinchCenterX - (mapX * newZoom); camY = pinchCenterY - (mapY * newZoom); zoom = newZoom; updateCamera();
             }
         }, {passive: false});
-        
         viewport.addEventListener('touchend', e => { if(e.touches.length < 2) isPinching = false; });
-
         viewport.addEventListener('wheel', e => {
             if(e.target.closest('.modal') || e.target.closest('.hud-top') || e.target.closest('.toolbar')) return;
             e.preventDefault();
@@ -578,21 +546,37 @@
             let mapX = (mouseX - camX) / zoom; let mapY = (mouseY - camY) / zoom;
             camX = mouseX - (mapX * newZoom); camY = mouseY - (mapY * newZoom); zoom = newZoom; updateCamera();
         }, {passive: false});
-
         function resizeGame() { let minZoom = Math.max(window.innerWidth / BG_W, window.innerHeight / BG_H); if(zoom < minZoom) zoom = minZoom; updateCamera(); }
         window.addEventListener('resize', resizeGame);
 
-        // --- بالن پیام ---
+        // بالن پیام
         function triggerIncomingBalloon(sender, text) {
-            const balloon = document.getElementById('chatBalloon');
-            balloon.className = 'state-hidden-left'; 
+            const balloon = document.getElementById('chatBalloon'); balloon.className = 'state-hidden-left'; 
             document.getElementById('balloonSender').innerText = `فرستنده: ${sender}`;
             setTimeout(() => { balloon.className = 'state-center'; }, 100); 
         }
         function closeBalloon(e) { if(e) e.stopPropagation(); document.getElementById('chatBalloon').className = 'state-hidden-right'; }
         function openMessagesFromBalloon() { openMessages(); closeBalloon(); }
 
-        // --- ذخیره‌سازی و همگام‌سازی ---
+        // --- پردازش ورود، ذخیره‌سازی و زمان‌های 5 ثانیه‌ای با Promise.all ---
+        async function attemptLogin() {
+            const user = document.getElementById('username').value.trim(); const pass = document.getElementById('password').value.trim();
+            if ((user === 'حمیدرضا' && pass === 'CTF_22') || (user === 'الهه' && pass === 'CTF_11')) {
+                document.getElementById('loginScreen').style.opacity = '0';
+                setTimeout(async () => { 
+                    document.getElementById('loginScreen').style.display = 'none'; 
+                    document.getElementById('loginLoading').classList.add('active');
+                    currentPlayer = user; 
+                    
+                    let loadP = loadCloudData();
+                    let timeP = new Promise(r => setTimeout(r, 5000));
+                    await Promise.all([loadP, timeP]);
+                    
+                    document.getElementById('loginLoading').classList.remove('active');
+                }, 400);
+            } else { alert('رمز اشتباه است!'); }
+        }
+
         setInterval(() => {
             if(!currentPlayer || isVisiting || isQuizMode) return;
             let now = Date.now(); let diff = Math.floor((now - state.stats.lt) / 1000);
@@ -636,28 +620,20 @@
             } else {
                 state.uid = 'UID-' + Math.random().toString(36).substr(2, 6).toUpperCase(); state.stats.lt = Date.now(); await saveCloudData(); 
             }
-            cleanSpoiledItems(); applyBuildingPositions(); updateLabels(); updateMsgBadge(); updateHUD(); renderGarden(); setupBuildingEvents(); checkSpinCooldown();
-            resizeGame(); 
+            cleanSpoiledItems(); applyBuildingPositions(); updateLabels(); updateMsgBadge(); updateHUD(); renderGarden(); setupBuildingEvents(); checkSpinCooldown(); resizeGame(); 
             if(currentPlayer === 'حمیدرضا') document.getElementById('adminBtn').style.display = 'flex';
         }
 
+        // همگام‌سازی لحظه‌ای با سرعت بالا برای حمله‌ها
         setInterval(async () => {
             if(!currentPlayer || isVisiting || isAttacking) return;
             const { data } = await db.from('farm_players').select('inventory, cash, sun, level, xp').eq('username', currentPlayer).single();
             if (data) {
                 let s = data.inventory;
                 if(s.messages && s.messages.length > state.messages.length) { state.messages = s.messages; updateMsgBadge(); }
-                if(s.incomingMessage) {
-                    triggerIncomingBalloon(s.incomingMessage.sender, "شما پیام جدیدی دارید!");
-                    s.incomingMessage = null; state = s;
-                    await db.from('farm_players').update({ inventory: s }).eq('username', currentPlayer);
-                }
-                if(s.incomingCrow) {
-                    playDefendingCrow(s.incomingCrow);
-                    s.incomingCrow = null; state = s;
-                    await db.from('farm_players').update({ inventory: s }).eq('username', currentPlayer);
-                }
-                // کنترل کوییز زنده
+                if(s.incomingMessage) { triggerIncomingBalloon(s.incomingMessage.sender, "شما پیام جدیدی دارید!"); s.incomingMessage = null; state = s; await db.from('farm_players').update({ inventory: s }).eq('username', currentPlayer); }
+                if(s.incomingCrow) { playDefendingCrow(s.incomingCrow); s.incomingCrow = null; state = s; await db.from('farm_players').update({ inventory: s }).eq('username', currentPlayer); }
+                
                 if(s.incomingQuiz && !isQuizMode) {
                     let req = s.incomingQuiz;
                     if(confirm(`درخواست بازی از طرف ${req.from}\nهزینه: ۲۵ اسکناس و ۱ خورشید\nجایزه برنده: ۵۰ اسکناس\nقبول می‌کنید؟`)) {
@@ -672,9 +648,7 @@
                             await db.from('farm_players').update({ inventory: oppInv }).eq('username', req.from);
                             startQuizGame(req.qIdx, 'guest', req.from);
                         } else { alert('موجودی کافی نیست!'); s.incomingQuiz = null; await db.from('farm_players').update({ inventory: s }).eq('username', currentPlayer); }
-                    } else {
-                        s.incomingQuiz = null; await db.from('farm_players').update({ inventory: s }).eq('username', currentPlayer);
-                    }
+                    } else { s.incomingQuiz = null; await db.from('farm_players').update({ inventory: s }).eq('username', currentPlayer); }
                 }
                 if(s.quizAccepted && !isQuizMode) {
                     if(cash >= 25 && sun >= 1) {
@@ -704,17 +678,23 @@
             setTimeout(() => { crow.style.opacity = '0'; }, 3000);
         }
 
-        async function attemptLogin() {
-            const user = document.getElementById('username').value.trim(); const pass = document.getElementById('password').value.trim();
-            if ((user === 'حمیدرضا' && pass === 'CTF_22') || (user === 'الهه' && pass === 'CTF_11')) {
-                document.getElementById('loginScreen').style.opacity = '0';
-                setTimeout(async () => { 
-                    document.getElementById('loginScreen').style.display = 'none'; 
-                    document.getElementById('loginLoading').classList.add('active');
-                    currentPlayer = user; await loadCloudData(); 
-                    setTimeout(() => document.getElementById('loginLoading').classList.remove('active'), 3500);
-                }, 400);
-            } else { alert('رمز اشتباه است!'); }
+        // --- تضمین کلیک‌ها با هوش محاسبه فاصله روی ساختمان‌ها و زمین ---
+        function setupBuildingEvents() {
+            let bStartX, bStartY;
+            document.querySelectorAll('.building').forEach(b => {
+                b.onpointerdown = (e) => { bStartX = e.clientX; bStartY = e.clientY; };
+                b.onpointerup = (e) => {
+                    let dist = Math.hypot(e.clientX - bStartX, e.clientY - bStartY);
+                    if(dist < 8 && !isMovingMode && !isVisiting && !isQuizMode) {
+                        e.stopPropagation();
+                        if(b.id === 'cabin-inv') openModal('inventoryModal');
+                        if(b.id === 'cabin-guard') openGuardModal();
+                        if(b.id === 'cabin-crow') openCrowModal();
+                        if(b.id === 'cabin-bank') openBankModal();
+                        if(b.id === 'cabin-school') openSchoolModal();
+                    }
+                };
+            });
         }
 
         function getRequiredXp(lvl) { return lvl * lvl * 50; }
@@ -725,15 +705,6 @@
             document.getElementById('hudLevel').innerText = isVisiting ? visitingData.level : level;
             document.getElementById('xpBar').style.width = `${(xp / getRequiredXp(level)) * 100}%`;
             if(sun > state.stats.maxS) state.stats.maxS = sun;
-        }
-
-        function initMarket() {
-            for (let k in itemsData) if (itemsData[k].type === 'crop') currentPrices[k] = itemsData[k].basePrice;
-            setInterval(() => {
-                for (let k in currentPrices) { let f = 1 + (Math.random() * 0.4 - 0.2); currentPrices[k] = Math.max(1, Math.round(itemsData[k].basePrice * f)); }
-                if(document.getElementById('marketModal').style.display === 'flex') renderMarket();
-                if(document.getElementById('inventoryModal').style.display === 'flex') renderInventory();
-            }, 60000); 
         }
 
         function getInvCount() { let t = 0; for(let k in state.items) t += state.items[k].length; for(let k in state.loot) t += state.loot[k].length; return t; }
@@ -771,43 +742,33 @@
             const listUser = document.getElementById('messagesListUser'); listUser.innerHTML = '';
             const listSys = document.getElementById('messagesListSys'); listSys.innerHTML = '';
             let hasUser = false, hasSys = false;
-            
             state.messages.forEach(m => { 
                 let html = `<div class="msg-item">${m.text}<span class="msg-time">${new Date(m.id).toLocaleString('fa-IR')}</span></div>`;
                 if(m.type === 'user') { listUser.innerHTML += html; hasUser = true; } else { listSys.innerHTML += html; hasSys = true; }
                 m.read = true; 
             });
-            
             if(!hasUser) listUser.innerHTML = '<p style="text-align:center; color:#666; font-size:12px;">صندوق پیام کاربران خالی است.</p>';
             if(!hasSys) listSys.innerHTML = '<p style="text-align:center; color:#666; font-size:12px;">صندوق پیام‌های بازی خالی است.</p>';
-
             saveCloudData(); updateMsgBadge(); openModal('messagesModal');
         }
         function clearMessages() { state.messages = []; saveCloudData(); updateMsgBadge(); openMessages(); }
 
         async function sendPlayerMessage() {
-            let target = document.getElementById('msgTargetUser').value.trim();
-            let txt = document.getElementById('msgContentText').value.trim();
+            let target = document.getElementById('msgTargetUser').value.trim(); let txt = document.getElementById('msgContentText').value.trim();
             if(!target || !txt) { alert('نام گیرنده و متن پیام را وارد کنید!'); return; }
             if(target === currentPlayer) { alert('نمی‌توانید به خودتان پیام بفرستید!'); return; }
-
             const { data } = await db.from('farm_players').select('*').eq('username', target).single();
             if(!data) { alert('کاربری با این نام یافت نشد!'); return; }
-
             let tInv = data.inventory; if(!tInv.messages) tInv.messages = [];
             tInv.messages.unshift({ id: Date.now(), text: `پیام از ${currentPlayer}: ${txt}`, read: false, type: 'user' });
             tInv.incomingMessage = { sender: currentPlayer, text: txt };
-
             await db.from('farm_players').update({ inventory: tInv }).eq('username', target);
-            alert('پیام با موفقیت ارسال شد!');
-            document.getElementById('msgTargetUser').value = ''; document.getElementById('msgContentText').value = '';
-            closeModal('sendMsgModal');
+            alert('پیام با موفقیت ارسال شد!'); document.getElementById('msgTargetUser').value = ''; document.getElementById('msgContentText').value = ''; closeModal('sendMsgModal');
         }
 
         function updateLabels() {
             let dataToUse = isVisiting ? visitingData.inventory : state; let lToUse = isVisiting ? visitingData.level : level;
             document.getElementById('invLabel').innerText = `انبار ${isVisiting ? `(${visitingData.username})` : `(${getInvCount()}/200)`}`;
-            
             const gl = document.getElementById('guardLabel');
             if(lToUse < 10) { gl.innerText = "قفل"; gl.classList.add('locked'); document.getElementById('guardSpriteContainer').innerHTML=''; }
             else { 
@@ -818,18 +779,15 @@
                     else document.getElementById('guardSpriteContainer').innerHTML = `<div class="guard-sprite">${'🏹'.repeat(ammo)}</div>`;
                 } else { document.getElementById('guardSpriteContainer').innerHTML = ''; }
             }
-            
             const cl = document.getElementById('crowLabel');
             if(lToUse < 10) { cl.innerText = "قفل"; cl.classList.add('locked'); } else { cl.classList.remove('locked'); cl.innerText = dataToUse.crow.level === 0 ? "خرید آشیانه" : `آشیانه Lvl.${dataToUse.crow.level}`; }
-
             const bl = document.getElementById('bankLabel');
             if(lToUse < 3) { bl.innerText = "قفل"; bl.classList.add('locked'); } else { bl.classList.remove('locked'); bl.innerText = (dataToUse.bank && dataToUse.bank.level > 0) ? `بانک Lvl.${dataToUse.bank.level}` : "ساخت بانک"; }
         }
 
         function applyBuildingPositions() {
             let p = isVisiting ? visitingData.inventory.positions : state.positions;
-            if(!p.bank) p.bank = { t: -140, l: 30 };
-            if(!p.school) p.school = { t: 150, l: 100 };
+            if(!p.bank) p.bank = { t: -140, l: 30 }; if(!p.school) p.school = { t: 150, l: 100 };
             document.getElementById('cabin-inv').style.top = p.inv.t + 'px'; document.getElementById('cabin-inv').style.left = p.inv.l + 'px';
             document.getElementById('cabin-guard').style.top = p.guard.t + 'px'; document.getElementById('cabin-guard').style.left = p.guard.l + 'px';
             document.getElementById('cabin-crow').style.top = p.crow.t + 'px'; document.getElementById('cabin-crow').style.left = p.crow.l + 'px';
@@ -837,7 +795,7 @@
             document.getElementById('cabin-school').style.top = p.school.t + 'px'; document.getElementById('cabin-school').style.left = p.school.l + 'px';
         }
 
-        // --- جابجایی هوشمند ساختمان‌ها (فریم به فریم و بررسی برخورد) ---
+        // جابجایی هوشمند ساختمان‌ها (فریم به فریم و بررسی برخورد)
         let activeB = null, isDraggingB = false, dragBX, dragBY;
         function startMoveMode(id) {
             closeModal('inventoryModal'); closeModal('guardModal'); closeModal('crowModal'); closeModal('bankModal'); closeModal('schoolModal');
@@ -849,27 +807,18 @@
         function bDragMove(e) {
             if(!isDraggingB) return; e.preventDefault();
             let dx = (e.clientX - dragBX) / zoom; let dy = (e.clientY - dragBY) / zoom;
-            
             let nT = activeB.offsetTop + dy; let nL = activeB.offsetLeft + dx;
             nT = Math.max(-180, Math.min(200, nT)); nL = Math.max(-140, Math.min(180, nL));
-
             activeB.style.left = nL + 'px'; activeB.style.top = nT + 'px';
             dragBX = e.clientX; dragBY = e.clientY;
             checkCollision();
         }
         function checkCollision() {
             let gardenRect = document.getElementById('garden').getBoundingClientRect();
-            let bRect = activeB.getBoundingClientRect();
-            let btn = document.getElementById('btnConfirmMove');
-            // بررسی برخورد مستطیل‌ها
+            let bRect = activeB.getBoundingClientRect(); let btn = document.getElementById('btnConfirmMove');
             let overlap = !(bRect.right < gardenRect.left || bRect.left > gardenRect.right || bRect.bottom < gardenRect.top || bRect.top > gardenRect.bottom);
-            if(overlap) {
-                activeB.style.filter = 'drop-shadow(0 0 15px red) brightness(0.7)';
-                btn.style.opacity = '0.4'; btn.style.pointerEvents = 'none';
-            } else {
-                activeB.style.filter = 'drop-shadow(0 0 15px #4caf50) brightness(1.2)';
-                btn.style.opacity = '1'; btn.style.pointerEvents = 'auto';
-            }
+            if(overlap) { activeB.style.filter = 'drop-shadow(0 0 15px red) brightness(0.7)'; btn.style.opacity = '0.4'; btn.style.pointerEvents = 'none'; } 
+            else { activeB.style.filter = 'drop-shadow(0 0 15px #4caf50) brightness(1.2)'; btn.style.opacity = '1'; btn.style.pointerEvents = 'auto'; }
         }
         function bDragEnd(e) { if(!isDraggingB) return; isDraggingB = false; activeB.releasePointerCapture(e.pointerId); }
         function confirmMove() { let key = activeB.id.replace('cabin-', ''); state.positions[key] = { t: activeB.offsetTop, l: activeB.offsetLeft }; saveCloudData(); exitMoveMode(); }
@@ -880,7 +829,7 @@
             activeB = null; document.getElementById('moveUI').style.display = 'none'; document.getElementById('toolbar-normal').style.display = 'flex';
         }
 
-        // --- سیستم دقیق کاشت بذر (جلوگیری از تداخل با کشیدن صفحه) ---
+        // سیستم دقیق کاشت بذر با محاسبه فاصله لمس
         function renderGarden(visitLayout = null) {
             const garden = document.getElementById('garden'); const gSize = visitLayout ? visitLayout.size : gridSize; garden.style.setProperty('--grid-size', gSize); garden.innerHTML = '';
             let layoutToUse = visitLayout ? visitLayout.plots : (state.gardenLayout || []);
@@ -907,7 +856,6 @@
                     }
                 }
                 
-                // فرمول تضمینی محاسبه لمس برای کاشت بذر
                 let plotStartX = 0, plotStartY = 0;
                 plot.onpointerdown = (e) => { plotStartX = e.clientX; plotStartY = e.clientY; };
                 plot.onpointerup = (e) => {
@@ -954,26 +902,31 @@
             box.innerHTML = msg; document.body.appendChild(box); setTimeout(() => box.remove(), 5000);
         }
 
+        // --- بازدید و حمله با لودینگ دقیق و تضمینی 5 ثانیه ---
         async function visitFarm(username) {
             closeModal('leaderboardModal');
             document.getElementById('visitLoading').classList.add('active');
-            setTimeout(async () => {
-                const { data } = await db.from('farm_players').select('*').eq('username', username).single();
-                if(data) {
-                    isVisiting = true; visitingData = data; document.getElementById('toolbar-normal').style.display = 'none'; document.getElementById('toolbar-visit').style.display = 'flex';
-                    applyBuildingPositions(); updateLabels(); updateHUD(); renderGarden({ size: data.grid_size, plots: data.inventory.gardenLayout || [] }); 
-                    setTimeout(() => document.getElementById('visitLoading').classList.remove('active'), 3500);
-                } else { alert('خطا در بارگذاری مزرعه!'); document.getElementById('visitLoading').classList.remove('active'); }
-            }, 500);
+            
+            let timeP = new Promise(r => setTimeout(r, 5000));
+            let dataP = db.from('farm_players').select('*').eq('username', username).single();
+            let [_, result] = await Promise.all([timeP, dataP]);
+            const data = result.data;
+            
+            if(data) {
+                isVisiting = true; visitingData = data; document.getElementById('toolbar-normal').style.display = 'none'; document.getElementById('toolbar-visit').style.display = 'flex';
+                applyBuildingPositions(); updateLabels(); updateHUD(); renderGarden({ size: data.grid_size, plots: data.inventory.gardenLayout || [] }); 
+            } else { alert('خطا در بارگذاری مزرعه!'); }
+            document.getElementById('visitLoading').classList.remove('active');
         }
 
-        function returnHome() {
+        async function returnHome() {
             document.getElementById('visitLoading').classList.add('active');
-            setTimeout(() => {
-                isVisiting = false; visitingData = null; isAttacking = false; document.getElementById('toolbar-normal').style.display = 'flex'; document.getElementById('toolbar-visit').style.display = 'none';
-                applyBuildingPositions(); updateLabels(); updateHUD(); renderGarden(); 
-                setTimeout(() => document.getElementById('visitLoading').classList.remove('active'), 3500);
-            }, 500);
+            
+            await new Promise(r => setTimeout(r, 5000));
+            
+            isVisiting = false; visitingData = null; isAttacking = false; document.getElementById('toolbar-normal').style.display = 'flex'; document.getElementById('toolbar-visit').style.display = 'none';
+            applyBuildingPositions(); updateLabels(); updateHUD(); renderGarden(); 
+            document.getElementById('visitLoading').classList.remove('active');
         }
 
         async function attackOpponent() {
@@ -981,21 +934,23 @@
             if(!opp) { alert('نام حریف را بنویسید!'); return; }
             if(opp === currentPlayer) { alert('به خودت نمیتونی حمله کنی!'); return; }
             
-            const { data } = await db.from('farm_players').select('*').eq('username', opp).single();
-            if(!data) { alert('بازیکنی با این نام پیدا نشد!'); return; }
-
             closeModal('crowModal');
             document.getElementById('visitLoading').classList.add('active');
             
-            setTimeout(() => {
-                isVisiting = true; isAttacking = true; visitingData = data;
-                document.getElementById('toolbar-normal').style.display = 'none'; document.getElementById('toolbar-visit').style.display = 'none';
-                applyBuildingPositions(); updateLabels(); updateHUD();
-                renderGarden({ size: data.grid_size, plots: data.inventory.gardenLayout || [] });
-                document.getElementById('visitLoading').classList.remove('active');
-                
-                setTimeout(() => { executeLiveAttack(data); }, 1000); 
-            }, 3500);
+            let timeP = new Promise(r => setTimeout(r, 5000));
+            let dataP = db.from('farm_players').select('*').eq('username', opp).single();
+            let [_, result] = await Promise.all([timeP, dataP]);
+            const data = result.data;
+            
+            if(!data) { alert('بازیکنی با این نام پیدا نشد!'); document.getElementById('visitLoading').classList.remove('active'); return; }
+
+            isVisiting = true; isAttacking = true; visitingData = data;
+            document.getElementById('toolbar-normal').style.display = 'none'; document.getElementById('toolbar-visit').style.display = 'none';
+            applyBuildingPositions(); updateLabels(); updateHUD();
+            renderGarden({ size: data.grid_size, plots: data.inventory.gardenLayout || [] });
+            
+            document.getElementById('visitLoading').classList.remove('active');
+            setTimeout(() => { executeLiveAttack(data); }, 500); 
         }
 
         async function executeLiveAttack(oppData) {
@@ -1010,10 +965,7 @@
 
             setTimeout(async () => {
                 let defended = false;
-                if (oppInv.guard.level > 0 && !oppInv.guard.sleeping) {
-                    let chance = guardAcc[oppInv.guard.level-1];
-                    if (Math.random() * 100 <= chance) defended = true;
-                }
+                if (oppInv.guard.level > 0 && !oppInv.guard.sleeping) { let chance = guardAcc[oppInv.guard.level-1]; if (Math.random() * 100 <= chance) defended = true; }
 
                 if(defended) {
                     arrow.style.opacity = '1'; arrow.style.top = oppInv.positions.guard.t + 'px'; arrow.style.left = oppInv.positions.guard.l + 'px';
@@ -1026,12 +978,10 @@
                     if(oppInv.guard.kills >= (oppInv.guard.level >= 4 ? 2 : 1)) oppInv.guard.sleeping = true;
                     oppInv.messages.unshift({ id: Date.now(), text: `🏹 نگهبان شما کلاغِ ${currentPlayer} را شکار کرد!`, read: false, type: 'system' });
                     await db.from('farm_players').update({ inventory: oppInv }).eq('username', oppData.username);
-                    
                     setTimeout(() => { alert('دفاع حریف موفق بود!'); state.crow.lastSent = Date.now(); saveCloudData(); returnHome(); }, 2000);
                 } else {
                     let layout = oppInv.gardenLayout || []; let targets = [];
                     for(let i=0; i<layout.length; i++) if(layout[i].state === 'growing' || layout[i].state === 'ready') targets.push(i);
-                    
                     if(targets.length === 0) { alert('حریف هیچ محصولی نداشت!'); crow.style.opacity = '0'; state.crow.lastSent = Date.now(); saveCloudData(); returnHome(); return; }
                     
                     let targetIdx = targets[Math.floor(Math.random() * targets.length)]; let targetPlot = document.getElementById(`plot-${targetIdx}`);
@@ -1067,69 +1017,34 @@
         }
 
         // مودال‌ها
-        function switchShopTab(tab) {
-            document.querySelectorAll('#shopModal .tab-btn').forEach(b => b.classList.remove('active')); document.querySelectorAll('#shopModal .tab-content').forEach(c => c.classList.remove('active'));
-            document.getElementById(`tab-btn-${tab}`).classList.add('active'); document.getElementById(`tab-${tab}`).classList.add('active');
-        }
-        function switchBankTab(tab) {
-            document.querySelectorAll('#bankModal .tab-btn').forEach(b => b.classList.remove('active')); document.querySelectorAll('#bankModal .tab-content').forEach(c => c.classList.remove('active'));
-            document.getElementById(`tab-btn-${tab}`).classList.add('active'); document.getElementById(`tab-${tab}`).classList.add('active');
-        }
-        function switchInvTab(tab) {
-            document.querySelectorAll('#inventoryModal .tab-btn').forEach(b => b.classList.remove('active')); document.querySelectorAll('#inventoryModal .tab-content').forEach(c => c.classList.remove('active'));
-            document.getElementById(`tab-btn-inv-${tab}`).classList.add('active'); document.getElementById(`tab-inv-${tab}`).classList.add('active');
-        }
-
-        function openModal(id) {
-            if(isMovingMode || isAttacking || isQuizMode) return;
-            cleanSpoiledItems(); document.getElementById(id).style.display = 'flex';
-            if(id === 'shopModal') { document.getElementById('landCostLabel').innerText = `💵 ${gridSize * 150}`; renderShop(); }
-            if(id === 'inventoryModal') renderInventory();
-            if(id === 'marketModal') renderMarket();
-            if(id === 'leaderboardModal') { renderLeaderboard(); }
-        }
+        function switchShopTab(tab) { document.querySelectorAll('#shopModal .tab-btn').forEach(b => b.classList.remove('active')); document.querySelectorAll('#shopModal .tab-content').forEach(c => c.classList.remove('active')); document.getElementById(`tab-btn-${tab}`).classList.add('active'); document.getElementById(`tab-${tab}`).classList.add('active'); }
+        function switchBankTab(tab) { document.querySelectorAll('#bankModal .tab-btn').forEach(b => b.classList.remove('active')); document.querySelectorAll('#bankModal .tab-content').forEach(c => c.classList.remove('active')); document.getElementById(`tab-btn-${tab}`).classList.add('active'); document.getElementById(`tab-${tab}`).classList.add('active'); }
+        function switchInvTab(tab) { document.querySelectorAll('#inventoryModal .tab-btn').forEach(b => b.classList.remove('active')); document.querySelectorAll('#inventoryModal .tab-content').forEach(c => c.classList.remove('active')); document.getElementById(`tab-btn-inv-${tab}`).classList.add('active'); document.getElementById(`tab-inv-${tab}`).classList.add('active'); }
+        function openModal(id) { if(isMovingMode || isAttacking || isQuizMode) return; cleanSpoiledItems(); document.getElementById(id).style.display = 'flex'; if(id === 'shopModal') { document.getElementById('landCostLabel').innerText = `💵 ${gridSize * 150}`; renderShop(); } if(id === 'inventoryModal') renderInventory(); if(id === 'marketModal') renderMarket(); if(id === 'leaderboardModal') { renderLeaderboard(); } }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
         // بانک
         function updateExchCalc() { let val = parseInt(document.getElementById('exchInput').value) || 0; document.getElementById('exchOutCash').innerText = Math.floor(val / 5); document.getElementById('exchOutSun').innerText = Math.floor(val / 5); }
-        function doExch(type) {
-            let val = parseInt(document.getElementById('exchInput').value) || 0;
-            if(val <= 0 || val % 50 !== 0) { alert('مقدار باید مضربی از ۵۰ باشد!'); return; }
-            if(type === 'sun2cash') { if (sun >= val) { sun -= val; cash += Math.floor(val / 5); updateHUD(); saveCloudData(); openBankModal(); } else alert('خورشید کافی نیست!'); }
-            if(type === 'cash2sun') { if (cash >= val) { cash -= val; sun += Math.floor(val / 5); updateHUD(); saveCloudData(); openBankModal(); } else alert('اسکناس کافی نیست!'); }
-        }
-
+        function doExch(type) { let val = parseInt(document.getElementById('exchInput').value) || 0; if(val <= 0 || val % 50 !== 0) { alert('مقدار باید مضربی از ۵۰ باشد!'); return; } if(type === 'sun2cash') { if (sun >= val) { sun -= val; cash += Math.floor(val / 5); updateHUD(); saveCloudData(); openBankModal(); } else alert('خورشید کافی نیست!'); } if(type === 'cash2sun') { if (cash >= val) { cash -= val; sun += Math.floor(val / 5); updateHUD(); saveCloudData(); openBankModal(); } else alert('اسکناس کافی نیست!'); } }
         function openBankModal() {
             if(level < 3) { alert('برای ساخت بانک باید به سطح 3 برسی!'); return; }
-            const costs = [200, 400, 800, 1500, 3000]; const topDiv = document.getElementById('tab-bank'); const botDiv = document.getElementById('tab-invest');
-            let b = state.bank;
-            let htmlTop = '';
+            const costs = [200, 400, 800, 1500, 3000]; const topDiv = document.getElementById('tab-bank'); const botDiv = document.getElementById('tab-invest'); let b = state.bank; let htmlTop = '';
             if (b.level === 0) { htmlTop = `<p>بانک هر دقیقه اسکناس تولید می‌کند.</p><button class="btn-action" onclick="upgradeBank()">ساخت سطح 1 (${costs[0]}💵)</button>`; botDiv.innerHTML = ''; }
             else {
                 let cap = b.level * 100; let diffMins = Math.floor((Date.now() - b.lastCol) / 60000); let gen = Math.min(diffMins, cap);
                 htmlTop = `<p style="font-weight:bold; font-size:12px;">سطح بانک: ${b.level} (ظرفیت: ${cap})</p><div style="background:#e8f5e9; padding:10px; border-radius:8px; border:2px solid #4caf50;"><span style="font-size:20px; color:#2e7d32;">💵 ${gen}</span><button class="btn-action" style="margin-top:5px; background:#4caf50;" onclick="collectBank()">برداشت از صندوق</button></div>`;
                 if(b.level < 5) htmlTop += `<button class="btn-action" style="background:#ff9800; font-size:11px;" onclick="upgradeBank()">ارتقا به سطح ${b.level+1} (${costs[b.level]}💵)</button>`; else htmlTop += `<p style="color:green;">بانک در سطح نهایت است!</p>`;
-                
                 let htmlBot = '';
                 if (b.level < 5) { htmlBot = `<div class="bank-blur"><p style="font-weight:bold;">بانک تجارت</p><p>برای دسترسی به این بخش، سطح ۵ بانک ضروری است 🔒</p></div>`; } 
                 else {
                     if (!b.acc) { htmlBot = `<p style="font-weight:bold;">💳 بانک تجارت (سرمایه‌گذاری)</p><button class="btn-action" style="background:#0288d1;" onclick="openBankAccount()">افتتاح حساب (5000 💵)</button>`; } 
                     else {
-                        let cardImg = currentPlayer === 'الهه' ? imgs.cardElahe : imgs.cardHamid;
-                        htmlBot = `<img src="${cardImg}" class="bank-card">`;
-                        if (b.inv === 0) {
-                            htmlBot += `<input type="number" id="investInput" class="exchange-input" placeholder="مقدار اسکناس" min="100" step="100"><button class="btn-action" style="background:#00897b;" onclick="startInvest()">سرمایه‌گذاری (قفل ۲۴ ساعته 5%)</button>`;
-                        } else {
-                            if (!b.ready) { let remainH = Math.ceil(((24 * 3600 * 1000) - (Date.now() - b.invStart)) / 3600000); htmlBot += `<p style="color:#e65100; font-weight:bold;">سرمایه شما (${b.inv} 💵) بلوکه است.<br>⏳ ${remainH} ساعت تا دریافت سود.</p>`; } 
-                            else { let profit = Math.floor(b.inv * 0.05); htmlBot += `<p style="color:#2e7d32; font-weight:bold;">مبلغ سود شما: ${profit} 💵</p><div style="display:flex; gap:10px;"><button class="btn-action" style="background:#4caf50;" onclick="collectInvestProfit()">برداشت سود (تمدید)</button><button class="btn-action" style="background:#d32f2f;" onclick="collectInvestTotal()">برداشت کل پول</button></div>`; }
-                        }
+                        let cardImg = currentPlayer === 'الهه' ? imgs.cardElahe : imgs.cardHamid; htmlBot = `<img src="${cardImg}" class="bank-card">`;
+                        if (b.inv === 0) { htmlBot += `<input type="number" id="investInput" class="exchange-input" placeholder="مقدار اسکناس" min="100" step="100"><button class="btn-action" style="background:#00897b;" onclick="startInvest()">سرمایه‌گذاری (قفل ۲۴ ساعته 5%)</button>`; } else { if (!b.ready) { let remainH = Math.ceil(((24 * 3600 * 1000) - (Date.now() - b.invStart)) / 3600000); htmlBot += `<p style="color:#e65100; font-weight:bold;">سرمایه شما (${b.inv} 💵) بلوکه است.<br>⏳ ${remainH} ساعت تا دریافت سود.</p>`; } else { let profit = Math.floor(b.inv * 0.05); htmlBot += `<p style="color:#2e7d32; font-weight:bold;">مبلغ سود شما: ${profit} 💵</p><div style="display:flex; gap:10px;"><button class="btn-action" style="background:#4caf50;" onclick="collectInvestProfit()">برداشت سود (تمدید)</button><button class="btn-action" style="background:#d32f2f;" onclick="collectInvestTotal()">برداشت کل پول</button></div>`; } }
                     }
-                }
-                botDiv.innerHTML = htmlBot;
-            }
-            topDiv.innerHTML = htmlTop; openModal('bankModal');
+                } botDiv.innerHTML = htmlBot;
+            } topDiv.innerHTML = htmlTop; openModal('bankModal');
         }
-
         function upgradeBank() { const costs = [200, 400, 800, 1500, 3000]; let bl = state.bank.level; if(cash >= costs[bl]) { cash -= costs[bl]; state.bank.level++; updateHUD(); saveCloudData(); updateLabels(); openBankModal(); } else alert('پول کافی نیست!'); }
         function collectBank() { let cap = state.bank.level * 100; let diffMins = Math.floor((Date.now() - state.bank.lastCol) / 60000); let gen = Math.min(diffMins, cap); if(gen > 0) { cash += gen; state.bank.lastCol = Date.now(); document.getElementById('bankCashIcon').style.display='none'; updateHUD(); saveCloudData(); openBankModal(); } }
         function openBankAccount() { if(cash >= 5000) { cash -= 5000; state.bank.acc = true; updateHUD(); saveCloudData(); openBankModal(); } else alert('به ۵۰۰۰ اسکناس نیاز دارید!'); }
@@ -1140,112 +1055,96 @@
         function renderShop() {
             const seedsList = document.getElementById('tab-seeds'); seedsList.innerHTML = ''; const equipList = document.getElementById('tab-equip-other'); equipList.innerHTML = '';
             for (let key in itemsData) {
-                const p = itemsData[key]; let isLocked = level < p.reqLvl;
-                if(p.type === 'food' && state.guard.level === 0) continue; 
+                const p = itemsData[key]; let isLocked = level < p.reqLvl; if(p.type === 'food' && state.guard.level === 0) continue; 
                 const item = document.createElement('div'); item.className = 'list-item' + (isLocked ? ' locked' : '');
                 let imgHtml = p.type === 'crop' ? `<img src="${p.img}">` : `<span style="font-size:30px;">${p.img}</span>`;
                 item.innerHTML = `<div style="display:flex; align-items:center; gap:10px;">${imgHtml} <div style="text-align:right;"><span>${p.name} ${isLocked ? `(سطح ${p.reqLvl})` : ''}</span><span style="font-size:11px; display:block; color:#666;">${p.type === 'crop' ? `+${p.xp} XP` : p.desc}</span></div></div> <span style="color:#2e7d32;">💵 ${p.cost}</span>`;
-                if (!isLocked) {
-                    item.onclick = () => {
-                        if(p.type === 'food') {
-                            if(cash >= p.cost) {
-                                if(state.guard.sleeping) { cash -= p.cost; state.guard.sleeping = false; state.guard.kills = 0; updateHUD(); saveCloudData(); showAlert('نگهبان بیدار شد!'); updateLabels(); closeModal('shopModal'); }
-                                else { alert('نگهبان بیدار است!'); }
-                            } else alert('پول کافی نیست!');
-                        } else { selectedSeed = key; document.getElementById('seedName').innerText = p.name; document.getElementById('seedIndicator').style.display = 'block'; closeModal('shopModal'); }
-                    };
-                }
+                if (!isLocked) { item.onclick = () => { if(p.type === 'food') { if(cash >= p.cost) { if(state.guard.sleeping) { cash -= p.cost; state.guard.sleeping = false; state.guard.kills = 0; updateHUD(); saveCloudData(); showAlert('نگهبان بیدار شد!'); updateLabels(); closeModal('shopModal'); } else { alert('نگهبان بیدار است!'); } } else alert('پول کافی نیست!'); } else { selectedSeed = key; document.getElementById('seedName').innerText = p.name; document.getElementById('seedIndicator').style.display = 'block'; closeModal('shopModal'); } }; }
                 if(p.type === 'crop') seedsList.appendChild(item); else equipList.appendChild(item);
             }
         }
-
         function expandLand() { if (gridSize >= 6) { alert('زمین به نهایت رسیده!'); return; } let cost = gridSize * 150; if (cash >= cost) { if(confirm(`گسترش زمین با ${cost} اسکناس؟`)) { cash -= cost; gridSize++; renderGarden(); updateHUD(); saveCloudData(); closeModal('shopModal'); } } else alert(`به ${cost} اسکناس نیاز داری.`); }
 
         function renderInventory() {
-            const listProd = document.getElementById('inventory-list'); listProd.innerHTML = ''; 
-            const listLoot = document.getElementById('loot-list'); listLoot.innerHTML = ''; 
-            document.getElementById('invCount').innerText = getInvCount(); 
-            let hasProd = false, hasLoot = false;
-            for (let key in state.items) {
-                if (state.items[key] && state.items[key].length > 0) {
-                    hasProd = true; const p = itemsData[key]; const price = currentPrices[key];
-                    const div = document.createElement('div'); div.className = 'list-item';
-                    div.innerHTML = `<div style="display:flex; align-items:center; gap:10px;"><img src="${p.img}"> <span>${p.name} (${state.items[key].length})</span></div><button style="background:#ff9800; color:white; border:none; padding:6px; border-radius:6px; cursor:pointer;" onclick="sellItem('${key}', false)">فروش +${price}☀️</button>`;
-                    listProd.appendChild(div);
-                }
-            }
-            for (let key in state.loot) {
-                if (state.loot[key] && state.loot[key].length > 0) {
-                    hasLoot = true; const p = itemsData[key]; const price = currentPrices[key];
-                    const div = document.createElement('div'); div.className = 'list-item';
-                    div.innerHTML = `<div style="display:flex; align-items:center; gap:10px;"><img src="${p.img}"> <span>${p.name} (${state.loot[key].length})</span></div><button style="background:#ff9800; color:white; border:none; padding:6px; border-radius:6px; cursor:pointer;" onclick="sellItem('${key}', true)">فروش +${price}☀️</button>`;
-                    listLoot.appendChild(div);
-                }
-            }
-            if (!hasProd) listProd.innerHTML = '<p style="text-align:center; color:#666; font-size:12px;">بخش محصولات خالی است.</p>';
-            if (!hasLoot) listLoot.innerHTML = '<p style="text-align:center; color:#666; font-size:12px;">بخش غنیمت‌ها خالی است.</p>';
+            const listProd = document.getElementById('inventory-list'); listProd.innerHTML = ''; const listLoot = document.getElementById('loot-list'); listLoot.innerHTML = ''; 
+            document.getElementById('invCount').innerText = getInvCount(); let hasProd = false, hasLoot = false;
+            for (let key in state.items) { if (state.items[key] && state.items[key].length > 0) { hasProd = true; const p = itemsData[key]; const price = currentPrices[key]; const div = document.createElement('div'); div.className = 'list-item'; div.innerHTML = `<div style="display:flex; align-items:center; gap:10px;"><img src="${p.img}"> <span>${p.name} (${state.items[key].length})</span></div><button style="background:#ff9800; color:white; border:none; padding:6px; border-radius:6px; cursor:pointer;" onclick="sellItem('${key}', false)">فروش +${price}☀️</button>`; listProd.appendChild(div); } }
+            for (let key in state.loot) { if (state.loot[key] && state.loot[key].length > 0) { hasLoot = true; const p = itemsData[key]; const price = currentPrices[key]; const div = document.createElement('div'); div.className = 'list-item'; div.innerHTML = `<div style="display:flex; align-items:center; gap:10px;"><img src="${p.img}"> <span>${p.name} (${state.loot[key].length})</span></div><button style="background:#ff9800; color:white; border:none; padding:6px; border-radius:6px; cursor:pointer;" onclick="sellItem('${key}', true)">فروش +${price}☀️</button>`; listLoot.appendChild(div); } }
+            if (!hasProd) listProd.innerHTML = '<p style="text-align:center; color:#666; font-size:12px;">بخش محصولات خالی است.</p>'; if (!hasLoot) listLoot.innerHTML = '<p style="text-align:center; color:#666; font-size:12px;">بخش غنیمت‌ها خالی است.</p>';
         }
-
         function sellItem(key, isLoot) { let collection = isLoot ? state.loot : state.items; if (collection[key] && collection[key].length > 0) { collection[key].pop(); sun += currentPrices[key]; updateHUD(); saveCloudData(); renderInventory(); updateLabels(); } }
 
         function renderMarket() {
             const list = document.getElementById('market-list'); list.innerHTML = '';
-            for (let key in currentPrices) {
-                const p = itemsData[key]; const price = currentPrices[key]; const diff = price - p.basePrice;
-                let status = diff > 0 ? `<span class="price-up">▲ ${price}</span>` : (diff < 0 ? `<span class="price-down">▼ ${price}</span>` : `<span>- ${price}</span>`);
-                const div = document.createElement('div'); div.className = 'list-item';
-                div.innerHTML = `<div style="display:flex; align-items:center; gap:10px;"><img src="${p.img}"> <span>${p.name}</span></div><div style="text-align:left;"><span style="font-size:11px; color:#777; display:block;">پایه: ${p.basePrice}</span> ${status} ☀️</div>`;
-                list.appendChild(div);
-            }
+            for (let key in currentPrices) { const p = itemsData[key]; const price = currentPrices[key]; const diff = price - p.basePrice; let status = diff > 0 ? `<span class="price-up">▲ ${price}</span>` : (diff < 0 ? `<span class="price-down">▼ ${price}</span>` : `<span>- ${price}</span>`); const div = document.createElement('div'); div.className = 'list-item'; div.innerHTML = `<div style="display:flex; align-items:center; gap:10px;"><img src="${p.img}"> <span>${p.name}</span></div><div style="text-align:left;"><span style="font-size:11px; color:#777; display:block;">پایه: ${p.basePrice}</span> ${status} ☀️</div>`; list.appendChild(div); }
         }
 
         function showAlert(msg) { const box = document.getElementById('alertBox'); box.innerText = msg; box.style.display = 'block'; setTimeout(() => { box.style.display = 'none'; }, 4000); }
         function cancelPlanting() { selectedSeed = null; document.getElementById('seedIndicator').style.display = 'none'; }
 
         async function openAdminPanel() {
-            if (currentPlayer !== 'حمیدرضا') return;
-            document.getElementById('adminModal').style.display = 'flex';
-            const list = document.getElementById('admin-user-list'); list.innerHTML = '<p>در حال بارگذاری لیست...</p>';
+            if (currentPlayer !== 'حمیدرضا') return; document.getElementById('adminModal').style.display = 'flex'; const list = document.getElementById('admin-user-list'); list.innerHTML = '<p>در حال بارگذاری لیست...</p>';
             const { data } = await db.from('farm_players').select('username, level, cash, sun').order('sun', { ascending: false });
-            if (data) {
-                list.innerHTML = '';
-                data.forEach(u => {
-                    list.innerHTML += `<div class="list-item" style="flex-direction:column; align-items:start; gap:5px; margin-bottom: 12px; border: 2px solid #5d4037;"><div style="width:100%; display:flex; justify-content:space-between; align-items:center;"><span style="font-weight:bold;">👤 ${u.username}</span><button style="background:#d32f2f; color:white; border:none; padding:4px 8px; border-radius:5px; cursor:pointer;" onclick="resetPlayer('${u.username}')">🔄 ریست کامل</button></div><div style="width:100%; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #ccc; padding-bottom:5px;"><div style="font-size:11px; color:#666;">💵 ${u.cash} | ☀️ ${u.sun}</div><div style="display:flex; gap:6px; align-items:center;"><button style="background:#ff9800; color:white; border:none; padding:2px 6px; border-radius:4px; cursor:pointer;" onclick="changeLvl('${u.username}', ${u.level}, -1)">-</button><span style="font-weight:bold; width:45px; text-align:center;">سطح ${u.level}</span><button style="background:#4caf50; color:white; border:none; padding:2px 6px; border-radius:4px; cursor:pointer;" onclick="changeLvl('${u.username}', ${u.level}, 1)">+</button></div></div><div style="width:100%; display:flex; gap:8px; margin-top:5px;"><input type="number" id="addCash_${u.username}" placeholder="اسکناس" style="width:100%; padding:5px; border-radius:5px; border:1px solid #ffb300; text-align:center; font-size:12px;"><button style="background:#4caf50; color:white; border:none; padding:5px; border-radius:5px; cursor:pointer; font-weight:bold; font-size:12px;" onclick="addCashToUser('${u.username}')">واریز</button></div></div>`;
-                });
-            }
+            if (data) { list.innerHTML = ''; data.forEach(u => { list.innerHTML += `<div class="list-item" style="flex-direction:column; align-items:start; gap:5px; margin-bottom: 12px; border: 2px solid #5d4037;"><div style="width:100%; display:flex; justify-content:space-between; align-items:center;"><span style="font-weight:bold;">👤 ${u.username}</span><button style="background:#d32f2f; color:white; border:none; padding:4px 8px; border-radius:5px; cursor:pointer;" onclick="resetPlayer('${u.username}')">🔄 ریست کامل</button></div><div style="width:100%; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #ccc; padding-bottom:5px;"><div style="font-size:11px; color:#666;">💵 ${u.cash} | ☀️ ${u.sun}</div><div style="display:flex; gap:6px; align-items:center;"><button style="background:#ff9800; color:white; border:none; padding:2px 6px; border-radius:4px; cursor:pointer;" onclick="changeLvl('${u.username}', ${u.level}, -1)">-</button><span style="font-weight:bold; width:45px; text-align:center;">سطح ${u.level}</span><button style="background:#4caf50; color:white; border:none; padding:2px 6px; border-radius:4px; cursor:pointer;" onclick="changeLvl('${u.username}', ${u.level}, 1)">+</button></div></div><div style="width:100%; display:flex; gap:8px; margin-top:5px;"><input type="number" id="addCash_${u.username}" placeholder="اسکناس" style="width:100%; padding:5px; border-radius:5px; border:1px solid #ffb300; text-align:center; font-size:12px;"><button style="background:#4caf50; color:white; border:none; padding:5px; border-radius:5px; cursor:pointer; font-weight:bold; font-size:12px;" onclick="addCashToUser('${u.username}')">واریز</button></div></div>`; }); }
         }
         async function removeLimits() { state.crow.lastSent = 0; state.bank.invStart = 0; localStorage.setItem(`lastSpin_${currentPlayer}`, 0); await saveCloudData(); alert('محدودیت‌ها برداشته شد!'); }
         async function addCashToUser(targetUser) { const input = document.getElementById(`addCash_${targetUser}`); const amount = parseInt(input.value); if (!amount || amount <= 0) return; const { data } = await db.from('farm_players').select('cash').eq('username', targetUser).single(); if (data) { await db.from('farm_players').update({ cash: data.cash + amount }).eq('username', targetUser); alert(`واریز شد!`); openAdminPanel(); } }
         async function changeLvl(targetUser, currentLevel, amount) { let newLvl = currentLevel + amount; if (newLvl < 1) newLvl = 1; await db.from('farm_players').update({ level: newLvl }).eq('username', targetUser); openAdminPanel(); }
         async function resetPlayer(targetUser) { if(!confirm(`مطمئن هستید؟`)) return; const defaultState = { uid: 'UID-'+Math.random().toString(36).substr(2, 6).toUpperCase(), stats:{hrv:0,atk:0,def:0,maxS:0,pTime:0,lt:Date.now()}, items: { redFlower: [], pinkFlower: [], wheat: [], appleTree: [], pineTree: [] }, loot: { redFlower: [], pinkFlower: [], wheat: [], appleTree: [], pineTree: [] }, guard: { level: 0, kills: 0, sleeping: false }, crow: { level: 0, lastSent: 0 }, bank: { level: 0, lastCol: Date.now(), acc: false, inv: 0, invStart: 0, ready: false }, messages: [], positions: { inv: { t: -120, l: -50 }, guard: { t: 80, l: -80 }, crow: { t: -80, l: 120 }, bank: { t: -140, l: 30 }, school: { t: 150, l: 100 } }, incomingAttack: false, gardenLayout:[] }; const { error } = await db.from('farm_players').update({ cash: 100, sun: 0, level: 1, xp: 0, grid_size: 3, inventory: defaultState }).eq('username', targetUser); if(!error) { alert(`ریست شد.`); openAdminPanel(); } }
 
-        // --- مسابقات مدرسه Ravora ---
+        function openGuardModal() {
+            if(level < 10) { alert('باید به سطح 10 برسی!'); return; }
+            const costs = [500, 1000, 2000, 4000]; const acc = [30, 50, 75, 100]; const div = document.getElementById('guard-content'); let gl = state.guard.level; let html = `<p>با خرید نگهبان از دزدی کلاغ‌ها جلوگیری کن.</p>`;
+            if (gl === 0) { html += `<button class="btn-action" onclick="upgradeGuard()">خرید سطح 1 (${costs[0]}💵)</button>`; } 
+            else { html += `<p style="font-weight:bold;">سطح: ${gl} | شانس شلیک: ${acc[gl-1]}%<br>وضعیت: ${state.guard.sleeping ? '😴 خواب' : '👁️ بیدار'}</p>`; if (gl < 4) html += `<button class="btn-action" onclick="upgradeGuard()">ارتقا به سطح ${gl+1} (${costs[gl]}💵)</button>`; else html += `<p style="color:green;">نهایت! (2 سرباز)</p>`; }
+            div.innerHTML = html; openModal('guardModal');
+        }
+        function upgradeGuard() { const costs = [500, 1000, 2000, 4000]; let gl = state.guard.level; if(cash >= costs[gl]) { cash -= costs[gl]; state.guard.level++; updateHUD(); saveCloudData(); updateLabels(); openGuardModal(); } else alert('پول کافی نیست!'); }
+
+        function openCrowModal() {
+            if(level < 10) { alert('باید به سطح 10 برسی!'); return; }
+            const costs = [800, 1500, 3000, 5000]; const times = [24, 12, 6, 4]; const div = document.getElementById('crow-content'); let cl = state.crow.level; let html = `<p>با کلاغ می‌تونی محصولات حریف رو بدزدی!</p>`;
+            if (cl === 0) { html += `<button class="btn-action" onclick="upgradeCrow()">خرید سطح 1 (${costs[0]}💵)</button>`; } 
+            else {
+                let canAttack = (Date.now() - state.crow.lastSent) > (times[cl-1] * 3600000); let remain = !canAttack ? Math.ceil(((times[cl-1] * 3600000) - (Date.now() - state.crow.lastSent)) / 60000) : 0;
+                html += `<p style="font-weight:bold;">سطح: ${cl} | حمله هر ${times[cl-1]} ساعت<br></p>`;
+                if(canAttack) { document.getElementById('crow-attack-box').style.display = 'block'; } else { document.getElementById('crow-attack-box').style.display = 'none'; html += `<button class="btn-action" disabled style="background:#888;">استراحت کلاغ - ${remain} دقیقه دیگه</button>`; }
+                if (cl < 4) html += `<button class="btn-action" onclick="upgradeCrow()">ارتقا به سطح ${cl+1} (${costs[cl]}💵)</button>`; else html += `<p style="color:green;">نهایت!</p>`;
+            } div.innerHTML = html; openModal('crowModal');
+        }
+        function upgradeCrow() { const costs = [800, 1500, 3000, 5000]; let cl = state.crow.level; if(cash >= costs[gl]) { cash -= costs[cl]; state.crow.level++; updateHUD(); saveCloudData(); updateLabels(); openCrowModal(); } else alert('پول کافی نیست!'); }
+
+        async function renderLeaderboard() {
+            const list = document.getElementById('leaderboard-list'); list.innerHTML = '<p>در حال دریافت...</p>'; const { data } = await db.from('farm_players').select('username, sun').order('sun', { ascending: false }).limit(10); list.innerHTML = '';
+            if(data) { data.forEach((p, index) => { const div = document.createElement('div'); div.className = 'list-item'; if(p.username === currentPlayer) div.style.background = '#e3f2fd'; let visitBtn = p.username !== currentPlayer ? `<button style="background:#4facfe; border:none; color:white; padding:4px 8px; border-radius:5px; cursor:pointer;" onclick="visitFarm('${p.username}')">👁️ بازدید</button>` : ''; div.innerHTML = `<span>${index + 1}. ${p.username}</span><div style="display:flex; gap:10px; align-items:center;"><span style="color:#ff8f00;">☀️ ${p.sun}</span>${visitBtn}</div>`; list.appendChild(div); }); }
+        }
+
+        const prizes = [ { t: '20 💵', type: 'cash', v: 20 }, { t: '50 ☀️', type: 'sun', v: 50 }, { t: '10 💵', type: 'cash', v: 10 }, { t: '100 ☀️', type: 'sun', v: 100 }, { t: '50 💵', type: 'cash', v: 50 }, { t: '200 ☀️', type: 'sun', v: 200 } ];
+        function checkSpinCooldown() { const lastSpin = localStorage.getItem(`lastSpin_${currentPlayer}`); const btn = document.getElementById('spinBtn'); if (lastSpin && (Date.now() - parseInt(lastSpin)) < 3600000) { btn.disabled = true; let remain = Math.ceil((3600000 - (Date.now() - parseInt(lastSpin))) / 60000); btn.innerText = `⏳ ${remain} دقیقه`; setTimeout(checkSpinCooldown, 60000); } else { btn.disabled = false; btn.innerText = "بچرخان!"; } }
+        function spinWheel() { const wheel = document.getElementById('wheel'); const btn = document.getElementById('spinBtn'); const res = document.getElementById('luckyResult'); btn.disabled = true; res.innerText = "در حال چرخش..."; let winIndex = Math.floor(Math.random() * 6); let finalDeg = (5 * 360) + (360 - winIndex * 60); wheel.style.transform = `rotate(${finalDeg}deg)`; setTimeout(() => { let p = prizes[winIndex]; res.innerText = `🎉 جایزه: ${p.t}`; if(p.type === 'cash') cash += p.v; else sun += p.v; updateHUD(); localStorage.setItem(`lastSpin_${currentPlayer}`, Date.now()); saveCloudData(); checkSpinCooldown(); setTimeout(() => { wheel.style.transition = 'none'; wheel.style.transform = `rotate(${finalDeg % 360}deg)`; setTimeout(() => wheel.style.transition = 'transform 3s cubic-bezier(0.1, 0.7, 0.1, 1)', 50); }, 1000); }, 3000); }
+
+        // --- مدرسه Ravora و کوییز آنلاین لایو ---
         async function openSchoolModal() {
             document.getElementById('loginLoading').classList.add('active');
-            const { data } = await db.from('farm_players').select('username, level').order('sun', { ascending: false }).limit(15);
+            let timeP = new Promise(r => setTimeout(r, 5000));
+            let dataP = db.from('farm_players').select('username, level').order('sun', { ascending: false }).limit(15);
+            let [_, result] = await Promise.all([timeP, dataP]);
+            const data = result.data;
             const list = document.getElementById('onlinePlayersList'); list.innerHTML = '';
-            if(data) {
-                data.forEach(p => {
-                    if(p.username === currentPlayer) return;
-                    const div = document.createElement('div'); div.className = 'list-item';
-                    div.innerHTML = `<span>🟢 ${p.username} (Lvl.${p.level})</span><button class="btn-action" style="width:auto; margin:0; padding:4px 8px; font-size:11px;" onclick="invitePlayer('${p.username}')">درخواست مسابقه</button>`;
-                    list.appendChild(div);
-                });
-            }
-            setTimeout(() => { document.getElementById('loginLoading').classList.remove('active'); openModal('schoolModal'); }, 800);
+            if(data) { data.forEach(p => { if(p.username === currentPlayer) return; const div = document.createElement('div'); div.className = 'list-item'; div.innerHTML = `<span>🟢 ${p.username} (Lvl.${p.level})</span><button class="btn-action" style="width:auto; margin:0; padding:4px 8px; font-size:11px;" onclick="invitePlayer('${p.username}')">درخواست مسابقه</button>`; list.appendChild(div); }); }
+            document.getElementById('loginLoading').classList.remove('active'); openModal('schoolModal');
         }
 
         async function invitePlayer(oppName) {
             if(cash < 25 || sun < 1) { alert('برای مسابقه باید ۲۵ اسکناس و ۱ خورشید داشته باشید!'); return; }
-            const { data } = await db.from('farm_players').select('*').eq('username', oppName).single();
-            if(!data) return;
+            const { data } = await db.from('farm_players').select('*').eq('username', oppName).single(); if(!data) return;
             let oppInv = data.inventory; let qIdx = parseInt(localStorage.getItem('rav_q_idx') || 0);
             oppInv.incomingQuiz = { from: currentPlayer, qIdx: qIdx };
             await db.from('farm_players').update({ inventory: oppInv }).eq('username', oppName);
             alert('درخواست مسابقه ارسال شد. در انتظار تایید حریف...'); closeModal('schoolModal');
         }
 
-        // دیتابیس هوشمند فشرده سوالات - سوالات به ترتیب اینجا اضافه شده‌اند (می‌توانید هزاران سوال را اینجا کپی کنید)
+        // دیتابیس هوشمند سوالات (105 سوال به عنوان نمونه وارد شده. ساختار کاملا آماده است تا تمام 1600 سوال خود را به ترتیب همین الگو وارد کنید)
         const allQuestions = [
             ["پایتخت کشور استرالیا کدام شهر است؟", "سیدنی", "ملبورن", "کانبرا", "پرث", 2],
             ["طولانی ترین رود جهان چه نام دارد؟", "آمازون", "نیل", "یانگ تسه", "می سی سی پی", 1],
@@ -1276,86 +1175,132 @@
             ["کدام کشور میزبان المپیک تابستانی ۲۰۲۴ بود؟", "ژاپن", "فرانسه", "آمریکا", "انگلستان", 1],
             ["رودخانه ای که از بیشترین کشورهای جهان عبور میکند کدام است؟", "دانوب", "آمازون", "نیل", "راین", 0],
             ["سرعت نور در خلأ تقریباً چقدر است؟", "۳۰۰ هزار کیلومتر بر ثانیه", "۳۰ هزار کیلومتر بر ثانیه", "۳ میلیون کیلومتر بر ثانیه", "۳ هزار کیلومتر بر ثانیه", 0],
-            ["پرنده ای که توانایی پرواز ندارد اما بسیار سریع میدود؟", "پنگوئن", "شتر مرغ", "کیوی", "فلامینگو", 1]
-            // <-- 1600 سوال خود را دقیقاً با همین الگو ادامه دهید -->
+            ["پرنده ای که توانایی پرواز ندارد اما بسیار سریع میدود؟", "پنگوئن", "شتر مرغ", "کیوی", "فلامینگو", 1],
+            ["سازنده سیستم عامل ویندوز کدام شرکت است؟", "اپل", "گوگل", "مایکروسافت", "آی‌بی‌ام", 2],
+            ["نام علمی آب چیست؟", "CO2", "H2O", "NaCl", "CH4", 1],
+            ["کدام فیلسوف یونانی شاگرد افلاطون و معلم اسکندر مقدونی بود؟", "سقراط", "فیثاغورث", "ارسطو", "دیوژن", 2],
+            ["بنیان گذار شرکت اپل چه کسی بود؟", "بیل گیتس", "استیو جابز", "مارک زاکربرگ", "جف بزوس", 1],
+            ["بزرگترین پستاندار روی زمین کدام است؟", "فیل آفریقایی", "کرگدن", "نهنگ آبی", "زرافه", 2],
+            ["انقلاب صنعتی برای اولین بار در کدام کشور آغاز شد؟", "فرانسه", "آلمان", "انگلستان", "آمریکا", 2],
+            ["ورزش ملی کشور ژاپن چیست؟", "جودو", "سومو", "کاراته", "کندو", 1],
+            ["رنگ کمربند بالاترین سطح در ورزشهای رزمی مانند کاراته چیست؟", "قهوه ای", "قرمز", "مشکی", "دان", 2],
+            ["کوچکترین پرنده جهان چه نام دارد؟", "مرغ مگس خوار", "گنجشک", "قناری", "فنج", 0],
+            ["نویسنده سری کتابهای هری پاتر کیست؟", "جی آر آر تالکین", "جورج آر. آر. مارتین", "جی کی رولینگ", "آگاتا کریستی", 2],
+            ["فراوان ترین عنصر در جهان هستی کدام است؟", "اکسیژن", "کربن", "هلیوم", "هیدروژن", 3],
+            ["مهد بازیهای المپیک باستان کدام کشور بود؟", "ایتالیا", "یونان", "مصر", "چین", 1],
+            ["نزدیک ترین ستاره به زمین پس از خورشید چه نام دارد؟", "شباهنگ", "قطبی", "پروکسیما قنطورس", "آلفا قنطورس", 2],
+            ["واحد اندازه گیری شدت جریان الکتریکی چیست؟", "ولت", "اهم", "آمپر", "وات", 2],
+            ["نماد شیمیایی آهن چیست؟", "Fe", "Ir", "Ag", "Au", 0],
+            ["تابلوی شب پر ستاره اثر کدام نقاش است؟", "پابلو پیکاسو", "وینسنت ون گوگ", "کلود مونه", "سالوادور دالی", 1],
+            ["پایتخت کشور کانادا کدام شهر است؟", "تورنتو", "ونکوور", "مونترال", "اتاوا", 3],
+            ["اولین پادشاه سلسله هخامنشی چه کسی بود؟", "داریوش بزرگ", "خشایارشا", "کوروش بزرگ", "کمبوجیه", 2],
+            ["کدام کشور به سرزمین آفتاب تابان معروف است؟", "چین", "کره جنوبی", "ژاپن", "تایلند", 2],
+            ["طول مسابقه دو ماراتن تقریباً چقدر است؟", "۲۱ کیلومتر", "۳۲ کیلومتر", "۴۲.۱۹۵ کیلومتر", "۵۰ کیلومتر", 2],
+            ["کدام اندام در بدن انسان انسولین تولید میکند؟", "کبد", "کلیه", "لوزالمعده", "کیسه صفرا", 2],
+            ["قوی ترین حس در سگها کدام است؟", "بینایی", "شنوایی", "چشایی", "بویایی", 3],
+            ["کدام ورزشکار به عنوان سریع ترین دونده تاریخ شناخته میشود؟", "تایسون گی", "یوهان بلیک", "اوسین بولت", "جاستین گاتلین", 2],
+            ["قاره ای که از نظر مساحت و جمعیت دومین قاره بزرگ جهان است؟", "اروپا", "آفریقا", "آمریکای شمالی", "آمریکای جنوبی", 1],
+            ["جنگ جهانی اول در چه سالی آغاز شد؟", "۱۹۱۴", "۱۹۱۸", "۱۹۳۹", "۱۹۴۵", 0],
+            ["بازیگر نقش اصلی در فیلم «پدرخوانده» چه کسی بود؟", "آل پاچینو", "مارلون براندو", "رابرت دنیرو", "جک نیکلسون", 1],
+            ["کتاب دیوان شمس اثر کدام شاعر بزرگ ایرانی است؟", "سعدی", "حافظ", "مولوی", "عطار", 2],
+            ["کدام حیوان میتواند در حالت ایستاده بخوابد؟", "سگ", "اسب", "گربه", "خرس", 1],
+            ["نماد صلح در سراسر جهان چیست؟", "عقاب", "کبوتر سفید", "شیر", "برگ زیتون", 1],
+            ["پایتخت کشور اسپانیا کجاست؟", "بارسلونا", "مادرید", "لیون", "والنسیا", 1],
+            ["در بازی شطرنج کدام مهره فقط میتواند به صورت مورب حرکت کند؟", "رخ", "اسب", "فیل", "وزیر", 2],
+            ["بلند ترین آبشار جهان چه نام دارد؟", "نیاگارا", "ویکتوریا", "آنجل", "ایگواسو", 2],
+            ["بزرگترین غده بدن انسان کدام است؟", "تیروئید", "کبد", "لوزالمعده", "هیپوفیز", 1],
+            ["در افسانه های یونان باستان خدای دریاها چه نام داشت؟", "زئوس", "هادس", "آپولو", "پوزئیدون", 3],
+            ["پول رسمی کشور هند چیست؟", "روپیه", "پزو", "لیره", "دینار", 0],
+            ["اولین رئیس جمهور ایالات متحده آمریکا چه کسی بود؟", "آبراهام لینکلن", "توماس جفرسون", "جرج واشینگتن", "جان آدامز", 2],
+            ["کدام گاز باعث ایجاد اثر گلخانه ای در زمین میشود؟", "اکسیژن", "نیتروژن", "کربن دی اکسید", "هلیوم", 2],
+            ["کدام قاره به قاره سیاه معروف است؟", "آسیا", "آمریکای جنوبی", "آفریقا", "استرالیا", 2],
+            ["ورزش تنیس روی میز اولین بار در کدام کشور ابداع شد؟", "چین", "ژاپن", "انگلستان", "کره جنوبی", 2],
+            ["شاعر معروف انگلیسی و نویسنده نمایشنامه «رومئو و ژولیت»؟", "چارلز دیکنز", "ویلیام شکسپیر", "آرتور کانن دویل", "جین آستین", 1],
+            ["کاشف قاره آمریکا چه کسی بود؟", "مارکو پولو", "واسکو دوگاما", "کریستف کلمب", "ماژلان", 2],
+            ["عمیق ترین نقطه اقیانوسها در کجا قرار دارد؟", "گودال ماریانا", "گودال پورتوریکو", "دریای کارائیب", "خلیج مکزیک", 0],
+            ["کدام فلز در دمای اتاق به حالت مایع است؟", "سرب", "جیوه", "روی", "مس", 1],
+            ["کوه های هیمالیا در کدام قاره قرار دارند؟", "اروپا", "آفریقا", "آسیا", "آمریکای جنوبی", 2],
+            ["چه کسی مخترع لامپ رشته ای بود؟", "نیکولا تسلا", "توماس ادیسون", "بنجامین فرانکلین", "مایکل فارادی", 1],
+            ["کدام کشور بیشترین مرز خاکی را با همسایگان خود دارد؟", "روسیه", "چین", "هند", "برزیل", 1],
+            ["در فوتبال تیمی که مسابقه را در زمین خود برگزار میکند چه مینامند؟", "تیم مهمان", "تیم میزبان", "تیم مهاجم", "تیم مدافع", 1],
+            ["اولین مسجد ساخته شده در اسلام چه نام دارد؟", "مسجد النبی", "مسجد الحرام", "مسجد قبا", "مسجد الاقصی", 2],
+            ["کدام حیوان معروف است که حافظه بسیار قوی دارد؟", "شیر", "زرافه", "فیل", "خرس", 2],
+            ["کدام کشور از نظر مساحت بزرگترین کشور جهان است؟", "کانادا", "آمریکا", "چین", "روسیه", 3],
+            ["کدام ویتامین برای انعقاد خون ضروری است؟", "ویتامین A", "ویتامین C", "ویتامین K", "ویتامین E", 2],
+            ["کدام شهر به عروس شهرهای اروپا شهرت دارد؟", "پاریس", "لندن", "رم", "برلین", 0],
+            ["کدام نویسنده ایرانی جایزه نوبل ادبیات را دریافت کرده است؟", "صادق هدایت", "محمود دولت آبادی", "هیچکدام", "سیمین دانشور", 2],
+            ["پایتخت کشور مصر کدام شهر است؟", "اسکندریه", "قاهره", "پورت سعید", "اقصر", 1],
+            ["سازه تاریخی کلوسئوم در کدام شهر قرار دارد؟", "آتن", "رم", "استانبول", "میلان", 1],
+            ["ورزش اصلی کشور هند چیست که در آن بسیار موفق بوده اند؟", "فوتبال", "بیسبال", "کریکت", "بسکتبال", 2],
+            ["چه حیوانی نماد کشور استرالیا است؟", "کوالا", "کانگورو", "شتر مرغ", "پلاتی پوس", 1],
+            ["چه کسی اولین نقشه جهان را ترسیم کرد؟", "بطلمیوس", "آناکسیماندر", "ارسطو", "گالیله", 1],
+            ["کدام درخت نماد صلح و دوستی است؟", "کاج", "بلوط", "زیتون", "نارون", 2],
+            ["پرجمعیت ترین شهر جهان کدام است؟", "نیویورک", "شانگهای", "توکیو", "بمبئی", 2],
+            ["در ریاضیات مجموع زوایای داخلی یک مثلث چند درجه است؟", "۹۰", "۱۸۰", "۲۷۰", "۳۶۰", 1],
+            ["پایتخت تاریخی امپراتوری بیزانس کدام شهر بود؟", "آتن", "قسطنطنیه", "رم", "اسکندریه", 1],
+            ["زبان رسمی کشور آرژانتین چیست؟", "پرتغالی", "اسپانیایی", "ایتالیایی", "فرانسوی", 1],
+            ["سازه معروف تاج محل در کدام کشور قرار دارد؟", "پاکستان", "بنگلادش", "هند", "ایران", 2],
+            ["بزرگترین جزیره جهان کدام است؟", "ماداگاسکار", "بریتانیا", "گرینلند", "گینه نو", 2],
+            ["مخترع ماشین چاپ چه کسی بود؟", "یوهانس گوتنبرگ", "آیزاک نیوتن", "گالیله", "لئوناردو داوینچی", 0],
+            ["رنگ سبز گیاهان به دلیل وجود کدام ماده است؟", "کاروتن", "کلروفیل", "ملانین", "هموگلوبین", 1],
+            ["فیلم رستگاری در شاوشنک بر اساس داستانی از کدام نویسنده ساخته شده است؟", "تالکین", "استیون کینگ", "آگاتا کریستی", "کانن دویل", 1],
+            ["تعداد بازیکنان یک تیم بسکتبال در داخل زمین چند نفر است؟", "۵ نفر", "۶ نفر", "۷ نفر", "۱۱ نفر", 0],
+            ["پرچم کدام کشور به شکل یک مربع کامل است؟", "نپال", "سوئیس", "ژاپن", "کانادا", 1],
+            ["پایتخت کشور فنلاند کدام شهر است؟", "اسلو", "هلسینکی", "استکهلم", "کپنهاگ", 1],
+            ["کاشف نیروی جاذبه زمین چه کسی بود؟", "آلبرت اینشتین", "گالیله", "اسحاق نیوتن", "نیکولا تسلا", 2],
+            ["یک انسان بالغ به طور متوسط چند استخوان در بدن دارد؟", "۱۸۶", "۲۰۶", "۲۵۶", "۳۰۶", 1],
+            ["بزرگترین بیابان گرم جهان غیر قطبی کدام است؟", "گبی", "لوت", "صحرای بزرگ آفریقا", "کالاهاری", 2],
+            ["نویسنده رمان معروف پیرمرد و دریا کیست؟", "ارنست همینگوی", "مارک تواین", "داستایوفسکی", "گارسیا مارکز", 0]
+            // مابقی 1600 سوال خود را به راحتی در اینجا و با همین فرمت می‌توانید اضافه کنید.
         ];
 
         let quizQIndex = 0; let qCount = 0; let qTimer;
         
         function startQuizGame(startIdx, role, oppName) {
             isQuizMode = true; qCount = 0;
-            document.getElementById('toolbar-normal').style.display = 'none';
-            document.getElementById('matchOverlay').style.display = 'flex';
-            document.getElementById('waitScreen').style.display = 'none';
+            document.getElementById('toolbar-normal').style.display = 'none'; document.getElementById('matchOverlay').style.display = 'flex'; document.getElementById('waitScreen').style.display = 'none';
             document.getElementById('quizMe').innerText = `شما: 0`; document.getElementById('quizOpp').innerText = `${oppName}: 0`;
-            
-            quizQIndex = startIdx;
-            if(quizQIndex >= allQuestions.length) quizQIndex = 0; 
-            if(role === 'host') localStorage.setItem('rav_q_idx', quizQIndex + 10); // افزایش شماره برای بازی‌های بعدی
-            
+            quizQIndex = startIdx; if(quizQIndex >= allQuestions.length) quizQIndex = 0; 
+            if(role === 'host') localStorage.setItem('rav_q_idx', quizQIndex + 10); 
             nextQuestion();
         }
 
         function nextQuestion() {
             if(qCount >= 10) { endQuizGame(); return; }
             let q = allQuestions[quizQIndex + qCount];
-            if(!q) q = allQuestions[0]; // اگر سوال تمام شد برگردد اول
+            if(!q) q = allQuestions[0]; 
 
             document.getElementById('quizQ').innerText = `${qCount+1}. ` + q[0];
             const optsDiv = document.getElementById('quizOpts'); optsDiv.innerHTML = '';
             
-            // گزینه‌ها در اندیس‌های 1 تا 4، پاسخ در اندیس 5
             for(let i=1; i<=4; i++) {
                 let btn = document.createElement('button'); btn.className = 'quiz-opt'; btn.innerText = q[i];
                 btn.onclick = () => {
                     clearInterval(qTimer);
                     if(i - 1 === q[5]) state.quizState.myScore++;
-                    document.getElementById('quizMe').innerText = `شما: ${state.quizState.myScore}`;
-                    document.getElementById('quizScore').innerText = `امتیاز فعلی: ${state.quizState.myScore}`;
+                    document.getElementById('quizMe').innerText = `شما: ${state.quizState.myScore}`; document.getElementById('quizScore').innerText = `امتیاز فعلی: ${state.quizState.myScore}`;
                     qCount++; nextQuestion();
-                };
-                optsDiv.appendChild(btn);
+                }; optsDiv.appendChild(btn);
             }
 
-            let timeLeft = 10; document.getElementById('quizTimer').innerText = `⏱ ${timeLeft}`;
-            clearInterval(qTimer);
-            qTimer = setInterval(() => {
-                timeLeft--; document.getElementById('quizTimer').innerText = `⏱ ${timeLeft}`;
-                if(timeLeft <= 0) { clearInterval(qTimer); qCount++; nextQuestion(); }
-            }, 1000);
+            let timeLeft = 10; document.getElementById('quizTimer').innerText = `⏱ ${timeLeft}`; clearInterval(qTimer);
+            qTimer = setInterval(() => { timeLeft--; document.getElementById('quizTimer').innerText = `⏱ ${timeLeft}`; if(timeLeft <= 0) { clearInterval(qTimer); qCount++; nextQuestion(); } }, 1000);
         }
 
         async function endQuizGame() {
-            state.quizState.isDone = true;
-            document.getElementById('waitScreen').style.display = 'flex';
-            document.getElementById('waitSub').innerText = 'در حال دریافت اطلاعات حریف...';
-            saveCloudData();
-
+            state.quizState.isDone = true; document.getElementById('waitScreen').style.display = 'flex'; document.getElementById('waitSub').innerText = 'در حال دریافت اطلاعات حریف...'; saveCloudData();
             const { data } = await db.from('farm_players').select('*').eq('username', state.quizState.opp).single();
-            if(data) {
-                let oppInv = data.inventory; oppInv.quizOppDone = { score: state.quizState.myScore };
-                await db.from('farm_players').update({ inventory: oppInv }).eq('username', state.quizState.opp);
-            }
+            if(data) { let oppInv = data.inventory; oppInv.quizOppDone = { score: state.quizState.myScore }; await db.from('farm_players').update({ inventory: oppInv }).eq('username', state.quizState.opp); }
             checkQuizResults();
         }
 
         async function checkQuizResults() {
             if(state.quizState && state.quizState.isDone && state.quizState.oppDone) {
                 let res = '';
-                if(state.quizState.myScore > state.quizState.oppScore) {
-                    res = `🎉 شما برنده شدید! 50 💵 دریافت کردید.\n\nشما: ${state.quizState.myScore}\nحریف: ${state.quizState.oppScore}`;
-                    cash += 50; updateHUD();
-                } else if (state.quizState.myScore < state.quizState.oppScore) {
-                    res = `💀 شما باختید!\n\nشما: ${state.quizState.myScore}\nحریف: ${state.quizState.oppScore}`;
-                } else {
-                    res = `🤝 مساوی شدید! هزینه (25 💵) برگشت داده شد.\n\nشما: ${state.quizState.myScore}\nحریف: ${state.quizState.oppScore}`;
-                    cash += 25; updateHUD();
-                }
-                
-                alert(res);
-                state.quizState = null; isQuizMode = false; saveCloudData();
-                document.getElementById('matchOverlay').style.display = 'none';
-                document.getElementById('toolbar-normal').style.display = 'flex';
+                if(state.quizState.myScore > state.quizState.oppScore) { res = `🎉 شما برنده شدید! 50 💵 دریافت کردید.\n\nشما: ${state.quizState.myScore}\nحریف: ${state.quizState.oppScore}`; cash += 50; updateHUD(); } 
+                else if (state.quizState.myScore < state.quizState.oppScore) { res = `💀 شما باختید!\n\nشما: ${state.quizState.myScore}\nحریف: ${state.quizState.oppScore}`; } 
+                else { res = `🤝 مساوی شدید! هزینه (25 💵) برگشت داده شد.\n\nشما: ${state.quizState.myScore}\nحریف: ${state.quizState.oppScore}`; cash += 25; updateHUD(); }
+                alert(res); state.quizState = null; isQuizMode = false; saveCloudData(); document.getElementById('matchOverlay').style.display = 'none'; document.getElementById('toolbar-normal').style.display = 'flex';
             }
         }
 
