@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>مزرعه پیکسلی آنلاین</title>
     
-    <!-- لود پیشاپیش مپ جدید -->
     <link rel="preload" as="image" href="https://raw.githubusercontent.com/persiancom/farm/main/file_00000000cb2481f58a273ef7caeb058d.png">
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -15,29 +14,24 @@
 
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #0d1b2a; }
 
-        /* پس‌زمینه نئونی متحرک برای ورود و بارگذاری */
-        .neon-bg {
-            background: linear-gradient(-45deg, #0d47a1, #1976d2, #00bcd4, #009688);
-            background-size: 400% 400%;
-            animation: gradientBG 10s ease infinite;
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 99999;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden;
+        /* پس‌زمینه جدید لاگین */
+        #loginScreen { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: url('https://raw.githubusercontent.com/persiancom/farm/main/file_00000000c01881fd985e1f2570d073a7.png') no-repeat center center;
+            background-size: cover; z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.4s; 
         }
-        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        
-        .floating-emojis { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-        .emoji-float { position: absolute; bottom: -50px; opacity: 0.15; animation: floatUp linear infinite; pointer-events: none; }
-        @keyframes floatUp { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(-120vh) rotate(360deg); } }
-
-        #loginScreen { transition: opacity 0.4s; }
         .login-box { background: linear-gradient(to bottom, #fff8e1, #ffecb3); border: 4px solid #ff8f00; border-radius: 15px; padding: 25px 20px; width: 85%; max-width: 320px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.7); z-index: 10; }
         .login-input { width: 100%; padding: 10px; margin: 8px 0; border: 2px solid #ffb300; border-radius: 8px; font-size: 14px; text-align: center; font-weight: bold; outline: none; }
 
-        #cloudOverlay { transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); left: -100%; pointer-events:none; z-index: 999999;}
-        #cloudOverlay.active { left: 0; pointer-events:auto;}
-        .cloud-icon { font-size: 60px; animation: floatCloud 2s infinite ease-in-out alternate; text-shadow: 0 10px 20px rgba(0,0,0,0.3); z-index: 10;}
-        @keyframes floatCloud { from { transform: translateY(0px); } to { transform: translateY(-15px); } }
-        .cloud-text { color: white; font-size: 16px; font-weight: bold; margin-top: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); z-index: 10;}
+        /* لودینگ‌های اختصاصی بدون متن */
+        .full-overlay { 
+            position: fixed; top: 0; left: -100%; width: 100%; height: 100%; 
+            background-size: cover; background-position: center; background-repeat: no-repeat;
+            z-index: 999999; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none;
+        }
+        .full-overlay.active { left: 0; pointer-events: auto; }
+        #loginLoading { background-image: url('https://raw.githubusercontent.com/persiancom/farm/main/file_000000005a3881f8b0cb65bf0e2e0979.png'); }
+        #visitLoading { background-image: url('https://raw.githubusercontent.com/persiancom/farm/main/IMG_%DB%B2%DB%B0%DB%B2%DB%B6%DB%B0%DB%B7%DB%B2%DB%B7_%DB%B2%DB%B3%DB%B3%DB%B1%DB%B3%DB%B4.png'); }
 
         .hud-top { position: fixed; top: 10px; left: 10px; right: 10px; display: flex; justify-content: space-between; align-items:flex-start; z-index: 5000; pointer-events: none;}
         .profile-panel { background: rgba(0, 0, 0, 0.85); border: 2px solid #ffb300; border-radius: 10px; padding: 5px 10px; color: white; font-weight: bold; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.5); cursor: pointer; pointer-events: auto; }
@@ -61,7 +55,7 @@
         #adminBtn { display: none; background: linear-gradient(to bottom, #f44336, #b71c1c); color:white;}
 
         #moveUI { display: none; position: fixed; bottom: 60px; left: 50%; transform: translateX(-50%); gap: 15px; z-index: 6000; pointer-events: auto;}
-        .btn-move { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 22px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); border: 2px solid white; cursor: pointer; background: #4caf50;}
+        .btn-move { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 22px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); border: 2px solid white; cursor: pointer; background: #4caf50; transition:0.2s;}
 
         /* سیستم دوربین دقیق فیت شده با مپ جدید */
         #gameViewport { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; touch-action: none; z-index: 10; }
@@ -70,21 +64,19 @@
         
         #isoWorld { position: absolute; top: 45%; left: 50%; transform: rotateX(60deg) rotateZ(-45deg); transform-style: preserve-3d; }
 
-        /* اصلاح سایز و کیفیت کاشی‌های زمین */
-        .garden { display: grid; grid-template-columns: repeat(var(--grid-size), 35px); grid-template-rows: repeat(var(--grid-size), 35px); gap: 4px; transform-style: preserve-3d; transition: all 0.5s ease; }
-        .plot { width: 35px; height: 35px; background: rgba(109, 76, 65, 0.9); border: 1.5px solid #3e2723; border-radius: 4px; box-shadow: inset 0 0 5px rgba(0,0,0,0.6), -2px 2px 0px rgba(62, 39, 35, 0.85); position: relative; cursor: pointer; transform-style: preserve-3d; transition: background 0.2s; z-index: 5; pointer-events: auto;}
-        .plot:hover { background: rgba(121, 85, 72, 0.95); }
+        /* اصلاح سایز و چسباندن کاشی‌های زمین */
+        .garden { display: grid; grid-template-columns: repeat(var(--grid-size), 32px); grid-template-rows: repeat(var(--grid-size), 32px); gap: 0px; transform-style: preserve-3d; transition: all 0.5s ease; border: 2px solid #3e2723; border-radius: 5px; background: #3e2723;}
+        .plot { width: 32px; height: 32px; background: rgba(109, 76, 65, 0.95); border: 1px solid #4e342e; box-shadow: inset 0 0 5px rgba(0,0,0,0.8); position: relative; cursor: pointer; transform-style: preserve-3d; transition: background 0.2s; z-index: 5; pointer-events: auto !important;}
+        .plot:hover { background: rgba(121, 85, 72, 1); }
 
         .plot-content, .building { transform: rotateZ(45deg) rotateX(-60deg) !important; transform-origin: bottom center; transform-style: preserve-3d; }
         .plot-content { position: absolute; bottom: 8px; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; pointer-events: none !important; }
         .plot-content img { max-height: 40px; object-fit: contain; filter: drop-shadow(0 3px 2px rgba(0,0,0,0.4)); pointer-events: none; }
 
-        /* فعال‌سازی کلیک و درگ روی ساختمان‌ها */
         .building { position: absolute; cursor: pointer; z-index: 20; transition: filter 0.2s; pointer-events: auto !important; }
         .building:hover { filter: brightness(1.15); } 
         .building img { width: 120px; object-fit: contain; filter: drop-shadow(-2px 5px 3px rgba(0,0,0,0.5)); pointer-events: none; }
-        .building.moving { filter: drop-shadow(0 0 15px #4caf50) brightness(1.2) !important; z-index: 999 !important; animation: floatMove 1s infinite alternate; pointer-events: auto !important; touch-action: none; }
-        @keyframes floatMove { from { transform: rotateZ(45deg) rotateX(-60deg) translateY(-10px) !important; } to { transform: rotateZ(45deg) rotateX(-60deg) translateY(-20px) !important; } }
+        .building.moving { filter: drop-shadow(0 0 15px #4caf50) brightness(1.2) !important; z-index: 999 !important; touch-action: none; pointer-events: auto !important;}
 
         .timer-badge { background: rgba(0, 0, 0, 0.85); color: #fff; padding: 2px 4px; border-radius: 4px; font-size: 8px; font-weight: bold; border: 1px solid #fff; margin-bottom: 2px; display: none; box-shadow: 0 2px 4px rgba(0,0,0,0.4); white-space: nowrap; pointer-events: none; }
         .progress-bar { width: 30px; height: 3px; background-color: #222; border: 1px solid #fff; border-radius: 3px; display: none; overflow: hidden; margin-bottom: 3px; box-shadow: 0 2px 4px rgba(0,0,0,0.5); pointer-events: none;}
@@ -97,6 +89,7 @@
         .bank-cash-icon { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 20px; z-index: 15; pointer-events: none; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5)); display: none; animation: floatIcon 1.5s infinite alternate;}
         @keyframes floatIcon { from { transform: translateX(-50%) translateY(0); } to { transform: translateX(-50%) translateY(-5px); } }
 
+        /* اصلاح کلاغ */
         #battleCrow { position: absolute; z-index: 100; transition: all 1s ease; transform: rotateZ(45deg) rotateX(-60deg) !important; transform-origin: bottom center; pointer-events: none; opacity: 0; display:flex; flex-direction:column; align-items:center;}
         .crow-icon-style { font-size: 38px; filter: drop-shadow(0 15px 5px rgba(0,0,0,0.6)); text-shadow: none; background: none;}
         .crow-timer { font-size:10px; color:#fff; font-weight:bold; text-shadow:0 1px 2px #000; margin-top:-5px; }
@@ -121,7 +114,6 @@
         .tab-btn { flex: 1; padding: 5px; background: #ffe082; border: 2px solid #ffb300; border-radius: 6px; font-weight: bold; color: #5d4037; cursor: pointer; font-size: 12px; }
         .tab-btn.active { background: #ff8f00; color: #fff; box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); border-color: #e65100; }
         
-        /* اصلاح مودال‌ها و صندوق پیامِ اسکرول‌دار */
         .tab-content { display: none; padding: 0 5px;}
         .tab-content.active { display: block; }
         .msg-container { max-height: 140px; overflow-y: auto; padding-right: 5px; display: flex; flex-direction: column; }
@@ -149,6 +141,16 @@
         .bank-blur { filter: blur(3px) grayscale(50%); pointer-events: none; opacity: 0.7;}
         .msg-item { background: #fff; border-right: 4px solid #ff9800; padding: 8px; margin-bottom: 8px; border-radius: 5px; text-align: right; font-size: 11px; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
         .msg-time { font-size: 9px; color: #888; display: block; margin-top: 4px; }
+
+        /* استایل اختصاصی کوییز مدرسه */
+        #matchOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #1a1a2e; z-index: 99999; display: none; flex-direction: column; align-items: center; justify-content: center; color: white;}
+        .quiz-timer { font-size: 30px; color: #ffb300; font-weight: 900; background: #000; padding: 10px 20px; border-radius: 10px; border: 3px solid #ff8f00; margin-bottom: 20px;}
+        .quiz-q { font-size: 16px; background: #fff; color: #000; padding: 15px; border-radius: 10px; width: 90%; text-align: center; font-weight: bold; margin-bottom: 20px; border: 3px solid #00bcd4; line-height:1.6;}
+        .quiz-opt { background: #00bcd4; color: white; border: none; width: 90%; padding: 12px; margin-bottom: 10px; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 0 #00838f; transition: 0.1s;}
+        .quiz-opt:active { transform: scale(0.95); box-shadow: 0 0 0 #00838f;}
+        #quizScore { font-size: 18px; margin-top: 15px; color: #00e676; font-weight: bold; }
+        .quiz-vs { position: absolute; top: 20px; display: flex; justify-content: space-between; width: 90%; font-size: 14px; font-weight: bold; border-bottom: 2px solid #555; padding-bottom: 10px;}
+        .wait-screen { position: absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index: 100000; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;}
     </style>
 </head>
 <body>
@@ -163,9 +165,8 @@
         </div>
     </div>
 
-    <!-- پس‌زمینه نئونی و ایموجی‌های متحرک برای لاگین -->
-    <div id="loginScreen" class="neon-bg">
-        <div class="floating-emojis" id="loginEmojis"></div>
+    <!-- پس‌زمینه جدید ورود -->
+    <div id="loginScreen">
         <div class="login-box">
             <img src="https://raw.githubusercontent.com/persiancom/farm/main/file_0000000073dc81f5bc7991afd0bca56c.png" style="width: 250px; max-width: 90%; margin: 0 auto 5px auto; display: block; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));">
             <h4 style="margin: 0 0 15px 0; white-space: nowrap; font-size: 12px; color:#d32f2f; text-shadow:1px 1px 0px #fff; font-weight:900;">♥️ به مزرعه زیبای خودت خوش اومدی ♥️</h4>
@@ -175,12 +176,10 @@
         </div>
     </div>
 
-    <!-- پس‌زمینه نئونی و ایموجی‌ها برای لودینگ مپ -->
-    <div id="cloudOverlay" class="neon-bg">
-        <div class="floating-emojis" id="cloudEmojis"></div>
-        <div class="cloud-icon">☁️ ✈️ ☁️</div>
-        <div class="cloud-text" id="cloudText">🔍 لطفاً صبر کنید...</div>
-    </div>
+    <!-- لودینگ اختصاصی لاگین -->
+    <div id="loginLoading" class="full-overlay"></div>
+    <!-- لودینگ اختصاصی بازدید -->
+    <div id="visitLoading" class="full-overlay"></div>
 
     <div class="hud-top">
         <div class="profile-panel" onclick="openProfile()">
@@ -209,24 +208,29 @@
             <div id="isoWorld">
                 <div class="garden" id="garden"></div>
                 
-                <!-- ساختمان‌ها با Event های سالم و کلیک‌پذیر -->
-                <div class="building" id="cabin-inv" onclick="checkBuildingClick(this, () => openModal('inventoryModal'))">
+                <!-- ساختمان‌ها -->
+                <div class="building" id="cabin-inv">
                     <div class="b-label" id="invLabel">انبار (0/200)</div>
                     <img src="https://raw.githubusercontent.com/persiancom/farm/main/file_000000005acc8243af0f42016d01ef45.png">
                 </div>
-                <div class="building" id="cabin-guard" onclick="checkBuildingClick(this, openGuardModal)">
+                <div class="building" id="cabin-guard">
                     <div class="b-label" id="guardLabel">نگهبانی</div>
                     <div id="guardSpriteContainer"></div>
                     <img src="https://raw.githubusercontent.com/persiancom/farm/main/file_00000000318c81f488176e9d1c9220d5.png">
                 </div>
-                <div class="building" id="cabin-crow" onclick="checkBuildingClick(this, openCrowModal)">
+                <div class="building" id="cabin-crow">
                     <div class="b-label" id="crowLabel">آشیانه</div>
                     <img src="https://raw.githubusercontent.com/persiancom/farm/main/file_00000000c9ec81f4b0f7578df0859c1a.png">
                 </div>
-                <div class="building" id="cabin-bank" onclick="checkBuildingClick(this, openBankModal)">
+                <div class="building" id="cabin-bank">
                     <div class="b-label" id="bankLabel">بانک (قفل)</div>
                     <div id="bankCashIcon" class="bank-cash-icon">💵</div>
                     <img src="https://raw.githubusercontent.com/persiancom/farm/main/BackgroundEraser_%DB%B2%DB%B0%DB%B2%DB%B6%DB%B0%DB%B7%DB%B2%DB%B4_%DB%B1%DB%B9%DB%B0%DB%B7%DB%B1%DB%B5%DB%B3%DB%B9%DB%B7.png">
+                </div>
+                <!-- مدرسه Ravora -->
+                <div class="building" id="cabin-school">
+                    <div class="b-label" id="schoolLabel">مدرسه Ravora</div>
+                    <img src="https://raw.githubusercontent.com/persiancom/farm/main/BackgroundEraser_%DB%B2%DB%B0%DB%B2%DB%B6%DB%B0%DB%B7%DB%B2%DB%B7_%DB%B0%DB%B0%DB%B0%DB%B7%DB%B4%DB%B0%DB%B7%DB%B0%DB%B7.png" style="width:140px;">
                 </div>
                 
                 <div id="battleCrow">🐦‍⬛</div>
@@ -236,7 +240,7 @@
     </div>
 
     <div id="moveUI">
-        <div class="btn-move" onclick="confirmMove()">✔️</div>
+        <div class="btn-move" id="btnConfirmMove" onclick="confirmMove()">✔️</div>
         <div class="btn-move" style="background:#f44336;" onclick="cancelMove()">❌</div>
     </div>
 
@@ -255,7 +259,32 @@
         <button class="btn-action" style="background:#d32f2f; box-shadow:0 4px 0 #b71c1c; font-size:14px; padding:10px; width:auto; border-radius:10px; margin:0;" onclick="returnHome()">🏡 بازگشت به مزرعه</button>
     </div>
 
-    <!-- مودال‌ها -->
+    <!-- محیط بازی مسابقه‌ای کوییز -->
+    <div id="matchOverlay">
+        <div class="quiz-vs"><span id="quizMe">شما: 0</span> <span id="quizOpp">حریف: 0</span></div>
+        <h2 id="quizTimer" class="quiz-timer">⏱ 10</h2>
+        <div id="quizQ" class="quiz-q">در حال آماده سازی...</div>
+        <div id="quizOpts" style="width:100%; display:flex; flex-direction:column; align-items:center;"></div>
+        <div id="quizScore">امتیاز فعلی: 0</div>
+        
+        <div id="waitScreen" class="wait-screen" style="display:none;">
+            <h2 id="waitTitle" style="color:#ffb300;">در حال انتظار...</h2>
+            <p id="waitSub" style="color:#ccc; font-size:14px;"></p>
+        </div>
+    </div>
+
+    <!-- مودال مدرسه -->
+    <div class="modal" id="schoolModal">
+        <div class="modal-content">
+            <h3 style="margin-top:0; color:#00838f;">🏫 مدرسه Ravora</h3>
+            <p style="font-size:11px; color:#555;">با شرکت در مسابقه (ورودی: ۲۵ 💵 + ۱ ☀️) اطلاعات خود را محک بزنید و برنده ۵۰ اسکناس شوید!</p>
+            <div id="onlinePlayersList" class="msg-container" style="max-height: 250px;"></div>
+            <button class="btn-move-cabin" onclick="startMoveMode('school')">تغییر مکان ساختمان 📍</button>
+            <button class="btn-close" onclick="closeModal('schoolModal')">بستن</button>
+        </div>
+    </div>
+
+    <!-- سایر مودال‌ها -->
     <div class="modal" id="profileModal">
         <div class="modal-content" style="text-align:right;">
             <div style="display:flex; gap:12px; align-items:center;">
@@ -283,7 +312,6 @@
         <div class="modal-content">
             <h3 style="margin-top:0;">💬 ارسال پیام</h3>
             <input type="text" id="msgTargetUser" class="exchange-input" placeholder="نام کاربری گیرنده">
-            <!-- حذف متن ایموجی -->
             <textarea id="msgContentText" class="exchange-input" placeholder="متن پیام شما..." style="height:70px; resize:none;"></textarea>
             <button class="btn-action" style="background:#4caf50;" onclick="sendPlayerMessage()">ارسال پیام 🚀</button>
             <button class="btn-close" onclick="closeModal('sendMsgModal')">بستن</button>
@@ -339,7 +367,6 @@
         </div>
     </div>
 
-    <!-- صندوق پیام‌ها با اسکرول‌بار مجزا و دو تب -->
     <div class="modal" id="messagesModal">
         <div class="modal-content">
             <h3 style="margin-top:0;">✉️ صندوق پیام‌ها</h3>
@@ -358,7 +385,6 @@
         </div>
     </div>
 
-    <!-- انبار با دو تب مجزا و اسکرول‌بار -->
     <div class="modal" id="inventoryModal">
         <div class="modal-content">
             <h3 style="margin-top:0;">📦 کلبه انبار (<span id="invCount">0</span>/200)</h3>
@@ -427,30 +453,12 @@
     </div>
 
     <script>
-        // تولید ایموجی‌های متحرک برای پس‌زمینه نئونی
-        function generateEmojis(containerId) {
-            const container = document.getElementById(containerId);
-            const emojis = ['☘️','🍀','🌼','🌸','☁️','🍒','🍓','🥕'];
-            for(let i=0; i<15; i++) {
-                let span = document.createElement('span');
-                span.className = 'emoji-float';
-                span.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-                span.style.left = Math.random() * 100 + '%';
-                span.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                span.style.animationDelay = (Math.random() * 5) + 's';
-                span.style.fontSize = (Math.random() * 15 + 15) + 'px';
-                container.appendChild(span);
-            }
-        }
-        generateEmojis('loginEmojis');
-        generateEmojis('cloudEmojis');
-
         const supabaseUrl = 'https://ssbyethkhdilosnydaxy.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzYnlldGhraGRpbG9zbnlkYXh5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ2MjkxNDksImV4cCI6MjEwMDIwNTE0OX0.-d22TnVxPnPuXF9wbWmLhLW2tAt1KL55ypS6EvM4u0c';
         const db = window.supabase.createClient(supabaseUrl, supabaseKey);
         
         let currentPlayer = ""; let isVisiting = false; let visitingData = null;
-        let isMovingMode = false; let isAttacking = false;
+        let isMovingMode = false; let isAttacking = false; let isQuizMode = false;
         let cash = 100, sun = 0, level = 1, xp = 0, gridSize = 3; let selectedSeed = null;
 
         const imgs = {
@@ -481,18 +489,30 @@
             loot: { redFlower: [], pinkFlower: [], wheat: [], appleTree: [], pineTree: [] },
             guard: { level: 0, kills: 0, sleeping: false }, crow: { level: 0, lastSent: 0 },
             bank: { level: 0, lastCol: Date.now(), acc: false, inv: 0, invStart: 0, ready: false }, messages: [],
-            positions: { inv: { t: -120, l: -50 }, guard: { t: 80, l: -80 }, crow: { t: -80, l: 120 }, bank: { t: -140, l: 30 } },
-            liveAlert: null, incomingAttack: false, incomingCrow: null
+            positions: { inv: { t: -120, l: -50 }, guard: { t: 80, l: -80 }, crow: { t: -80, l: 120 }, bank: { t: -140, l: 30 }, school: { t: 150, l: 100 } },
+            liveAlert: null, incomingAttack: false, incomingCrow: null, incomingQuiz: null, quizState: null
         };
 
-        // مدیریت تضمینی کلیک روی ساختمان‌ها
+        // مدیریت 100٪ تضمینی کلیک روی ساختمان‌ها
         let isDragClick = false;
-        function checkBuildingClick(el, action) {
-            if (isDragClick || isMovingMode || isVisiting || isAttacking) return;
-            action();
+        function setupBuildingEvents() {
+            document.querySelectorAll('.building').forEach(b => {
+                b.onpointerdown = () => { isDragClick = false; };
+                b.onpointermove = () => { isDragClick = true; };
+                b.onpointerup = (e) => {
+                    if(!isDragClick && !isMovingMode && !isVisiting && !isQuizMode) {
+                        e.stopPropagation();
+                        if(b.id === 'cabin-inv') openModal('inventoryModal');
+                        if(b.id === 'cabin-guard') openGuardModal();
+                        if(b.id === 'cabin-crow') openCrowModal();
+                        if(b.id === 'cabin-bank') openBankModal();
+                        if(b.id === 'cabin-school') openSchoolModal();
+                    }
+                };
+            });
         }
 
-        // --- سیستم محاسبه دقیق فیت‌شدن دوربین بر اساس ریاضی مپ 1500px ---
+        // سیستم دوربین دقیق فیت شده با مپ 1500px
         const BG_W = 1500; 
         const BG_H = 1500;
         let camX = 0, camY = 0, zoom = 1;
@@ -517,14 +537,12 @@
         }
 
         viewport.addEventListener('pointerdown', e => {
-            if (e.target.closest('.modal') || e.target.closest('.hud-top') || e.target.closest('.toolbar') || e.target.closest('#chatBalloon') || e.target.closest('.action-btn')) return;
-            if (isMovingMode || isAttacking) return;
-            
+            if (e.target.closest('.modal') || e.target.closest('.hud-top') || e.target.closest('.toolbar') || e.target.closest('#chatBalloon') || e.target.closest('.building')) return;
+            if (isMovingMode || isAttacking || isQuizMode) return;
             isDraggingMap = true; isDragClick = false;
             lastDragX = e.clientX; lastDragY = e.clientY;
         });
 
-        // Pointer Events روی ویندوز تا کلیک بقیه چیزا بلاک نشه
         window.addEventListener('pointermove', e => {
             if (!isDraggingMap) return;
             let dx = e.clientX - lastDragX;
@@ -536,10 +554,7 @@
             updateCamera();
         });
 
-        window.addEventListener('pointerup', e => {
-            isDraggingMap = false;
-            setTimeout(() => isDragClick = false, 50); // ریست کردن درگ بعد از لمس
-        });
+        window.addEventListener('pointerup', () => { isDraggingMap = false; setTimeout(() => isDragClick = false, 50); });
 
         // زوم لمسی
         let initDist = 0, initZoom = 1, initCamX = 0, initCamY = 0, pinchCenterX = 0, pinchCenterY = 0, isPinching = false;
@@ -571,10 +586,7 @@
         }, {passive: false});
         
         viewport.addEventListener('touchend', e => {
-            if(e.touches.length < 2) {
-                isPinching = false;
-                if(e.touches.length === 1) { lastDragX = e.touches[0].clientX; lastDragY = e.touches[0].clientY; }
-            }
+            if(e.touches.length < 2) { isPinching = false; if(e.touches.length === 1) { lastDragX = e.touches[0].clientX; lastDragY = e.touches[0].clientY; } }
         });
 
         viewport.addEventListener('wheel', e => {
@@ -592,33 +604,23 @@
 
         function resizeGame() {
             let minZoom = Math.max(window.innerWidth / BG_W, window.innerHeight / BG_H);
-            if(zoom < minZoom) zoom = minZoom;
-            updateCamera();
+            if(zoom < minZoom) zoom = minZoom; updateCamera();
         }
         window.addEventListener('resize', resizeGame);
 
-        // --- سیستم جدید و حرفه‌ای بالن پیام ---
+        // --- بالن پیام اختصاصی کاربران ---
         function triggerIncomingBalloon(sender, text) {
             const balloon = document.getElementById('chatBalloon');
             balloon.className = 'state-hidden-left'; 
             document.getElementById('balloonSender').innerText = `فرستنده: ${sender}`;
             setTimeout(() => { balloon.className = 'state-center'; }, 100); 
         }
+        function closeBalloon(e) { if(e) e.stopPropagation(); document.getElementById('chatBalloon').className = 'state-hidden-right'; }
+        function openMessagesFromBalloon() { openMessages(); closeBalloon(); }
 
-        function closeBalloon(e) {
-            if(e) e.stopPropagation();
-            const balloon = document.getElementById('chatBalloon');
-            balloon.className = 'state-hidden-right'; 
-        }
-
-        function openMessagesFromBalloon() {
-            openMessages();
-            closeBalloon(); 
-        }
-
-        // --- تایم‌ها ---
+        // --- ذخیره‌سازی و بارگذاری ---
         setInterval(() => {
-            if(!currentPlayer || isVisiting) return;
+            if(!currentPlayer || isVisiting || isQuizMode) return;
             let now = Date.now(); let diff = Math.floor((now - state.stats.lt) / 1000);
             if (diff > 0 && diff < 300) state.stats.pTime += diff; state.stats.lt = now;
 
@@ -628,14 +630,14 @@
             if (state.bank && state.bank.inv > 0 && !state.bank.ready) {
                 if (now - state.bank.invStart >= 24 * 3600 * 1000) {
                     state.bank.ready = true; let profit = Math.floor(state.bank.inv * 0.05);
-                    state.messages.unshift({ id: Date.now(), text: `مشتری گرامی ${currentPlayer} سود شما به مبلغ ${profit} اسکناس آماده است! (بانک تجارت)`, read: false, type: 'system' });
+                    state.messages.unshift({ id: Date.now(), text: `مشتری گرامی ${currentPlayer} سود شما به مبلغ ${profit} اسکناس آماده است!`, read: false, type: 'system' });
                     saveCloudData(); updateMsgBadge();
                 }
             }
         }, 5000);
 
         async function saveCloudData() {
-            if(!currentPlayer || isVisiting || isMovingMode || isAttacking) return;
+            if(!currentPlayer || isVisiting || isMovingMode || isAttacking || isQuizMode) return;
             if(sun > state.stats.maxS) state.stats.maxS = sun;
             const lastSpinTime = localStorage.getItem(`lastSpin_${currentPlayer}`) || 0;
             const data = { username: currentPlayer, cash: cash, sun: sun, level: level, xp: xp, grid_size: gridSize, inventory: state, last_spin: parseInt(lastSpinTime) };
@@ -650,7 +652,8 @@
                 if(data.inventory && data.inventory.items) { 
                     state = data.inventory; 
                     if(!state.loot) state.loot = { redFlower: [], pinkFlower: [], wheat: [], appleTree: [], pineTree: [] };
-                    if(!state.positions) state.positions = { inv: { t: -120, l: -50 }, guard: { t: 80, l: -80 }, crow: { t: -80, l: 120 }, bank: { t: -140, l: 30 } };
+                    if(!state.positions) state.positions = { inv: { t: -120, l: -50 }, guard: { t: 80, l: -80 }, crow: { t: -80, l: 120 }, bank: { t: -140, l: 30 }, school: { t: 150, l: 100 } };
+                    if(!state.positions.school) state.positions.school = { t: 150, l: 100 };
                     if(!state.stats) state.stats = { hrv: 0, atk: 0, def: 0, maxS: sun, pTime: 0, lt: Date.now() };
                     if(!state.uid) state.uid = 'UID-' + Math.random().toString(36).substr(2, 6).toUpperCase();
                     if(!state.messages) state.messages = [];
@@ -659,20 +662,18 @@
             } else {
                 state.uid = 'UID-' + Math.random().toString(36).substr(2, 6).toUpperCase(); state.stats.lt = Date.now(); await saveCloudData(); 
             }
-            cleanSpoiledItems(); applyBuildingPositions(); updateLabels(); updateMsgBadge(); updateHUD(); renderGarden(); checkSpinCooldown();
+            cleanSpoiledItems(); applyBuildingPositions(); updateLabels(); updateMsgBadge(); updateHUD(); renderGarden(); setupBuildingEvents(); checkSpinCooldown();
             resizeGame(); 
             if(currentPlayer === 'حمیدرضا') document.getElementById('adminBtn').style.display = 'flex';
         }
 
-        // همگام‌سازی لحظه‌ای با سرعت بالا برای حمله‌ها
+        // همگام‌سازی لحظه‌ای با سرعت بالا برای حمله‌ها و کوییز
         setInterval(async () => {
             if(!currentPlayer || isVisiting || isAttacking) return;
             const { data } = await db.from('farm_players').select('inventory, cash, sun, level, xp').eq('username', currentPlayer).single();
             if (data) {
                 let s = data.inventory;
-                if(s.messages && s.messages.length > state.messages.length) { 
-                    state.messages = s.messages; updateMsgBadge(); 
-                }
+                if(s.messages && s.messages.length > state.messages.length) { state.messages = s.messages; updateMsgBadge(); }
                 if(s.incomingMessage) {
                     triggerIncomingBalloon(s.incomingMessage.sender, "شما پیام جدیدی دارید!");
                     s.incomingMessage = null; state = s;
@@ -683,6 +684,41 @@
                     s.incomingCrow = null; state = s;
                     await db.from('farm_players').update({ inventory: s }).eq('username', currentPlayer);
                 }
+                // هندل مسابقه کوییز
+                if(s.incomingQuiz && !isQuizMode) {
+                    let req = s.incomingQuiz;
+                    if(confirm(`درخواست بازی از طرف ${req.from}\nهزینه: ۲۵ اسکناس و ۱ خورشید\nجایزه برنده: ۵۰ اسکناس\nقبول می‌کنید؟`)) {
+                        if(cash >= 25 && sun >= 1) {
+                            cash -= 25; sun -= 1; updateHUD();
+                            s.quizState = { opp: req.from, role: 'guest', myScore: 0, isDone: false, oppDone: false };
+                            s.incomingQuiz = null; state = s;
+                            await db.from('farm_players').update({ inventory: s }).eq('username', currentPlayer);
+                            
+                            // اطلاع به درخواست‌کننده
+                            const { data: oppD } = await db.from('farm_players').select('*').eq('username', req.from).single();
+                            let oppInv = oppD.inventory; oppInv.quizAccepted = { by: currentPlayer, qIdx: req.qIdx };
+                            await db.from('farm_players').update({ inventory: oppInv }).eq('username', req.from);
+                            startQuizGame(req.qIdx, 'guest', req.from);
+                        } else { alert('موجودی کافی نیست!'); s.incomingQuiz = null; await db.from('farm_players').update({ inventory: s }).eq('username', currentPlayer); }
+                    } else {
+                        s.incomingQuiz = null; await db.from('farm_players').update({ inventory: s }).eq('username', currentPlayer);
+                    }
+                }
+                if(s.quizAccepted && !isQuizMode) {
+                    if(cash >= 25 && sun >= 1) {
+                        cash -= 25; sun -= 1; updateHUD();
+                        s.quizState = { opp: s.quizAccepted.by, role: 'host', myScore: 0, isDone: false, oppDone: false };
+                        let idx = s.quizAccepted.qIdx; s.quizAccepted = null; state = s;
+                        await db.from('farm_players').update({ inventory: s }).eq('username', currentPlayer);
+                        startQuizGame(idx, 'host', state.quizState.opp);
+                    }
+                }
+                if(s.quizOppDone && isQuizMode) {
+                    state.quizState.oppDone = true; state.quizState.oppScore = s.quizOppDone.score;
+                    s.quizOppDone = null; await db.from('farm_players').update({ inventory: s }).eq('username', currentPlayer);
+                    checkQuizResults();
+                }
+
                 if(s.liveAlert) {
                     showLiveAlert(s.liveAlert); s.liveAlert = null; state = s;
                     await db.from('farm_players').update({ inventory: s }).eq('username', currentPlayer);
@@ -690,7 +726,7 @@
                 } else { state = s; }
                 if (data.cash !== cash || data.level !== level) { cash = data.cash; level = data.level; sun = data.sun; xp = data.xp; updateHUD(); }
             }
-        }, 2000); // آپدیت هر ۲ ثانیه برای عکس‌العمل سریع
+        }, 2000); 
 
         function playDefendingCrow(data) {
             const crow = document.getElementById('battleCrow');
@@ -705,8 +741,9 @@
                 document.getElementById('loginScreen').style.opacity = '0';
                 setTimeout(async () => { 
                     document.getElementById('loginScreen').style.display = 'none'; 
-                    const overlay = document.getElementById('cloudOverlay'); overlay.classList.add('active');
-                    currentPlayer = user; await loadCloudData(); overlay.classList.remove('active');
+                    document.getElementById('loginLoading').classList.add('active');
+                    currentPlayer = user; await loadCloudData(); 
+                    document.getElementById('loginLoading').classList.remove('active');
                 }, 400);
             } else { alert('رمز اشتباه است!'); }
         }
@@ -835,15 +872,17 @@
         function applyBuildingPositions() {
             let p = isVisiting ? visitingData.inventory.positions : state.positions;
             if(!p.bank) p.bank = { t: -140, l: 30 };
+            if(!p.school) p.school = { t: 150, l: 100 };
             document.getElementById('cabin-inv').style.top = p.inv.t + 'px'; document.getElementById('cabin-inv').style.left = p.inv.l + 'px';
             document.getElementById('cabin-guard').style.top = p.guard.t + 'px'; document.getElementById('cabin-guard').style.left = p.guard.l + 'px';
             document.getElementById('cabin-crow').style.top = p.crow.t + 'px'; document.getElementById('cabin-crow').style.left = p.crow.l + 'px';
             document.getElementById('cabin-bank').style.top = p.bank.t + 'px'; document.getElementById('cabin-bank').style.left = p.bank.l + 'px';
+            document.getElementById('cabin-school').style.top = p.school.t + 'px'; document.getElementById('cabin-school').style.left = p.school.l + 'px';
         }
 
-        // جابجایی ساختمان‌ها با قفل در فضای امن عکس
+        // جابجایی ساختمان‌ها با قفل در فضای امن و بررسی تصادف با زمین کشاورزی
         function startMoveMode(id) {
-            closeModal('inventoryModal'); closeModal('guardModal'); closeModal('crowModal'); closeModal('bankModal');
+            closeModal('inventoryModal'); closeModal('guardModal'); closeModal('crowModal'); closeModal('bankModal'); closeModal('schoolModal');
             isMovingMode = true; activeB = document.getElementById(`cabin-${id}`); activeB.classList.add('moving');
             bStartT = activeB.offsetTop; bStartL = activeB.offsetLeft;
             document.getElementById('moveUI').style.display = 'flex'; document.getElementById('toolbar-normal').style.display = 'none';
@@ -854,17 +893,33 @@
             if(!isDraggingB) return; e.preventDefault();
             let dx = (e.clientX - dragBX) / zoom; let dy = (e.clientY - dragBY) / zoom;
             
+            // قفل در محدوده کلی خالی وسط تصویر
             let nT = bStartT + dy; let nL = bStartL + dx;
-            nT = Math.max(-180, Math.min(60, nT));
-            nL = Math.max(-140, Math.min(100, nL));
+            nT = Math.max(-180, Math.min(200, nT));
+            nL = Math.max(-140, Math.min(180, nL));
 
             activeB.style.left = nL + 'px'; activeB.style.top = nT + 'px';
+            checkCollision();
+        }
+        function checkCollision() {
+            let gardenRect = document.getElementById('garden').getBoundingClientRect();
+            let bRect = activeB.getBoundingClientRect();
+            let btn = document.getElementById('btnConfirmMove');
+            // بررسی تداخل
+            let overlap = !(bRect.right < gardenRect.left || bRect.left > gardenRect.right || bRect.bottom < gardenRect.top || bRect.top > gardenRect.bottom);
+            if(overlap) {
+                activeB.style.filter = 'drop-shadow(0 0 15px red) brightness(0.7)';
+                btn.style.opacity = '0.4'; btn.style.pointerEvents = 'none';
+            } else {
+                activeB.style.filter = 'drop-shadow(0 0 15px #4caf50) brightness(1.2)';
+                btn.style.opacity = '1'; btn.style.pointerEvents = 'auto';
+            }
         }
         function bDragEnd(e) { if(!isDraggingB) return; isDraggingB = false; bStartL = activeB.offsetLeft; bStartT = activeB.offsetTop; activeB.releasePointerCapture(e.pointerId); }
         function confirmMove() { let key = activeB.id.replace('cabin-', ''); state.positions[key] = { t: activeB.offsetTop, l: activeB.offsetLeft }; saveCloudData(); exitMoveMode(); }
         function cancelMove() { let key = activeB.id.replace('cabin-', ''); let orig = state.positions[key]; activeB.style.top = orig.t + 'px'; activeB.style.left = orig.l + 'px'; exitMoveMode(); }
         function exitMoveMode() {
-            isMovingMode = false; activeB.classList.remove('moving');
+            isMovingMode = false; activeB.style.filter = ''; activeB.classList.remove('moving');
             activeB.removeEventListener('pointerdown', bDragStart); window.removeEventListener('pointermove', bDragMove); window.removeEventListener('pointerup', bDragEnd);
             activeB = null; document.getElementById('moveUI').style.display = 'none'; document.getElementById('toolbar-normal').style.display = 'flex';
         }
@@ -894,20 +949,20 @@
                         if(isVisiting) { tb.innerText = 'در حال رشد'; pf.style.width = '50%'; } else { startGrowthTimer(plot, svg, pb, pf, tb, item, item.time - elapsed, saved); }
                     }
                 }
-                if (!isVisiting && !isAttacking) { 
-                    // استفاده از ساختار مطمئن برای کلیک و جلوگیری از تداخل
-                    plot.onclick = (e) => { 
-                        e.stopPropagation(); 
-                        if(isDragClick) return; 
+                
+                plot.onpointerdown = () => { isDragClick = false; };
+                plot.onpointermove = () => { isDragClick = true; };
+                plot.onpointerup = (e) => {
+                    e.stopPropagation(); 
+                    if(!isDragClick && !isVisiting && !isMovingMode && !isAttacking && !isQuizMode) {
                         handlePlotClick(plot, svg, pb, pf, tb, layoutToUse[i]); 
-                    } 
+                    }
                 }
                 garden.appendChild(plot);
             }
         }
 
         function handlePlotClick(plot, svg, pb, pf, tb, savedData) {
-            if(isMovingMode || isAttacking) return;
             if (plot.dataset.state === 'empty' && selectedSeed && itemsData[selectedSeed].type === 'crop') {
                 const item = itemsData[selectedSeed];
                 if (cash >= item.cost) {
@@ -944,22 +999,23 @@
 
         async function visitFarm(username) {
             closeModal('leaderboardModal');
-            const overlay = document.getElementById('cloudOverlay'); overlay.classList.add('active');
-            document.getElementById('cloudText').innerText = `🔍 در حال سفر به مزرعه ${username}...`; 
+            document.getElementById('visitLoading').classList.add('active');
             setTimeout(async () => {
                 const { data } = await db.from('farm_players').select('*').eq('username', username).single();
                 if(data) {
                     isVisiting = true; visitingData = data; document.getElementById('toolbar-normal').style.display = 'none'; document.getElementById('toolbar-visit').style.display = 'flex';
-                    applyBuildingPositions(); updateLabels(); updateHUD(); renderGarden({ size: data.grid_size, plots: data.inventory.gardenLayout || [] }); overlay.classList.remove('active');
-                } else { alert('خطا در بارگذاری مزرعه!'); overlay.classList.remove('active'); }
+                    applyBuildingPositions(); updateLabels(); updateHUD(); renderGarden({ size: data.grid_size, plots: data.inventory.gardenLayout || [] }); 
+                    document.getElementById('visitLoading').classList.remove('active');
+                } else { alert('خطا در بارگذاری مزرعه!'); document.getElementById('visitLoading').classList.remove('active'); }
             }, 800);
         }
 
         function returnHome() {
-            const overlay = document.getElementById('cloudOverlay'); document.getElementById('cloudText').innerText = '🏡 بازگشت به خانه...'; overlay.classList.add('active');
+            document.getElementById('visitLoading').classList.add('active');
             setTimeout(() => {
                 isVisiting = false; visitingData = null; isAttacking = false; document.getElementById('toolbar-normal').style.display = 'flex'; document.getElementById('toolbar-visit').style.display = 'none';
-                applyBuildingPositions(); updateLabels(); updateHUD(); renderGarden(); overlay.classList.remove('active');
+                applyBuildingPositions(); updateLabels(); updateHUD(); renderGarden(); 
+                document.getElementById('visitLoading').classList.remove('active');
             }, 800);
         }
 
@@ -972,14 +1028,14 @@
             if(!data) { alert('بازیکنی با این نام پیدا نشد!'); return; }
 
             closeModal('crowModal');
-            const overlay = document.getElementById('cloudOverlay'); document.getElementById('cloudText').innerText = `⚔️ حمله به ${opp}...`; overlay.classList.add('active');
+            document.getElementById('visitLoading').classList.add('active');
             
             setTimeout(() => {
                 isVisiting = true; isAttacking = true; visitingData = data;
                 document.getElementById('toolbar-normal').style.display = 'none'; document.getElementById('toolbar-visit').style.display = 'none';
                 applyBuildingPositions(); updateLabels(); updateHUD();
                 renderGarden({ size: data.grid_size, plots: data.inventory.gardenLayout || [] });
-                overlay.classList.remove('active');
+                document.getElementById('visitLoading').classList.remove('active');
                 
                 setTimeout(() => { executeLiveAttack(data); }, 1000); 
             }, 800);
@@ -1025,6 +1081,7 @@
                     let stolenPlant = layout[targetIdx].plant;
                     crow.style.top = targetPlot.offsetTop + 'px'; crow.style.left = targetPlot.offsetLeft + 'px';
 
+                    // ارسال فرمان پخش انیمیشن به شخص مورد حمله
                     oppInv.incomingCrow = { t: targetPlot.offsetTop, l: targetPlot.offsetLeft };
                     await db.from('farm_players').update({ inventory: oppInv }).eq('username', oppData.username);
                     
@@ -1043,7 +1100,7 @@
                                 
                                 state.stats.atk++; state.crow.lastSent = Date.now(); 
                                 if(!state.loot[stolenPlant]) state.loot[stolenPlant] = []; 
-                                state.loot[stolenPlant].push(Date.now()); 
+                                state.loot[stolenPlant].push(Date.now()); // افزودن به بخش غنیمت‌ها
                                 saveCloudData();
                                 setTimeout(() => { alert(`سرقت موفق! یک ${itemsData[stolenPlant].name} دزدیدی.`); returnHome(); }, 1000);
                             }
@@ -1068,7 +1125,7 @@
         }
 
         function openModal(id) {
-            if(isMovingMode || isAttacking) return;
+            if(isMovingMode || isAttacking || isQuizMode) return;
             cleanSpoiledItems(); document.getElementById(id).style.display = 'flex';
             if(id === 'shopModal') { document.getElementById('landCostLabel').innerText = `💵 ${gridSize * 150}`; renderShop(); }
             if(id === 'inventoryModal') renderInventory();
@@ -1248,7 +1305,7 @@
         async function removeLimits() { state.crow.lastSent = 0; state.bank.invStart = 0; localStorage.setItem(`lastSpin_${currentPlayer}`, 0); await saveCloudData(); alert('محدودیت‌ها برداشته شد!'); }
         async function addCashToUser(targetUser) { const input = document.getElementById(`addCash_${targetUser}`); const amount = parseInt(input.value); if (!amount || amount <= 0) return; const { data } = await db.from('farm_players').select('cash').eq('username', targetUser).single(); if (data) { await db.from('farm_players').update({ cash: data.cash + amount }).eq('username', targetUser); alert(`واریز شد!`); openAdminPanel(); } }
         async function changeLvl(targetUser, currentLevel, amount) { let newLvl = currentLevel + amount; if (newLvl < 1) newLvl = 1; await db.from('farm_players').update({ level: newLvl }).eq('username', targetUser); openAdminPanel(); }
-        async function resetPlayer(targetUser) { if(!confirm(`مطمئن هستید؟`)) return; const defaultState = { uid: 'UID-'+Math.random().toString(36).substr(2, 6).toUpperCase(), stats:{hrv:0,atk:0,def:0,maxS:0,pTime:0,lt:Date.now()}, items: { redFlower: [], pinkFlower: [], wheat: [], appleTree: [], pineTree: [] }, loot: { redFlower: [], pinkFlower: [], wheat: [], appleTree: [], pineTree: [] }, guard: { level: 0, kills: 0, sleeping: false }, crow: { level: 0, lastSent: 0 }, bank: { level: 0, lastCol: Date.now(), acc: false, inv: 0, invStart: 0, ready: false }, messages: [], positions: { inv: { t: -120, l: -50 }, guard: { t: 80, l: -80 }, crow: { t: -80, l: 120 }, bank: { t: -140, l: 30 } }, incomingAttack: false, gardenLayout:[] }; const { error } = await db.from('farm_players').update({ cash: 100, sun: 0, level: 1, xp: 0, grid_size: 3, inventory: defaultState }).eq('username', targetUser); if(!error) { alert(`ریست شد.`); openAdminPanel(); } }
+        async function resetPlayer(targetUser) { if(!confirm(`مطمئن هستید؟`)) return; const defaultState = { uid: 'UID-'+Math.random().toString(36).substr(2, 6).toUpperCase(), stats:{hrv:0,atk:0,def:0,maxS:0,pTime:0,lt:Date.now()}, items: { redFlower: [], pinkFlower: [], wheat: [], appleTree: [], pineTree: [] }, loot: { redFlower: [], pinkFlower: [], wheat: [], appleTree: [], pineTree: [] }, guard: { level: 0, kills: 0, sleeping: false }, crow: { level: 0, lastSent: 0 }, bank: { level: 0, lastCol: Date.now(), acc: false, inv: 0, invStart: 0, ready: false }, messages: [], positions: { inv: { t: -120, l: -50 }, guard: { t: 80, l: -80 }, crow: { t: -80, l: 120 }, bank: { t: -140, l: 30 }, school: { t: 150, l: 100 } }, incomingAttack: false, gardenLayout:[] }; const { error } = await db.from('farm_players').update({ cash: 100, sun: 0, level: 1, xp: 0, grid_size: 3, inventory: defaultState }).eq('username', targetUser); if(!error) { alert(`ریست شد.`); openAdminPanel(); } }
 
         function openGuardModal() {
             if(level < 10) { alert('باید به سطح 10 برسی!'); return; }
@@ -1321,6 +1378,158 @@
                 updateHUD(); localStorage.setItem(`lastSpin_${currentPlayer}`, Date.now()); saveCloudData(); checkSpinCooldown();
                 setTimeout(() => { wheel.style.transition = 'none'; wheel.style.transform = `rotate(${finalDeg % 360}deg)`; setTimeout(() => wheel.style.transition = 'transform 3s cubic-bezier(0.1, 0.7, 0.1, 1)', 50); }, 1000);
             }, 3000);
+        }
+
+        // --- بخش ویژه مدرسه Ravora ---
+        async function openSchoolModal() {
+            document.getElementById('loginLoading').classList.add('active');
+            // گرفتن بازیکنان (برای شبیه سازی آنلاین بودن افراد برتر رو میگیریم)
+            const { data } = await db.from('farm_players').select('username, level').order('sun', { ascending: false }).limit(15);
+            const list = document.getElementById('onlinePlayersList'); list.innerHTML = '';
+            if(data) {
+                data.forEach(p => {
+                    if(p.username === currentPlayer) return;
+                    const div = document.createElement('div'); div.className = 'list-item';
+                    div.innerHTML = `<span>🟢 ${p.username} (Lvl.${p.level})</span>
+                                     <button class="btn-action" style="width:auto; margin:0; padding:4px 8px; font-size:11px;" onclick="invitePlayer('${p.username}')">درخواست مسابقه</button>`;
+                    list.appendChild(div);
+                });
+            }
+            setTimeout(() => { document.getElementById('loginLoading').classList.remove('active'); openModal('schoolModal'); }, 800);
+        }
+
+        async function invitePlayer(oppName) {
+            if(cash < 25 || sun < 1) { alert('برای مسابقه باید ۲۵ اسکناس و ۱ خورشید داشته باشید!'); return; }
+            const { data } = await db.from('farm_players').select('*').eq('username', oppName).single();
+            if(!data) return;
+            
+            let oppInv = data.inventory;
+            let qIdx = parseInt(localStorage.getItem('rav_q_idx') || 0);
+            oppInv.incomingQuiz = { from: currentPlayer, qIdx: qIdx };
+            await db.from('farm_players').update({ inventory: oppInv }).eq('username', oppName);
+            
+            alert('درخواست مسابقه ارسال شد. در انتظار تایید حریف...');
+            closeModal('schoolModal');
+        }
+
+        // --- دیتابیس سوالات مدرسه ---
+        // 30 سوال اول به عنوان نمونه در اینجا قرار گرفته است. بقیه ۱۶۰۰ سوال را دقیقاً با همین فرمت در اینجا کپی کنید.
+        const allQuestions = [
+            { q: "پایتخت کشور استرالیا کدام شهر است؟", opts: ["سیدنی", "ملبورن", "کانبرا", "پرث"], ans: 2 },
+            { q: "طولانی ترین رود جهان چه نام دارد؟", opts: ["آمازون", "نیل", "یانگ تسه", "می سی سی پی"], ans: 1 },
+            { q: "کدام سیاره به «سیاره سرخ» معروف است؟", opts: ["مشتری", "زحل", "مریخ", "زهره"], ans: 2 },
+            { q: "نویسنده کتاب مشهور «بینوایان» کیست؟", opts: ["چارلز دیکنز", "ویکتور هوگو", "لئو تولستوی", "ویلیام شکسپیر"], ans: 1 },
+            { q: "بزرگترین اقیانوس کره زمین کدام است؟", opts: ["اقیانوس اطلس", "اقیانوس هند", "اقیانوس منجمد شمالی", "اقیانوس آرام"], ans: 3 },
+            { q: "مخترع تلفن چه کسی بود؟", opts: ["توماس ادیسون", "الکساندر گراهام بل", "نیکولا تسلا", "گالیله"], ans: 1 },
+            { q: "کدام ویتامین به «ویتامین نور خورشید» معروف است؟", opts: ["ویتامین A", "ویتامین B", "ویتامین C", "ویتامین D"], ans: 3 },
+            { q: "کوچک ترین کشور جهان از نظر مساحت کدام است؟", opts: ["موناکو", "واتیکان", "سان مارینو", "لیختن اشتاین"], ans: 1 },
+            { q: "در چه سالی جنگ جهانی دوم به پایان رسید؟", opts: ["۱۹۱۸", "۱۹۳۹", "۱۹۴۵", "۱۹۵۰"], ans: 2 },
+            { q: "سریع ترین حیوان خشکی کدام است؟", opts: ["شیر", "ببر", "یوزپلنگ", "غزال"], ans: 2 },
+            { q: "کدام عنصر شیمیایی با نماد 'Au' نشان داده میشود؟", opts: ["نقره", "آهن", "مس", "طلا"], ans: 3 },
+            { q: "تابلو «مونالیزا» اثر کدام هنرمند است؟", opts: ["پابلو پیکاسو", "وینسنت ون گوگ", "لئوناردو داوینچی", "میکل آنژ"], ans: 2 },
+            { q: "بلندترین قله جهان چه نام دارد؟", opts: ["کی ۲", "کلیمانجارو", "اورست", "دماوند"], ans: 2 },
+            { q: "زبان رسمی کشور برزیل چیست؟", opts: ["اسپانیایی", "انگلیسی", "پرتغالی", "فرانسوی"], ans: 2 },
+            { q: "کدام قاره هیچ بیابانی ندارد؟", opts: ["آسیا", "اروپا", "آمریکای شمالی", "استرالیا"], ans: 1 },
+            { q: "اولین انسانی که به فضا سفر کرد چه کسی بود؟", opts: ["نیل آرمسترانگ", "یوری گاگارین", "باز آلدرین", "جان گلن"], ans: 1 },
+            { q: "پرجمعیت ترین کشور جهان در سال ۲۰۲۴ کدام است؟", opts: ["چین", "آمریکا", "هند", "اندونزی"], ans: 2 },
+            { q: "کدام گاز بیشترین درصد از جو زمین را تشکیل میدهد؟", opts: ["اکسیژن", "کربن دی اکسید", "هیدروژن", "نیتروژن"], ans: 3 },
+            { q: "کاشف پنی سیلین چه کسی بود؟", opts: ["ماری کوری", "لویی پاستور", "الکساندر فلمینگ", "رابرت کخ"], ans: 2 },
+            { q: "واحد پول کشور ژاپن چیست؟", opts: ["یوان", "ین", "وون", "روپیه"], ans: 1 },
+            { q: "بزرگترین عضو بدن انسان چیست؟", opts: ["کبد", "قلب", "پوست", "مغز"], ans: 2 },
+            { q: "تیم فوتبال کدام کشور بیشترین قهرمانی در جام جهانی را دارد؟", opts: ["آلمان", "ایتالیا", "آرژانتین", "برزیل"], ans: 3 },
+            { q: "سخت ترین ماده طبیعی موجود در جهان چیست؟", opts: ["فولاد", "تیتانیوم", "گرافیت", "الماس"], ans: 3 },
+            { q: "مقر اصلی سازمان ملل متحد در کدام شهر است؟", opts: ["ژنو", "پاریس", "نیویورک", "لندن"], ans: 2 },
+            { q: "فیلمی که به همراه بن هور و ارباب حلقه ها رکورددار ۱۱ جایزه اسکار است؟", opts: ["تایتانیک", "آواتار", "پدرخوانده", "رستگاری در شاوشنک"], ans: 0 },
+            { q: "خالق اثر حماسی «شاهنامه» کیست؟", opts: ["حافظ", "سعدی", "فردوسی", "نظامی گنجوی"], ans: 2 },
+            { q: "کدام کشور میزبان المپیک تابستانی ۲۰۲۴ بود؟", opts: ["ژاپن", "فرانسه", "آمریکا", "انگلستان"], ans: 1 },
+            { q: "رودخانه ای که از بیشترین کشورهای جهان عبور میکند کدام است؟", opts: ["دانوب", "آمازون", "نیل", "راین"], ans: 0 },
+            { q: "سرعت نور در خلأ تقریباً چقدر است؟", opts: ["۳۰۰ هزار کیلومتر بر ثانیه", "۳۰ هزار کیلومتر بر ثانیه", "۳ میلیون کیلومتر بر ثانیه", "۳ هزار کیلومتر بر ثانیه"], ans: 0 },
+            { q: "پرنده ای که توانایی پرواز ندارد اما بسیار سریع میدود؟", opts: ["پنگوئن", "شتر مرغ", "کیوی", "فلامینگو"], ans: 1 }
+        ];
+
+        let quizQIndex = 0; let qCount = 0; let qTimer;
+        
+        function startQuizGame(startIdx, role, oppName) {
+            isQuizMode = true; qCount = 0;
+            document.getElementById('toolbar-normal').style.display = 'none';
+            document.getElementById('matchOverlay').style.display = 'flex';
+            document.getElementById('waitScreen').style.display = 'none';
+            document.getElementById('quizMe').innerText = `شما: 0`;
+            document.getElementById('quizOpp').innerText = `${oppName}: 0`;
+            
+            // اگر از مرز سوالات رد شدیم برگردیم اول
+            quizQIndex = startIdx;
+            if(quizQIndex >= allQuestions.length) quizQIndex = 0; 
+            
+            // فقط هاست شماره رو میبره بالا تا بازی‌های بعدی بره جلو
+            if(role === 'host') localStorage.setItem('rav_q_idx', quizQIndex + 10);
+            
+            nextQuestion();
+        }
+
+        function nextQuestion() {
+            if(qCount >= 10) { endQuizGame(); return; }
+            let q = allQuestions[quizQIndex + qCount];
+            // اگر سوالی نبود (از آرایه زد بیرون)
+            if(!q) { q = allQuestions[0]; }
+
+            document.getElementById('quizQ').innerText = `${qCount+1}. ` + q.q;
+            const optsDiv = document.getElementById('quizOpts'); optsDiv.innerHTML = '';
+            
+            q.opts.forEach((opt, i) => {
+                let btn = document.createElement('button'); btn.className = 'quiz-opt'; btn.innerText = opt;
+                btn.onclick = () => {
+                    clearInterval(qTimer);
+                    if(i === q.ans) state.quizState.myScore++;
+                    document.getElementById('quizMe').innerText = `شما: ${state.quizState.myScore}`;
+                    document.getElementById('quizScore').innerText = `امتیاز فعلی: ${state.quizState.myScore}`;
+                    qCount++; nextQuestion();
+                };
+                optsDiv.appendChild(btn);
+            });
+
+            let timeLeft = 10;
+            document.getElementById('quizTimer').innerText = `⏱ ${timeLeft}`;
+            clearInterval(qTimer);
+            qTimer = setInterval(() => {
+                timeLeft--; document.getElementById('quizTimer').innerText = `⏱ ${timeLeft}`;
+                if(timeLeft <= 0) { clearInterval(qTimer); qCount++; nextQuestion(); }
+            }, 1000);
+        }
+
+        async function endQuizGame() {
+            state.quizState.isDone = true;
+            document.getElementById('waitScreen').style.display = 'flex';
+            document.getElementById('waitSub').innerText = 'در حال محاسبه نتایج...';
+            saveCloudData();
+
+            // ارسال نتیجه من به حریف
+            const { data } = await db.from('farm_players').select('*').eq('username', state.quizState.opp).single();
+            if(data) {
+                let oppInv = data.inventory; oppInv.quizOppDone = { score: state.quizState.myScore };
+                await db.from('farm_players').update({ inventory: oppInv }).eq('username', state.quizState.opp);
+            }
+            checkQuizResults();
+        }
+
+        async function checkQuizResults() {
+            if(state.quizState && state.quizState.isDone && state.quizState.oppDone) {
+                let res = '';
+                if(state.quizState.myScore > state.quizState.oppScore) {
+                    res = `🎉 شما برنده شدید! 50 💵 به حساب شما افزوده شد.\n\nشما: ${state.quizState.myScore}\nحریف: ${state.quizState.oppScore}`;
+                    cash += 50; updateHUD();
+                } else if (state.quizState.myScore < state.quizState.oppScore) {
+                    res = `💀 شما باختید!\n\nشما: ${state.quizState.myScore}\nحریف: ${state.quizState.oppScore}`;
+                } else {
+                    res = `🤝 مساوی شدید! هزینه ورودی شما (25 💵) برگشت داده شد.\n\nشما: ${state.quizState.myScore}\nحریف: ${state.quizState.oppScore}`;
+                    cash += 25; updateHUD();
+                }
+                
+                alert(res);
+                state.quizState = null; isQuizMode = false; saveCloudData();
+                document.getElementById('matchOverlay').style.display = 'none';
+                document.getElementById('toolbar-normal').style.display = 'flex';
+            }
         }
 
         initMarket();
